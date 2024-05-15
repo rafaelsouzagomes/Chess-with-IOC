@@ -5,11 +5,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class ChessBoard {
 
+	public ChessSquare[][] chessBoard;
 	
-	public ChessSquare[][] getPatternInitGame() {
-		ChessSquare[][] squares = new ChessSquare[1][1];
-		squares[0][0] = new ChessSquare("Torre");
-		
-		return squares;
+	public void setChessBoard(ChessSquare[][] chessBoard) {
+		this.chessBoard = chessBoard;
 	}
 }

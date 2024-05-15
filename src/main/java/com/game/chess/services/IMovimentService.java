@@ -1,8 +1,9 @@
 package com.game.chess.services;
 
+import com.game.chess.dtos.MovimentOptions;
+import com.game.chess.dtos.MovimentRequestDTO;
+
 public interface IMovimentService {
 
-	public static void teste() {
-		System.out.println("teste statc method");
-	}
+	public MovimentOptions getMovimentOptions(MovimentRequestDTO mov);
 }

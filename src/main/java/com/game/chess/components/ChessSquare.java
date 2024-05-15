@@ -1,18 +1,19 @@
 package com.game.chess.components;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.game.chess.enums.EnumNameNotaionSquare;
 
 public class ChessSquare {
 
-	@Autowired
-	public ChessSquare(String string) {
-		this.piece = string;
+	private Piece piece;
+	
+	private EnumNameNotaionSquare nameNotationSquare;
+	
+	public void setPiece(Piece piece) {
+		this.piece = piece;
+	}
+	
+	public void setNameNotationSquare(EnumNameNotaionSquare nameNotationSquare) {
+		this.nameNotationSquare = nameNotationSquare;
 	}
 
-	private String piece = " "; 
-	
-	public String getPiece() {
-		return piece;
-	}
 }
