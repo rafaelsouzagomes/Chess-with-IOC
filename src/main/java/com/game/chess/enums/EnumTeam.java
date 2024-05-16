@@ -2,5 +2,23 @@ package com.game.chess.enums;
 
 public enum EnumTeam {
 	
-	BLACK, WHITE;
+	BLACK("B", "Black"), 
+	WHITE("W", "White");
+	
+	private String abr;
+	private String name;
+	
+	private EnumTeam(String abr, String name) {
+		this.abr = abr;
+		this.name = name;
+	}
+	
+	public String getAbr() {
+		return abr;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
 }

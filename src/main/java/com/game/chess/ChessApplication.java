@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.game.chess.components.ChessBoard;
-import com.game.chess.components.ChessSquare;
+import com.game.chess.components.chessSquare.ChessSquare;
 
 @SpringBootApplication
 public class ChessApplication implements CommandLineRunner  {

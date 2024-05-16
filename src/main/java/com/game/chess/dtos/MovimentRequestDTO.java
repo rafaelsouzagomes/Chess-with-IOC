@@ -3,7 +3,7 @@ package com.game.chess.dtos;
 import org.springframework.lang.NonNull;
 
 import com.game.chess.components.ChessBoard;
-import com.game.chess.components.Piece;
+import com.game.chess.components.piece.Piece;
 
 public class MovimentRequestDTO {
 

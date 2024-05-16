@@ -2,8 +2,8 @@ package com.game.chess.dtos;
 
 import java.util.List;
 
-import com.game.chess.components.ChessSquare;
-import com.game.chess.components.Piece;
+import com.game.chess.components.chessSquare.ChessSquare;
+import com.game.chess.components.piece.Piece;
 
 public class MovimentOptions {
 
