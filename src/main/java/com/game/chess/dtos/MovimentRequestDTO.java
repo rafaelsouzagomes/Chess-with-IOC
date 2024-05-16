@@ -12,4 +12,22 @@ public class MovimentRequestDTO {
 	
 	@NonNull
 	private Piece pieceToMove;
+
+	public ChessBoard getChessboard() {
+		return chessboard;
+	}
+
+	public void setChessboard(ChessBoard chessboard) {
+		this.chessboard = chessboard;
+	}
+
+	public Piece getPieceToMove() {
+		return pieceToMove;
+	}
+
+	public void setPieceToMove(Piece pieceToMove) {
+		this.pieceToMove = pieceToMove;
+	}
+	
+	
 }
