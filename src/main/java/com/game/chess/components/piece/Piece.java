@@ -17,7 +17,7 @@ public class Piece {
 	
 	@Override
 	public String toString() {
-		return  type.getAbr()+type.getAbr();
+		return  type.getAbr()+team.getAbr();
 	}
 	
 	protected void setTeam(EnumTeam team) {

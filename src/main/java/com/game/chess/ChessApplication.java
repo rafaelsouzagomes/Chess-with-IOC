@@ -22,13 +22,7 @@ public class ChessApplication implements CommandLineRunner  {
 
 	@Override
 	public void run(String... args) throws Exception {
-		ChessSquare[][] patternInitGame = x.getPatternInitGame();
-		for(ChessSquare[] linhas: patternInitGame ) {
-			for(ChessSquare coluna: linhas) {
-				System.out.print(coluna.getPiece() + " ") ;
-			}
-			System.out.println(" ");
-		}
+	
 		
 	}
 

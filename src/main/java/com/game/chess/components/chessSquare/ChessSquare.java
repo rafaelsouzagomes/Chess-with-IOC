@@ -2,9 +2,12 @@ package com.game.chess.components.chessSquare;
 
 import java.util.Objects;
 
+import org.springframework.stereotype.Component;
+
 import com.game.chess.components.piece.Piece;
 import com.game.chess.enums.EnumNameNotaionSquare;
 
+@Component
 public class ChessSquare {
 
 	private Piece piece;

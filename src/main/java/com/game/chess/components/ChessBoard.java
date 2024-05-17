@@ -26,7 +26,6 @@ public class ChessBoard {
 		initBoard();
 	}
 	
-	@Autowired
 	public void setChessBoard(ChessSquare[][] chessBoard) {
 		this.chessBoard = chessBoard;
 	}
@@ -42,9 +41,9 @@ public class ChessBoard {
 			for(int column=0; column < chessBoard[0].length; column++) {
 				ChessSquare chessSquare = chessBoard[line][column];
 				if(chessSquare.isEmpty()) 
-					System.out.print(" [ "+chessSquare.getNameNotationSquare()+" ] ");
+					System.out.print(" ["+chessSquare.getNameNotationSquare()+"] ");
 				else
-					System.out.print(" ["+ chessSquare.getPiece().toString()+" ] ");
+					System.out.print(" ["+chessSquare.getPiece().toString()+"] ");
 			}
 			System.out.println("");
 		}
@@ -115,13 +114,13 @@ public class ChessBoard {
 		chessBoard[6][6] = chessSquareFactory.build(EnumTypePiece.PAWN, EnumTeam.WHITE, EnumNameNotaionSquare.G2);
 		chessBoard[6][7] = chessSquareFactory.build(EnumTypePiece.PAWN, EnumTeam.WHITE, EnumNameNotaionSquare.H2);
 		
-		chessBoard[7][0] = chessSquareFactory.build(EnumTypePiece.ROOK, EnumTeam.BLACK, EnumNameNotaionSquare.A1);
-		chessBoard[7][1] = chessSquareFactory.build(EnumTypePiece.KNIGHT, EnumTeam.BLACK, EnumNameNotaionSquare.B1);
-		chessBoard[7][2] = chessSquareFactory.build(EnumTypePiece.BISHOP, EnumTeam.BLACK, EnumNameNotaionSquare.C1);
-		chessBoard[7][3] = chessSquareFactory.build(EnumTypePiece.KING, EnumTeam.BLACK, EnumNameNotaionSquare.D1);
-		chessBoard[7][4] = chessSquareFactory.build(EnumTypePiece.QUEEN, EnumTeam.BLACK, EnumNameNotaionSquare.E1);
-		chessBoard[7][5] = chessSquareFactory.build(EnumTypePiece.BISHOP, EnumTeam.BLACK, EnumNameNotaionSquare.F1);
-		chessBoard[7][6] = chessSquareFactory.build(EnumTypePiece.KNIGHT, EnumTeam.BLACK, EnumNameNotaionSquare.G1);
-		chessBoard[7][7] = chessSquareFactory.build(EnumTypePiece.ROOK, EnumTeam.BLACK, EnumNameNotaionSquare.H1);
+		chessBoard[7][0] = chessSquareFactory.build(EnumTypePiece.ROOK, EnumTeam.WHITE, EnumNameNotaionSquare.A1);
+		chessBoard[7][1] = chessSquareFactory.build(EnumTypePiece.KNIGHT, EnumTeam.WHITE, EnumNameNotaionSquare.B1);
+		chessBoard[7][2] = chessSquareFactory.build(EnumTypePiece.BISHOP, EnumTeam.WHITE, EnumNameNotaionSquare.C1);
+		chessBoard[7][3] = chessSquareFactory.build(EnumTypePiece.KING, EnumTeam.WHITE, EnumNameNotaionSquare.D1);
+		chessBoard[7][4] = chessSquareFactory.build(EnumTypePiece.QUEEN, EnumTeam.WHITE, EnumNameNotaionSquare.E1);
+		chessBoard[7][5] = chessSquareFactory.build(EnumTypePiece.BISHOP, EnumTeam.WHITE, EnumNameNotaionSquare.F1);
+		chessBoard[7][6] = chessSquareFactory.build(EnumTypePiece.KNIGHT, EnumTeam.WHITE, EnumNameNotaionSquare.G1);
+		chessBoard[7][7] = chessSquareFactory.build(EnumTypePiece.ROOK, EnumTeam.WHITE, EnumNameNotaionSquare.H1);
 	}
 }
