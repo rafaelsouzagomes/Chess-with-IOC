@@ -1,10 +1,12 @@
 package com.game.chess.components.piece;
 
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Component;
 
 import com.game.chess.enums.EnumTeam;
 import com.game.chess.enums.EnumTypePiece;
 
+@Component
 public class Piece {
 	
 	@NonNull

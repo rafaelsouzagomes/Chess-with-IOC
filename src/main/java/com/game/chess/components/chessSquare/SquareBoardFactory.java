@@ -10,20 +10,20 @@ import com.game.chess.enums.EnumTeam;
 import com.game.chess.enums.EnumTypePiece;
 
 @Service
-public class ChessSquareFactory {
+public class SquareBoardFactory {
 	
 	private PieceFactory pieceFactory;
 
-	public ChessSquare build(EnumTypePiece typePiece, EnumTeam team, EnumNameNotaionSquare notationSquare) {
+	public SquareBoard build(EnumTypePiece typePiece, EnumTeam team, EnumNameNotaionSquare notationSquare) {
 		Piece piece = pieceFactory.build(typePiece, team);
-		ChessSquare cs = new ChessSquare();
+		SquareBoard cs = new SquareBoard();
 		cs.setNameNotationSquare(notationSquare);
 		cs.setPiece(piece);
 		return cs;
 	}
 	
-	public ChessSquare buildEmpty(EnumNameNotaionSquare notationSquare) {
-		ChessSquare cs = new ChessSquare();
+	public SquareBoard buildEmpty(EnumNameNotaionSquare notationSquare) {
+		SquareBoard cs = new SquareBoard();
 		cs.setNameNotationSquare(notationSquare);
 		return cs;
 	}

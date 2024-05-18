@@ -2,20 +2,20 @@ package com.game.chess.dtos;
 
 import java.util.List;
 
-import com.game.chess.components.chessSquare.ChessSquare;
+import com.game.chess.components.chessSquare.SquareBoard;
 import com.game.chess.components.piece.Piece;
 
 public class MovimentOptionsAvailable {
 
-	private List<ChessSquare> chessSquaresAvailable;
+	private List<SquareBoard> chessSquaresAvailable;
 	
 	private Piece piece;
 
-	public List<ChessSquare> getChessSquaresAvailable() {
+	public List<SquareBoard> getChessSquaresAvailable() {
 		return chessSquaresAvailable;
 	}
 
-	public void setChessSquaresAvailable(List<ChessSquare> chessSquaresAvailable) {
+	public void setChessSquaresAvailable(List<SquareBoard> chessSquaresAvailable) {
 		this.chessSquaresAvailable = chessSquaresAvailable;
 	}
 

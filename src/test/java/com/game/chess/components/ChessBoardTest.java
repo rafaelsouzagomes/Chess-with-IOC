@@ -11,8 +11,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.game.chess.components.chessSquare.ChessSquare;
-import com.game.chess.components.chessSquare.ChessSquareFactory;
+import com.game.chess.components.chessSquare.SquareBoard;
+import com.game.chess.components.chessSquare.SquareBoardFactory;
 import com.game.chess.enums.EnumNameNotaionSquare;
 import com.game.chess.enums.EnumTeam;
 import com.game.chess.enums.EnumTypePiece;
@@ -27,16 +27,10 @@ class ChessBoardTest {
 
     @Test
     public void testPostConstruct() {
-        assertNotNull(chessBoard.get());
-        assertEquals(8, chessBoard.get().length);
-        assertEquals(8, chessBoard.get()[0].length);
+    	chessBoard.createNewGame();
+        assertNotNull(chessBoard.getBoard());
+        assertEquals(8, chessBoard.getBoard().length);
+        assertEquals(8, chessBoard.getBoard()[0].length);
         chessBoard.showBoard();
     }
-    
-//    @Configuration
-//    @ComponentScan(basePackages = "com.game.chess") // Ajuste o pacote conforme necessário
-//    static class TestConfig {
-//        // Esta classe pode ser usada para definir configurações de teste adicionais, se necessário
-//    }
-
 }

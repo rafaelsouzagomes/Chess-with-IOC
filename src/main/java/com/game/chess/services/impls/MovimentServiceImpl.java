@@ -3,7 +3,7 @@ package com.game.chess.services.impls;
 import org.springframework.stereotype.Service;
 
 import com.game.chess.components.ChessBoard;
-import com.game.chess.components.chessSquare.ChessSquare;
+import com.game.chess.components.chessSquare.SquareBoard;
 import com.game.chess.components.piece.Piece;
 import com.game.chess.dtos.MovimentOptionsAvailable;
 import com.game.chess.dtos.MovimentRequestDTO;
@@ -17,13 +17,13 @@ public class MovimentServiceImpl implements IMovimentService {
 	@Override
 	public MovimentOptionsAvailable getMovimentOptions(MovimentRequestDTO mov) {
 		ChessBoard chessboard = mov.getChessboard();
-		ChessSquare[][] chessSquares = chessboard.get();
+		SquareBoard[][] chessSquares = chessboard.getBoard();
 
 		Piece pieceToMove = mov.getPieceToMove();
 		EnumTeam team = pieceToMove.getTeam();
 		
 		EnumNameNotaionSquare currentPosition = EnumNameNotaionSquare.get(mov.getCurrentPosition());
-		ChessSquare currentSquare = chessSquares[currentPosition.getIndex_x()][currentPosition.getIndex_y()];
+		SquareBoard currentSquare = chessSquares[currentPosition.getIndex_x()][currentPosition.getIndex_y()];
 		
 		
 		
