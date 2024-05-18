@@ -11,7 +11,7 @@ import com.game.chess.enums.EnumNameNotaionSquare;
 public class ChessSquare {
 
 	private Piece piece;
-	
+
 	private EnumNameNotaionSquare nameNotationSquare;
 	
 	protected void setPiece(Piece piece) {

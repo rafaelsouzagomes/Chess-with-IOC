@@ -5,7 +5,7 @@ import java.util.List;
 import com.game.chess.components.chessSquare.ChessSquare;
 import com.game.chess.components.piece.Piece;
 
-public class MovimentOptions {
+public class MovimentOptionsAvailable {
 
 	private List<ChessSquare> chessSquaresAvailable;
 	

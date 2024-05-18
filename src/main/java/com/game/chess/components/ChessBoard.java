@@ -16,10 +16,11 @@ import com.game.chess.enums.EnumTypePiece;
 @Component
 public class ChessBoard {
 
-	public ChessSquare[][] chessBoard;
-	
+	private ChessSquare[][] chessBoard;
 	
 	private ChessSquareFactory chessSquareFactory;
+	
+	private ChessBoardFactory chessBoardFactory;
 	
 	@PostConstruct
 	public void initCheBoardDefault() {
@@ -28,6 +29,10 @@ public class ChessBoard {
 	
 	public void setChessBoard(ChessSquare[][] chessBoard) {
 		this.chessBoard = chessBoard;
+	}
+	
+	public ChessSquare[][] get() {
+		return chessBoard;
 	}
 	
 	@Autowired
@@ -49,8 +54,13 @@ public class ChessBoard {
 		}
 	}
 	
+
+	
 	private void initBoard() {
 		chessBoard = new ChessSquare[8][8];
+		
+		chessBoardFactory.addSquare_A8(EnumTypePiece.ROOK, EnumTeam.BLACK);
+		
 		chessBoard[0][0] = chessSquareFactory.build(EnumTypePiece.ROOK, EnumTeam.BLACK, EnumNameNotaionSquare.A8);
 		chessBoard[0][1] = chessSquareFactory.build(EnumTypePiece.KNIGHT, EnumTeam.BLACK, EnumNameNotaionSquare.B8);
 		chessBoard[0][2] = chessSquareFactory.build(EnumTypePiece.BISHOP, EnumTeam.BLACK, EnumNameNotaionSquare.C8);

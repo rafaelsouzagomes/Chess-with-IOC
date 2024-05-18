@@ -27,9 +27,9 @@ class ChessBoardTest {
 
     @Test
     public void testPostConstruct() {
-        assertNotNull(chessBoard.chessBoard);
-        assertEquals(8, chessBoard.chessBoard.length);
-        assertEquals(8, chessBoard.chessBoard[0].length);
+        assertNotNull(chessBoard.get());
+        assertEquals(8, chessBoard.get().length);
+        assertEquals(8, chessBoard.get()[0].length);
         chessBoard.showBoard();
     }
     

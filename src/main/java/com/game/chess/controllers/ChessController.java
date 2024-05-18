@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.game.chess.dtos.MovimentOptions;
+import com.game.chess.dtos.MovimentOptionsAvailable;
 import com.game.chess.dtos.MovimentRequestDTO;
 import com.game.chess.services.IMovimentService;
 
@@ -18,7 +18,7 @@ public class ChessController {
 	
 	@CrossOrigin
 	@GetMapping("/moviment/options")
-	public MovimentOptions getMovimentOptions(MovimentRequestDTO mov)  {
+	public MovimentOptionsAvailable getMovimentOptions(MovimentRequestDTO mov)  {
 		return movimentService.getMovimentOptions(mov);
 	}
 	

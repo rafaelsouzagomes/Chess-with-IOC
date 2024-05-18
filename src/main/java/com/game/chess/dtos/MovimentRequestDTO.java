@@ -4,6 +4,7 @@ import org.springframework.lang.NonNull;
 
 import com.game.chess.components.ChessBoard;
 import com.game.chess.components.piece.Piece;
+import com.game.chess.enums.EnumNameNotaionSquare;
 
 public class MovimentRequestDTO {
 
@@ -12,6 +13,9 @@ public class MovimentRequestDTO {
 	
 	@NonNull
 	private Piece pieceToMove;
+	
+	@NonNull
+	private String currentPosition;
 
 	public ChessBoard getChessboard() {
 		return chessboard;
@@ -28,6 +32,13 @@ public class MovimentRequestDTO {
 	public void setPieceToMove(Piece pieceToMove) {
 		this.pieceToMove = pieceToMove;
 	}
+
+	public void setCurrentPosition(String currentPosition) {
+		this.currentPosition = currentPosition;
+	}
 	
+	public String getCurrentPosition() {
+		return currentPosition;
+	}
 	
 }
