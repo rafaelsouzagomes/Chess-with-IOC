@@ -21,4 +21,12 @@ public enum EnumTeam {
 		return name;
 	}
 	
+	public boolean isBlack() {
+		return abr.equals("B");
+	}
+	
+	public boolean isWhite() {
+		return abr.equals("W");
+	}
+	
 }

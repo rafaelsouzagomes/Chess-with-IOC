@@ -9,7 +9,7 @@ import com.game.chess.enums.EnumNameNotaionSquare;
 public class MovimentRequestDTO {
 
 	@NonNull
-	private ChessBoard chessboard;
+	private Long idBoard;
 	
 	@NonNull
 	private Piece pieceToMove;
@@ -17,14 +17,14 @@ public class MovimentRequestDTO {
 	@NonNull
 	private String currentPosition;
 
-	public ChessBoard getChessboard() {
-		return chessboard;
+	public void setIdBoard(Long idBoard) {
+		this.idBoard = idBoard;
 	}
-
-	public void setChessboard(ChessBoard chessboard) {
-		this.chessboard = chessboard;
+	
+	public Long getIdBoard() {
+		return idBoard;
 	}
-
+	
 	public Piece getPieceToMove() {
 		return pieceToMove;
 	}

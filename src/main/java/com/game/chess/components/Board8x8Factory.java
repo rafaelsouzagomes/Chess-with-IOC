@@ -21,8 +21,8 @@ public class Board8x8Factory {
 	
 	private SquareBoardFactory squareBoardFactory;
 	
-	private final int LINES = 8;
-	private final int COLUMNS = 8;
+	public static final int LINES = 8;
+	public static final int COLUMNS = 8;
 	
 	@PostConstruct
 	public void initBoardDefault8x8() {
@@ -36,8 +36,8 @@ public class Board8x8Factory {
 
 	private void validateBoard() {
 		Objects.requireNonNull(squareBoard);
-		for(int line=0; line < squareBoard.length; line++) {
-			for(int column=0; column < squareBoard[0].length; column++) {
+		for(int line=0; line < LINES; line++) {
+			for(int column=0; column < COLUMNS; column++) {
 				Objects.requireNonNull(squareBoard[line][column]);
 			}
 			System.out.println("");
