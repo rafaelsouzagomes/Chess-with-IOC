@@ -36,6 +36,10 @@ public enum EnumNameNotaionSquare {
         return ENUM_MAP.get(value);
     }
     
+    public static EnumNameNotaionSquare get(int index_x, int index_y) {
+        return get(String.valueOf(index_x)+String.valueOf(index_y));
+    }
+    
 	public int getIndex_x() {
 		return index_x;
 	}

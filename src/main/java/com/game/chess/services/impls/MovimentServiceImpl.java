@@ -63,17 +63,16 @@ public class MovimentServiceImpl implements IMovimentService {
 					 moveAvailable.add(squareToMove);
 				 }
 			}
-		if(canMoveTwoSquares) {
-			 newLineToMove = index_x+2;
-			if(newLineToMove<Board8x8Factory.LINES) {
-				 SquareBoard squareToMove = chessSquares[newLineToMove][index_y];
-				 if(squareToMove.isEmpty()) {
-					 moveAvailable.add(squareToMove);
-				 }
+			if(canMoveTwoSquares) {
+				 newLineToMove = index_x+2;
+				if(newLineToMove<Board8x8Factory.LINES) {
+					 SquareBoard squareToMove = chessSquares[newLineToMove][index_y];
+					 if(squareToMove.isEmpty()) {
+						 moveAvailable.add(squareToMove);
+					 }
+				}
 			}
-		}
-		
-		
+			
 		}
 		// move to capture
 		SquareBoard oneMove = chessSquares[index_x][index_y];
