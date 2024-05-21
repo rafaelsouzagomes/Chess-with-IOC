@@ -38,7 +38,7 @@ class PawnMovimentServiceTest {
     @Test
     void testFindMovimentsAvailable() {
         MovimentRequestDTO request = new MovimentRequestDTO();
-        request.setCurrentPosition("e2");
+        request.setCurrentPosition("H7");
         request.setTeam(EnumTeam.WHITE.name());
 
         MovimentOptionsAvailable result = pawnMovimentService.findMovimentsAvailable(request);
