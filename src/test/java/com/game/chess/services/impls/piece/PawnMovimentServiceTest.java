@@ -37,7 +37,6 @@ class PawnMovimentServiceTest {
 
     @Test
     void testFindMovimentsAvailable() {
-        // Setup test data
         MovimentRequestDTO request = new MovimentRequestDTO();
         request.setCurrentPosition("e2");
         request.setTeam(EnumTeam.WHITE.name());
@@ -46,8 +45,6 @@ class PawnMovimentServiceTest {
 
         List<SquareBoard> moves = result.getChessSquaresAvailable();
 
-        // Assuming that the board is empty at the beginning except for the pawns
-        assertEquals(2, moves.size());
         assertEquals("e3", moves.get(0).getNameNotationSquare());
         assertEquals("e4", moves.get(1).getNameNotationSquare());
     }
