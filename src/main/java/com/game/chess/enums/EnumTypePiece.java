@@ -2,12 +2,12 @@ package com.game.chess.enums;
 
 public enum EnumTypePiece {
 
-	PAWN("P", "Pawn",1), 
-	ROOK("R", "Rook", 5), 
-	KNIGHT("N", "Knight", 3), 
-	BISHOP("B", "Bishop", 3), 
-	QUEEN("Q", "Queen", 9),
-	KING("K", "King", 0);
+	PAWN("P", NamePieces.PAWN,1), 
+	ROOK("R", NamePieces.ROOK, 5), 
+	KNIGHT("N", NamePieces.KNIGHT, 3), 
+	BISHOP("B", NamePieces.BISHOP, 3), 
+	QUEEN("Q", NamePieces.QUEEN, 9),
+	KING("K", NamePieces.King, 0);
 	
 	private String abr; 
 	private String name; 

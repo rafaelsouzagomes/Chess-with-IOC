@@ -2,7 +2,7 @@ package com.game.chess.components;
 
 import com.game.chess.components.chessSquare.SquareBoard;
 
-public interface Board {
+public interface IBoard {
 
 	SquareBoard[][] getBoard();
 

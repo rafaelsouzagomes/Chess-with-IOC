@@ -2,19 +2,16 @@ package com.game.chess.components;
 
 import java.util.Objects;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.game.chess.components.chessSquare.SquareBoard;
-import com.game.chess.components.chessSquare.SquareBoardFactory;
-import com.game.chess.enums.EnumNameNotaionSquare;
-import com.game.chess.enums.EnumTeam;
-import com.game.chess.enums.EnumTypePiece;
 
 @Component
-public class ChessBoard implements Board{
+@Scope(WebApplicationContext.SCOPE_REQUEST)
+public class ChessBoard implements IBoard{
 
 	private SquareBoard[][] chessBoard;
 	

@@ -12,33 +12,48 @@ public class MovimentRequestDTO {
 	private Long idBoard;
 	
 	@NonNull
-	private Piece pieceToMove;
+	private String pieceToMove;
+	
+	@NonNull
+	private String team;
 	
 	@NonNull
 	private String currentPosition;
 
-	public void setIdBoard(Long idBoard) {
-		this.idBoard = idBoard;
-	}
-	
 	public Long getIdBoard() {
 		return idBoard;
 	}
-	
-	public Piece getPieceToMove() {
+
+	public void setIdBoard(Long idBoard) {
+		this.idBoard = idBoard;
+	}
+
+	public String getPieceToMove() {
 		return pieceToMove;
 	}
 
-	public void setPieceToMove(Piece pieceToMove) {
+	public void setPieceToMove(String pieceToMove) {
 		this.pieceToMove = pieceToMove;
+	}
+
+	public String getTeam() {
+		return team;
+	}
+
+	public void setTeam(String team) {
+		this.team = team;
+	}
+
+	public String getCurrentPosition() {
+		return currentPosition;
 	}
 
 	public void setCurrentPosition(String currentPosition) {
 		this.currentPosition = currentPosition;
 	}
 	
-	public String getCurrentPosition() {
-		return currentPosition;
-	}
+	
+
+
 	
 }

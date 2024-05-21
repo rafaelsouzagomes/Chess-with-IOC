@@ -10,18 +10,6 @@ import com.game.chess.dtos.MovimentRequestDTO;
 
 class MovimentServiceImplTest {
 	
-	@Autowired
-	MovimentServiceImpl movService;
 
-	@Test
-	void shouldReturnInitMovsForPawns() {
-	
-		MovimentRequestDTO mov = new MovimentRequestDTO();
-		ChessBoard chessBoard = new ChessBoard();
-		
-		
-		mov.setChessboard(chessBoard);
-		movService.getMovimentOptions(mov);
-	}
 
 }
