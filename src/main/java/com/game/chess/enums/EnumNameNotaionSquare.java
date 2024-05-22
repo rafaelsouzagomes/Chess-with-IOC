@@ -1,5 +1,6 @@
 package com.game.chess.enums;
 
+import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +21,8 @@ public enum EnumNameNotaionSquare {
 	
 	private static final Map<String, EnumNameNotaionSquare> ENUM_MAP;
 	
+	private static final Map<Map.Entry<Integer, Integer>, EnumNameNotaionSquare> ENUM_BY_INDEX;
+	
 	private EnumNameNotaionSquare(int index_x, int index_y) {
 		this.index_x = index_x;
 		this.index_y = index_y;
@@ -27,8 +30,13 @@ public enum EnumNameNotaionSquare {
 	
 	static {
 		ENUM_MAP = new HashMap<>();
-        for (EnumNameNotaionSquare instance : EnumNameNotaionSquare.values()) {
+		ENUM_BY_INDEX = new HashMap<>();
+
+		for (EnumNameNotaionSquare instance : EnumNameNotaionSquare.values()) {
             ENUM_MAP.put(instance.name(), instance);
+            
+            Map.Entry<Integer, Integer> entry = new AbstractMap.SimpleEntry<>(instance.getIndex_x(), instance.getIndex_y());
+            ENUM_BY_INDEX.put(entry, instance);
         }
     }
 
@@ -37,7 +45,8 @@ public enum EnumNameNotaionSquare {
     }
     
     public static EnumNameNotaionSquare get(int index_x, int index_y) {
-        return get(String.valueOf(index_x)+String.valueOf(index_y));
+    	Map.Entry<Integer, Integer> entry = new AbstractMap.SimpleEntry<>(index_x, index_y);
+        return ENUM_BY_INDEX.get(entry);
     }
     
 	public int getIndex_x() {

@@ -17,6 +17,7 @@ import com.game.chess.components.chessSquare.SquareBoard;
 import com.game.chess.config.TestConfig;
 import com.game.chess.dtos.MovimentOptionsAvailable;
 import com.game.chess.dtos.MovimentRequestDTO;
+import com.game.chess.enums.EnumNameNotaionSquare;
 import com.game.chess.enums.EnumTeam;
 
 @ExtendWith(SpringExtension.class)
@@ -33,19 +34,37 @@ class PawnMovimentServiceTest {
     @BeforeEach
     void setUp() {
         chessBoard.createNewGame();
+        pawnMovimentService.setChessBoard(chessBoard);
     }
 
     @Test
-    void testFindMovimentsAvailable() {
+    void validateBlackPawnMovimentsInChessBoardInit() {
         MovimentRequestDTO request = new MovimentRequestDTO();
-        request.setCurrentPosition("H7");
-        request.setTeam(EnumTeam.WHITE.name());
+        request.setCurrentPosition("G7");
+        request.setTeam(EnumTeam.BLACK.getName());
 
         MovimentOptionsAvailable result = pawnMovimentService.findMovimentsAvailable(request);
 
         List<SquareBoard> moves = result.getChessSquaresAvailable();
 
-        assertEquals("e3", moves.get(0).getNameNotationSquare());
-        assertEquals("e4", moves.get(1).getNameNotationSquare());
+        assertEquals(2, moves.size());
+        assertEquals(EnumNameNotaionSquare.G6, moves.get(0).getNameNotationSquare());
+        assertEquals(EnumNameNotaionSquare.G5, moves.get(1).getNameNotationSquare());
+    }
+    
+    
+    @Test
+    void validateBlackPawnMovimentsInChessBoardInit_V2() {
+        MovimentRequestDTO request = new MovimentRequestDTO();
+        request.setCurrentPosition("A7");
+        request.setTeam(EnumTeam.BLACK.getName());
+
+        MovimentOptionsAvailable result = pawnMovimentService.findMovimentsAvailable(request);
+
+        List<SquareBoard> moves = result.getChessSquaresAvailable();
+
+        assertEquals(2, moves.size());
+        assertEquals(EnumNameNotaionSquare.A6, moves.get(0).getNameNotationSquare());
+        assertEquals(EnumNameNotaionSquare.A5, moves.get(1).getNameNotationSquare());
     }
 }

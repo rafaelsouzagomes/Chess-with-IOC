@@ -24,23 +24,24 @@ public class PawnMovimentService implements IMovimentPiece {
 	
 	private IBoard chessBoard;
 	
-//	@Autowired
-//	public void setChessBoard(IBoard chessBoard) {
-//		this.chessBoard = chessBoard;
-//	}
-	
-	
 	@Autowired
-	@Qualifier("testChessBoard")
 	public void setChessBoard(IBoard chessBoard) {
 		this.chessBoard = chessBoard;
 	}
+	
+	
+//	@Autowired
+//	@Qualifier("testChessBoard")
+//	public void setChessBoard(IBoard chessBoard) {
+//		this.chessBoard = chessBoard;
+//	}
 
 	@Override
 	public MovimentOptionsAvailable findMovimentsAvailable(MovimentRequestDTO mov) {
 		
 		List<SquareBoard> moveAvailable = new ArrayList<>();
 		EnumTeam team = EnumTeam.get(mov.getTeam());
+
 		SquareBoard[][] chessSquares = chessBoard.getBoard();
 
 		EnumNameNotaionSquare currentPosition = EnumNameNotaionSquare.get(mov.getCurrentPosition());
