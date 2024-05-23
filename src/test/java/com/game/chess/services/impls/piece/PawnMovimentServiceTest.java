@@ -22,7 +22,7 @@ import com.game.chess.enums.EnumTeam;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-@ContextConfiguration(classes = TestConfig.class)
+//@ContextConfiguration(classes = TestConfig.class)
 class PawnMovimentServiceTest {
 
     @Autowired
@@ -66,5 +66,63 @@ class PawnMovimentServiceTest {
         assertEquals(2, moves.size());
         assertEquals(EnumNameNotaionSquare.A6, moves.get(0).getNameNotationSquare());
         assertEquals(EnumNameNotaionSquare.A5, moves.get(1).getNameNotationSquare());
+    }
+    
+    @Test
+    void validateBlackPawnMovimentsInChessBoardInit_V3() {
+        MovimentRequestDTO request = new MovimentRequestDTO();
+        request.setCurrentPosition("F3");
+        request.setTeam(EnumTeam.BLACK.getName());
+
+        MovimentOptionsAvailable result = pawnMovimentService.findMovimentsAvailable(request);
+
+        List<SquareBoard> moves = result.getChessSquaresAvailable();
+
+        assertEquals(2, moves.size());
+        assertEquals(EnumNameNotaionSquare.E2, moves.get(0).getNameNotationSquare());
+        assertEquals(EnumNameNotaionSquare.G2, moves.get(1).getNameNotationSquare());
+    }
+    
+    @Test
+    void validateWhitePawnMovimentsInChessBoardInit() {
+        MovimentRequestDTO request = new MovimentRequestDTO();
+        request.setCurrentPosition("F2");
+        request.setTeam(EnumTeam.WHITE.getName());
+
+        MovimentOptionsAvailable result = pawnMovimentService.findMovimentsAvailable(request);
+
+        List<SquareBoard> moves = result.getChessSquaresAvailable();
+
+        assertEquals(2, moves.size());
+        assertEquals(EnumNameNotaionSquare.F3, moves.get(0).getNameNotationSquare());
+        assertEquals(EnumNameNotaionSquare.F4, moves.get(1).getNameNotationSquare());
+    }
+    
+    @Test
+    void validateWhitePawnMovimentsInChessBoardInit_V2() {
+        MovimentRequestDTO request = new MovimentRequestDTO();
+        request.setCurrentPosition("G6");
+        request.setTeam(EnumTeam.WHITE.getName());
+
+        MovimentOptionsAvailable result = pawnMovimentService.findMovimentsAvailable(request);
+
+        List<SquareBoard> moves = result.getChessSquaresAvailable();
+
+        assertEquals(2, moves.size());
+        assertEquals(EnumNameNotaionSquare.F7, moves.get(0).getNameNotationSquare());
+        assertEquals(EnumNameNotaionSquare.H7, moves.get(1).getNameNotationSquare());
+    }
+    
+    @Test
+    void validateWhitePawnMovimentsInChessBoardInit_V3() {
+        MovimentRequestDTO request = new MovimentRequestDTO();
+        request.setCurrentPosition("G1");
+        request.setTeam(EnumTeam.WHITE.getName());
+
+        MovimentOptionsAvailable result = pawnMovimentService.findMovimentsAvailable(request);
+
+        List<SquareBoard> moves = result.getChessSquaresAvailable();
+
+        assertEquals(0, moves.size());
     }
 }
