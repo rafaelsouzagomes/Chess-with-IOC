@@ -52,6 +52,20 @@ class PawnMovimentServiceTest {
         assertEquals(EnumNameNotaionSquare.G5, moves.get(1).getNameNotationSquare());
     }
     
+    @Test
+    void validateBlackPawnMovimentsInChessBoardInit_1() {
+        MovimentRequestDTO request = new MovimentRequestDTO();
+        request.setCurrentPosition("G6");
+        request.setTeam(EnumTeam.BLACK.getName());
+
+        MovimentOptionsAvailable result = pawnMovimentService.findMovimentsAvailable(request);
+
+        List<SquareBoard> moves = result.getChessSquaresAvailable();
+
+        assertEquals(1, moves.size());
+        assertEquals(EnumNameNotaionSquare.G5, moves.get(0).getNameNotationSquare());
+    }
+    
     
     @Test
     void validateBlackPawnMovimentsInChessBoardInit_V2() {

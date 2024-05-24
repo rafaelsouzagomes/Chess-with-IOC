@@ -24,6 +24,16 @@ public class PawnMovimentService implements IMovimentPiece {
 	
 	private IBoard chessBoard;
 	
+	private IPawnTeamManager pawnTeamManager ;
+	
+	private PawnTeamManagerFactory pawnTeamManagerFactory;
+	
+	
+	@Autowired
+	public void setPawnTeamManagerFactory(PawnTeamManagerFactory pawnTeamManagerFactory) {
+		this.pawnTeamManagerFactory = pawnTeamManagerFactory;
+	}
+	
 	@Autowired
 	public void setChessBoard(IBoard chessBoard) {
 		this.chessBoard = chessBoard;
@@ -41,6 +51,7 @@ public class PawnMovimentService implements IMovimentPiece {
 		
 		List<SquareBoard> moveAvailable = new ArrayList<>();
 		EnumTeam team = EnumTeam.get(mov.getTeam());
+		IPawnTeamManager pawnTeamManager = pawnTeamManagerFactory.getPawnTeamManager(team);
 
 		SquareBoard[][] chessSquares = chessBoard.getBoard();
 
@@ -48,19 +59,8 @@ public class PawnMovimentService implements IMovimentPiece {
 		int index_x = currentPosition.getIndex_x();
 		int index_y = currentPosition.getIndex_y();
 		
-		//check if is a pawn and call specific interface
-		boolean canMoveTwoSquares = false;
+		boolean canMoveTwoSquares = pawnTeamManager.canMoveTwoSquares(index_x);
 		
-		if(team.isBlack()){
-			if(index_x==1) {
-				canMoveTwoSquares = true;
-			}
-		}
-		if(team.isWhite()) {
-			if(index_x==6) {
-				canMoveTwoSquares = true;
-			}
-		}
 		
 		// check squares available to move
 		if(team.isBlack()) {
