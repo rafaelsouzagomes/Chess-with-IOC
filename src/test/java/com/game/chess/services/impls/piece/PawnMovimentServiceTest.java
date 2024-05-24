@@ -92,6 +92,10 @@ class PawnMovimentServiceTest {
 
         List<SquareBoard> moves = result.getChessSquaresAvailable();
 
+        for(SquareBoard move: moves) {
+        	System.out.println("Resultado: " + move.getNameNotationSquare());
+        }
+        
         assertEquals(2, moves.size());
         assertEquals(EnumNameNotaionSquare.E2, moves.get(0).getNameNotationSquare());
         assertEquals(EnumNameNotaionSquare.G2, moves.get(1).getNameNotationSquare());
@@ -121,7 +125,10 @@ class PawnMovimentServiceTest {
         MovimentOptionsAvailable result = pawnMovimentService.findMovimentsAvailable(request);
 
         List<SquareBoard> moves = result.getChessSquaresAvailable();
-
+        for(SquareBoard move: moves) {
+        	System.out.println("Resultado: " + move.getNameNotationSquare());
+        }
+        
         assertEquals(2, moves.size());
         assertEquals(EnumNameNotaionSquare.F7, moves.get(0).getNameNotationSquare());
         assertEquals(EnumNameNotaionSquare.H7, moves.get(1).getNameNotationSquare());

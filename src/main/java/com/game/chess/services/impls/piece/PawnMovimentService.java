@@ -48,61 +48,40 @@ public class PawnMovimentService implements IMovimentPiece {
 
 	@Override
 	public MovimentOptionsAvailable findMovimentsAvailable(MovimentRequestDTO mov) {
-		
-		List<SquareBoard> moveAvailable = new ArrayList<>();
+
 		EnumTeam team = EnumTeam.get(mov.getTeam());
 		IPawnTeamManager pawnTeamManager = pawnTeamManagerFactory.getPawnTeamManager(team);
-
 		SquareBoard[][] chessSquares = chessBoard.getBoard();
-
+		
 		EnumNameNotaionSquare currentPosition = EnumNameNotaionSquare.get(mov.getCurrentPosition());
 		int index_x = currentPosition.getIndex_x();
 		int index_y = currentPosition.getIndex_y();
-		
 		boolean canMoveTwoSquares = pawnTeamManager.canMoveTwoSquares(index_x);
 		
+		List<SquareBoard> moveAvailable = new ArrayList<>();
+			
+		int index_x_to_move = pawnTeamManager.getSimpleMovimentInIndex_X(index_x);
+		int index_y_to_Move =index_y;
+		 // guardar em bean de request?
+		addMove(chessSquares, moveAvailable, index_x_to_move, index_y_to_Move, team, false);
 		
-		// check squares available to move
-		if(team.isBlack()) {
-			
-			int index_x_to_move = index_x+1;
-			int index_y_to_Move =index_y;
-			addMove(chessSquares, moveAvailable, index_x_to_move, index_y_to_Move, team, false);
-			
-			if(canMoveTwoSquares) {
-				 index_x_to_move = index_x+2;
-				 index_y_to_Move =index_y;
-				 addMove(chessSquares, moveAvailable, index_x_to_move, index_y_to_Move, team, false);
-			}
-			
-			//capture moviments
-			index_x_to_move = index_x+1;
-			index_y_to_Move =index_y-1;
-			addMove(chessSquares, moveAvailable, index_x_to_move, index_y_to_Move, team, true);
-			
-			index_x_to_move = index_x+1;
-			index_y_to_Move =index_y+1;
-			addMove(chessSquares, moveAvailable, index_x_to_move, index_y_to_Move, team, true);
+		if(canMoveTwoSquares) {
+			 index_x_to_move = pawnTeamManager.getDoubleMovimentoInIndex_X(index_x);
+			 index_y_to_Move =index_y;
+			 addMove(chessSquares, moveAvailable, index_x_to_move, index_y_to_Move, team, false);
 		}
 		
-		if(team.isWhite()) {
-			int index_x_to_move = index_x-1;
-			int index_y_to_Move =index_y;
-			addMove(chessSquares, moveAvailable, index_x_to_move, index_y_to_Move, team, false);
-			
-			if(canMoveTwoSquares) {
-				 index_x_to_move = index_x-2;
-				 index_y_to_Move =index_y;
-				 addMove(chessSquares, moveAvailable, index_x_to_move, index_y_to_Move, team, false);
-			}
-			index_x_to_move = index_x-1;
-			index_y_to_Move =index_y-1;
-			addMove(chessSquares, moveAvailable, index_x_to_move, index_y_to_Move, team, true);
-			
-			index_x_to_move = index_x-1;
-			index_y_to_Move =index_y+1;
-			addMove(chessSquares, moveAvailable, index_x_to_move, index_y_to_Move, team, true);
-		}
+		//capture moviments
+		index_x_to_move = pawnTeamManager.getCaptureMovimentInIndex_X(index_x);
+		index_y_to_Move =pawnTeamManager.getCaptureMovimentInIndex_y_ToLeft(index_y);
+		System.out.println(index_y_to_Move);
+		addMove(chessSquares, moveAvailable, index_x_to_move, index_y_to_Move, team, true);
+		
+		index_x_to_move = pawnTeamManager.getCaptureMovimentInIndex_X(index_x);
+		index_y_to_Move =pawnTeamManager.getCaptureMovimentInIndex_Y_ToRight(index_y);
+		System.out.println(index_y_to_Move);
+		addMove(chessSquares, moveAvailable, index_x_to_move, index_y_to_Move, team, true);
+
 		
 		MovimentOptionsAvailable ma = new MovimentOptionsAvailable();
 		ma.setChessSquaresAvailable(moveAvailable);
@@ -110,6 +89,8 @@ public class PawnMovimentService implements IMovimentPiece {
 		return ma;
 	}
 
+
+//can jump?
 	private void addMove(SquareBoard[][] chessSquares, 
 						 List<SquareBoard> moveAvailable, 
 						 int index_x_to_move,
