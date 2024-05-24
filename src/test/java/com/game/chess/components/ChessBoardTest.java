@@ -2,6 +2,8 @@ package com.game.chess.components;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import javax.persistence.EnumType;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +26,21 @@ class ChessBoardTest {
 
     @Autowired
     private ChessBoard chessBoard;
+    
+    @Autowired
+	private SquareBoardFactory squareBoardFactory;
 
     @Test
     public void testPostConstruct() {
     	chessBoard.createNewGame();
-        assertNotNull(chessBoard.getBoard());
-        assertEquals(8, chessBoard.getBoard().length);
-        assertEquals(8, chessBoard.getBoard()[0].length);
+        SquareBoard[][] board = chessBoard.getBoard();
+		assertNotNull(board);
+        assertEquals(8, board.length);
+        assertEquals(8, board[0].length);
+        SquareBoard squareRook = squareBoardFactory.build(EnumTypePiece.ROOK, EnumTeam.BLACK, EnumNameNotaionSquare.A8);
+		assertEquals(squareRook, board[0][0]);
+        
+        
         chessBoard.showBoard();
     }
 }

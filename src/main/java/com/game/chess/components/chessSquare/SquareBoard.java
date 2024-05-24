@@ -14,6 +14,14 @@ public class SquareBoard {
 
 	private EnumNameNotaionSquare nameNotationSquare;
 	
+	@Override
+	public boolean equals(Object obj) {
+		SquareBoard squareToCompare = (SquareBoard) obj;
+		
+		return this.nameNotationSquare == squareToCompare.getNameNotationSquare() &&
+				this.piece.equals(squareToCompare.getPiece());
+	}
+	
 	protected void setPiece(Piece piece) {
 		this.piece = piece;
 	}

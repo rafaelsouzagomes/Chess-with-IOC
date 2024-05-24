@@ -18,6 +18,14 @@ public class Piece {
 	protected Piece() {}
 	
 	@Override
+	public boolean equals(Object obj) {
+		Piece pieceToCompare = (Piece) obj;
+		
+		return this.getType() == pieceToCompare.getType() && 
+				this.getTeam() == pieceToCompare.getTeam();
+	}
+	
+	@Override
 	public String toString() {
 		return  type.getAbr()+team.getAbr();
 	}
