@@ -48,15 +48,16 @@ public class PawnMovimentService implements IMovimentPiece {
 		EnumNameNotaionSquare currentPosition = EnumNameNotaionSquare.get(mov.getCurrentPosition());
 		int index_x = currentPosition.getIndex_x();
 		int index_y = currentPosition.getIndex_y();
-		boolean canMoveTwoSquares = pawnTeamManager.canMoveTwoSquares(index_x);
+		
 		
 		List<SquareBoard> moveAvailable = new ArrayList<>();
 			
 		int index_x_to_move = pawnTeamManager.getSimpleMovimentAhead(index_x);
 		int index_y_to_Move =index_y;
-		 // guardar em bean de request?
 		addMove(chessSquares, moveAvailable, index_x_to_move, index_y_to_Move, team);
+
 		
+		boolean canMoveTwoSquares = pawnTeamManager.canMoveTwoSquares(index_x);
 		if(canMoveTwoSquares) {
 			 index_x_to_move = pawnTeamManager.getDoubleMovimentAhead(index_x);
 			 index_y_to_Move =index_y;

@@ -1,6 +1,8 @@
 package com.game.chess.services.pieces;
 
+import com.game.chess.components.IBoard;
 import com.game.chess.dtos.MovimentOptionsAvailableDTO;
+import com.game.chess.services.pieces.pawn.ITeamManager;
 
 public interface IMovimentOptions {
 
@@ -9,5 +11,9 @@ public interface IMovimentOptions {
 	void addCaptureMove(int index_x_to_move, int index_y_to_Move);
 
 	MovimentOptionsAvailableDTO getMovimentsOptions();
+
+	void setChessBoard(IBoard chessBoard);
+
+	void setTeamManager(ITeamManager teamManager);
 
 }

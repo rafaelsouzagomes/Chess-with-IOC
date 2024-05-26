@@ -29,53 +29,75 @@ public class MovimentOptions implements IMovimentOptions {
 	
 	private ITeamManager teamManager;
 	
-	@Autowired
-	public void setChessBoard(IBoard chessBoard) {
-		this.chessBoard = chessBoard;
-	}
+	private SquareBoard[][] squareBoard;
 	
-	@Autowired
-	public void setTeamManager(ITeamManager teamManager) {
-		this.teamManager = teamManager;
-	}
+	private int index_x = -1;
+	
+	private int index_y = -1;
 	
 	@PostConstruct
 	public void iniMoviments() {
 		movesAvailable = new ArrayList<>();
-	}
-
-	@Override
-	public void addMove( int index_x_to_move, int index_y_to_Move) {
 		
-		SquareBoard[][] chessSquares = chessBoard.getBoard();
-		EnumNameNotaionSquare notationSquareToMove = EnumNameNotaionSquare.get(index_x_to_move, index_y_to_Move);
-		
-		if (Objects.nonNull(notationSquareToMove)) {
-			SquareBoard squareToMove = chessSquares[index_x_to_move][index_y_to_Move];
-			if (squareToMove.isEmpty())
-				movesAvailable.add(squareToMove);
-		}
 	}
-
-	@Override
-	public void addCaptureMove( int index_x_to_move, int index_y_to_Move) {
-
-		SquareBoard[][] chessSquares = chessBoard.getBoard();
-		EnumNameNotaionSquare notationSquareToMove = EnumNameNotaionSquare.get(index_x_to_move, index_y_to_Move);
-		
-		if (Objects.nonNull(notationSquareToMove)) {
-			SquareBoard squareToMove = chessSquares[index_x_to_move][index_y_to_Move];
-			if (!squareToMove.isEmpty()) {
-				Piece piece = squareToMove.getPiece();
-				if (piece.getTeam() != teamManager.getTeam())
-					movesAvailable.add(squareToMove);
-			}
-		}
-	}
+	
 	@Override
 	public MovimentOptionsAvailableDTO getMovimentsOptions() {
 		MovimentOptionsAvailableDTO dto = new MovimentOptionsAvailableDTO();
 		dto.setChessSquaresAvailable(movesAvailable);
 		return dto;
 	}
+
+	@Override
+	public void addMove( int index_x_to_move, int index_y_to_Move) {
+		this.index_x = index_y_to_Move;
+		this.index_y = index_y_to_Move;
+		
+		addMove();
+	}
+	
+	@Override
+	public void addCaptureMove( int index_x_to_move, int index_y_to_Move) {
+		this.index_x = index_x_to_move;
+		this.index_y = index_y_to_Move;
+
+		addCaptureMove();
+	}
+
+	private void addMove() {
+		if (isExists() && isEmpty()) 
+			movesAvailable.add(squareBoard[index_x][index_y]);
+	}
+	
+	private void addCaptureMove() {
+		if (isExists() && !isEmpty()) {
+			SquareBoard squareToMove = squareBoard[index_x][index_y];
+			Piece piece = squareToMove.getPiece();
+			if (piece.getTeam() != teamManager.getTeam())
+				movesAvailable.add(squareToMove);
+		}
+	}
+	
+	private boolean isEmpty() {
+		SquareBoard squareToMove = squareBoard[index_x][index_y];
+		return squareToMove.isEmpty();
+	}
+
+	private boolean isExists() {
+		EnumNameNotaionSquare notationSquareToMove = EnumNameNotaionSquare.get(index_x, index_y);
+		return Objects.nonNull(notationSquareToMove);
+	}
+	
+	@Override
+	@Autowired
+	public void setChessBoard(IBoard chessBoard) {
+		this.chessBoard = chessBoard;
+		squareBoard = chessBoard.getBoard();
+	}
+	@Override	
+	@Autowired
+	public void setTeamManager(ITeamManager teamManager) {
+		this.teamManager = teamManager;
+	}
+
 }
