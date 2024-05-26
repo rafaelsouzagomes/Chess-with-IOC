@@ -1,12 +1,16 @@
-package com.game.chess.services.impls.piece;
+package com.game.chess.services.impls.piece.pawn;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
 import com.game.chess.enums.EnumTeam;
+import com.game.chess.services.pieces.pawn.IPawnTeamManager;
 
 @Service
 @Qualifier("blackPawnTeamManager")
+@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class BlackPawnTeamManager implements IPawnTeamManager {
 
 	@Override
@@ -20,27 +24,27 @@ public class BlackPawnTeamManager implements IPawnTeamManager {
 	}
 
 	@Override
-	public int getCaptureMovimentInIndex_Y_ToRight(int index_y) {
+	public int getCaptureMovimentRight(int index_y) {
 		return index_y+1;
 	}
 
 	@Override
-	public int getCaptureMovimentInIndex_y_ToLeft(int index_y) {
+	public int getCaptureMovimentLeft(int index_y) {
 		return index_y-1;
 	}
 
 	@Override
-	public int getCaptureMovimentInIndex_X(int index_x) {
+	public int getCaptureMovimentAhead(int index_x) {
 		return index_x+1;
 	}
 
 	@Override
-	public int getDoubleMovimentoInIndex_X(int index_x) {
+	public int getDoubleMovimentAhead(int index_x) {
 		return index_x+2;
 	}
 
 	@Override
-	public int getSimpleMovimentInIndex_X(int index_x) {
+	public int getSimpleMovimentAhead(int index_x) {
 		return index_x+1;
 	}
 }

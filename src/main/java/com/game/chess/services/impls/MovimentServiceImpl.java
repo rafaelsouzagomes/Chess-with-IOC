@@ -5,11 +5,11 @@ import org.springframework.stereotype.Service;
 
 import com.game.chess.components.ChessBoard;
 import com.game.chess.components.piece.Piece;
-import com.game.chess.dtos.MovimentOptionsAvailable;
+import com.game.chess.dtos.MovimentOptionsAvailableDTO;
 import com.game.chess.dtos.MovimentRequestDTO;
 import com.game.chess.enums.EnumTeam;
 import com.game.chess.services.IMovimentService;
-import com.game.chess.services.impls.piece.MovimentPieceFactory;
+import com.game.chess.services.impls.piece.pawn.MovimentPieceFactory;
 import com.game.chess.services.pieces.IMovimentPiece;
 
 @Service
@@ -30,7 +30,7 @@ public class MovimentServiceImpl implements IMovimentService {
 	}
 
 	@Override
-	public MovimentOptionsAvailable getMovimentOptions(MovimentRequestDTO mov) {
+	public MovimentOptionsAvailableDTO getMovimentOptions(MovimentRequestDTO mov) {
 		chessboard.createNewGame();
 
 		IMovimentPiece movimentPiece = movimentPieceFactory.getMovimentPiece(mov.getPieceToMove());

@@ -1,4 +1,4 @@
-package com.game.chess.services.impls.piece;
+package com.game.chess.services.impls.piece.pawn;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,20 +9,17 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.game.chess.components.ChessBoard;
 import com.game.chess.components.chessSquare.SquareBoard;
-import com.game.chess.config.TestConfig;
-import com.game.chess.dtos.MovimentOptionsAvailable;
+import com.game.chess.dtos.MovimentOptionsAvailableDTO;
 import com.game.chess.dtos.MovimentRequestDTO;
 import com.game.chess.enums.EnumNameNotaionSquare;
 import com.game.chess.enums.EnumTeam;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-//@ContextConfiguration(classes = TestConfig.class)
 class PawnMovimentServiceTest {
 
     @Autowired
@@ -43,7 +40,7 @@ class PawnMovimentServiceTest {
         request.setCurrentPosition("G7");
         request.setTeam(EnumTeam.BLACK.getName());
 
-        MovimentOptionsAvailable result = pawnMovimentService.findMovimentsAvailable(request);
+        MovimentOptionsAvailableDTO result = pawnMovimentService.findMovimentsAvailable(request);
 
         List<SquareBoard> moves = result.getChessSquaresAvailable();
 
@@ -58,7 +55,7 @@ class PawnMovimentServiceTest {
         request.setCurrentPosition("G6");
         request.setTeam(EnumTeam.BLACK.getName());
 
-        MovimentOptionsAvailable result = pawnMovimentService.findMovimentsAvailable(request);
+        MovimentOptionsAvailableDTO result = pawnMovimentService.findMovimentsAvailable(request);
 
         List<SquareBoard> moves = result.getChessSquaresAvailable();
 
@@ -73,7 +70,7 @@ class PawnMovimentServiceTest {
         request.setCurrentPosition("A7");
         request.setTeam(EnumTeam.BLACK.getName());
 
-        MovimentOptionsAvailable result = pawnMovimentService.findMovimentsAvailable(request);
+        MovimentOptionsAvailableDTO result = pawnMovimentService.findMovimentsAvailable(request);
 
         List<SquareBoard> moves = result.getChessSquaresAvailable();
 
@@ -88,7 +85,7 @@ class PawnMovimentServiceTest {
         request.setCurrentPosition("F3");
         request.setTeam(EnumTeam.BLACK.getName());
 
-        MovimentOptionsAvailable result = pawnMovimentService.findMovimentsAvailable(request);
+        MovimentOptionsAvailableDTO result = pawnMovimentService.findMovimentsAvailable(request);
 
         List<SquareBoard> moves = result.getChessSquaresAvailable();
 
@@ -107,7 +104,7 @@ class PawnMovimentServiceTest {
         request.setCurrentPosition("F2");
         request.setTeam(EnumTeam.WHITE.getName());
 
-        MovimentOptionsAvailable result = pawnMovimentService.findMovimentsAvailable(request);
+        MovimentOptionsAvailableDTO result = pawnMovimentService.findMovimentsAvailable(request);
 
         List<SquareBoard> moves = result.getChessSquaresAvailable();
 
@@ -122,7 +119,7 @@ class PawnMovimentServiceTest {
         request.setCurrentPosition("G6");
         request.setTeam(EnumTeam.WHITE.getName());
 
-        MovimentOptionsAvailable result = pawnMovimentService.findMovimentsAvailable(request);
+        MovimentOptionsAvailableDTO result = pawnMovimentService.findMovimentsAvailable(request);
 
         List<SquareBoard> moves = result.getChessSquaresAvailable();
         for(SquareBoard move: moves) {
@@ -140,7 +137,7 @@ class PawnMovimentServiceTest {
         request.setCurrentPosition("G1");
         request.setTeam(EnumTeam.WHITE.getName());
 
-        MovimentOptionsAvailable result = pawnMovimentService.findMovimentsAvailable(request);
+        MovimentOptionsAvailableDTO result = pawnMovimentService.findMovimentsAvailable(request);
 
         List<SquareBoard> moves = result.getChessSquaresAvailable();
 

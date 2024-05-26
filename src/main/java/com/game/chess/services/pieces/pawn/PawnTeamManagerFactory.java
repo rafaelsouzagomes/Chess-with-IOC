@@ -1,4 +1,4 @@
-package com.game.chess.services.impls.piece;
+package com.game.chess.services.pieces.pawn;
 
 import com.game.chess.enums.EnumTeam;
 

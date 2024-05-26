@@ -1,4 +1,4 @@
-package com.game.chess.services.impls.piece;
+package com.game.chess.services.impls.piece.pawn;
 
 import java.util.HashMap;
 import java.util.Map;

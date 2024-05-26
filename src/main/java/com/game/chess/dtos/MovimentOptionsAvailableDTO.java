@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.game.chess.components.chessSquare.SquareBoard;
 
-public class MovimentOptionsAvailable {
+public class MovimentOptionsAvailableDTO {
 
 	private List<SquareBoard> chessSquaresAvailable;
 	

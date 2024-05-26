@@ -1,11 +1,13 @@
 package com.game.chess.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.game.chess.dtos.MovimentOptionsAvailable;
+import com.game.chess.dtos.MovimentOptionsAvailableDTO;
 import com.game.chess.dtos.MovimentRequestDTO;
 import com.game.chess.services.IMovimentService;
 
@@ -18,7 +20,7 @@ public class ChessController {
 	
 	@CrossOrigin
 	@GetMapping("/moviment/options")
-	public MovimentOptionsAvailable getMovimentOptions(MovimentRequestDTO mov)  {
+	public MovimentOptionsAvailableDTO getMovimentOptions(@RequestBody MovimentRequestDTO mov)  {
 		return movimentService.getMovimentOptions(mov);
 	}
 	
@@ -36,6 +38,7 @@ public class ChessController {
 //		return chessService.testeAlterar();
 //	}
 	
+	@Autowired
 	public void setMovimentService(IMovimentService movimentService) {
 		this.movimentService = movimentService;
 	}
