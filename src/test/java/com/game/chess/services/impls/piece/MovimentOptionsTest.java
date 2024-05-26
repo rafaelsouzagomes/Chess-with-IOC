@@ -57,5 +57,19 @@ class MovimentOptionsTest {
 		MovimentOptionsAvailableDTO movimentsOptions = movOptions.getMovimentsOptions();
 		assertEquals(1, movimentsOptions.getChessSquaresAvailable().size());
 	}
+	
+	@Test
+	void valid_capture_moviment_in_init_chessBoard() {
+		movOptions.addCaptureMove(7, 6);
+		MovimentOptionsAvailableDTO movimentsOptions = movOptions.getMovimentsOptions();
+		assertEquals(1, movimentsOptions.getChessSquaresAvailable().size());
+	}
+	
+	@Test
+	void invalid_capture_moviment_in_init_chessBoard() {
+		movOptions.addCaptureMove(0, 3);
+		MovimentOptionsAvailableDTO movimentsOptions = movOptions.getMovimentsOptions();
+		assertEquals(0, movimentsOptions.getChessSquaresAvailable().size());
+	}
 
 }

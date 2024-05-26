@@ -9,17 +9,21 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.game.chess.components.ChessBoard;
 import com.game.chess.components.chessSquare.SquareBoard;
+import com.game.chess.configs.CustomTestConfig;
 import com.game.chess.dtos.MovimentOptionsAvailableDTO;
 import com.game.chess.dtos.MovimentRequestDTO;
 import com.game.chess.enums.EnumNameNotaionSquare;
 import com.game.chess.enums.EnumTeam;
+import com.game.chess.services.impls.piece.MovimentOptions;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
+@Import(CustomTestConfig.class)
 class PawnMovimentServiceTest {
 
     @Autowired
@@ -27,11 +31,15 @@ class PawnMovimentServiceTest {
 
     @Autowired
     private ChessBoard chessBoard;
+    
+    @Autowired
+    private MovimentOptions movimentOptions;
 
     @BeforeEach
     void setUp() {
         chessBoard.createNewGame();
         pawnMovimentService.setChessBoard(chessBoard);
+        pawnMovimentService.setiMovimentOptions(movimentOptions);
     }
 
     @Test
@@ -109,6 +117,10 @@ class PawnMovimentServiceTest {
         List<SquareBoard> moves = result.getChessSquaresAvailable();
 
         assertEquals(2, moves.size());
+        
+        for(SquareBoard move: moves) {
+        	System.out.println("Resultado: " + move.getNameNotationSquare());
+        }
         assertEquals(EnumNameNotaionSquare.F3, moves.get(0).getNameNotationSquare());
         assertEquals(EnumNameNotaionSquare.F4, moves.get(1).getNameNotationSquare());
     }

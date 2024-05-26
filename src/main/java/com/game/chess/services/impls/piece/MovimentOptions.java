@@ -7,7 +7,9 @@ import java.util.Objects;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -20,7 +22,7 @@ import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.pawn.ITeamManager;
 
 @Service
-@Scope(WebApplicationContext.SCOPE_REQUEST)
+@Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class MovimentOptions implements IMovimentOptions {
 
 	private List<SquareBoard> movesAvailable;
@@ -50,7 +52,7 @@ public class MovimentOptions implements IMovimentOptions {
 
 	@Override
 	public void addMove( int index_x_to_move, int index_y_to_Move) {
-		this.index_x = index_y_to_Move;
+		this.index_x = index_x_to_move;
 		this.index_y = index_y_to_Move;
 		
 		addMove();
@@ -96,7 +98,7 @@ public class MovimentOptions implements IMovimentOptions {
 	}
 	@Override	
 	@Autowired
-	public void setTeamManager(ITeamManager teamManager) {
+	public void setTeamManager(@Lazy  ITeamManager teamManager) {
 		this.teamManager = teamManager;
 	}
 

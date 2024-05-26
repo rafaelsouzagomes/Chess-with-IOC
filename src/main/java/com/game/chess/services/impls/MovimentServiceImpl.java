@@ -11,6 +11,7 @@ import com.game.chess.enums.EnumTeam;
 import com.game.chess.services.IMovimentService;
 import com.game.chess.services.impls.piece.pawn.MovimentPieceFactory;
 import com.game.chess.services.pieces.IMovimentPiece;
+import com.game.chess.services.pieces.pawn.IPawnTeamManager;
 
 @Service
 public class MovimentServiceImpl implements IMovimentService {
@@ -34,6 +35,11 @@ public class MovimentServiceImpl implements IMovimentService {
 		chessboard.createNewGame();
 
 		IMovimentPiece movimentPiece = movimentPieceFactory.getMovimentPiece(mov.getPieceToMove());
+		
+//		EnumTeam team = EnumTeam.get(mov.getTeam());
+//		IPawnTeamManager pawnTeamManager = pawnTeamManagerFactory.getPawnTeamManager(team);
+//		iMovimentOptions.setTeamManager(pawnTeamManager); // isso precisa ser injetado apenas manualmente
+//		iMovimentOptions.setChessBoard(chessBoard);
 		
 		return movimentPiece.findMovimentsAvailable(mov);
 	}
