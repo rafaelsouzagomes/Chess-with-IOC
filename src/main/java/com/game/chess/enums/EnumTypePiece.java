@@ -30,5 +30,9 @@ public enum EnumTypePiece {
 	public int getPoints() {
 		return points;
 	}
+
+	public boolean isPawn() {
+		return getName()==EnumTypePiece.PAWN.getName();
+	}
 	
 }

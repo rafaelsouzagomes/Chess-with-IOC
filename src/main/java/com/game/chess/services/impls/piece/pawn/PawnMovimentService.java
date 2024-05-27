@@ -17,7 +17,7 @@ import com.game.chess.enums.NamePieces;
 import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.IMovimentPiece;
 import com.game.chess.services.pieces.pawn.IPawnTeamManager;
-import com.game.chess.services.pieces.pawn.PawnTeamManagerFactory;
+import com.game.chess.services.pieces.pawn.TeamManagerFactory;
 
 @Service
 @Qualifier(NamePieces.PAWN)
@@ -25,7 +25,7 @@ public class PawnMovimentService implements IMovimentPiece {
 	
 	private IBoard chessBoard;
 	
-	private PawnTeamManagerFactory pawnTeamManagerFactory;
+	private TeamManagerFactory pawnTeamManagerFactory;
 	
 	private IMovimentOptions iMovimentOptions;
 	
@@ -52,7 +52,7 @@ public class PawnMovimentService implements IMovimentPiece {
 //    }
 	
 	@Autowired
-	public void setPawnTeamManagerFactory(PawnTeamManagerFactory pawnTeamManagerFactory) {
+	public void setPawnTeamManagerFactory(TeamManagerFactory pawnTeamManagerFactory) {
 		this.pawnTeamManagerFactory = pawnTeamManagerFactory;
 	}
 	
@@ -65,7 +65,7 @@ public class PawnMovimentService implements IMovimentPiece {
 	public MovimentOptionsAvailableDTO findMovimentsAvailable(MovimentRequestDTO mov) {
 
 		EnumTeam team = EnumTeam.get(mov.getTeam());
-		IPawnTeamManager pawnTeamManager = pawnTeamManagerFactory.getPawnTeamManager(team);
+		IPawnTeamManager pawnTeamManager = pawnTeamManagerFactory.getPawnTeamManager(mov.getPieceToMove(),team);
 		iMovimentOptions.setTeamManager(pawnTeamManager); // isso precisa ser injetado apenas manualmente
 		iMovimentOptions.setChessBoard(chessBoard);
 		

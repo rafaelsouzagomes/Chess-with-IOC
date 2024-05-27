@@ -1,7 +1,5 @@
 package com.game.chess.services.pieces.pawn;
 
-import com.game.chess.enums.EnumTeam;
-
 public interface IPawnTeamManager extends ITeamManager{
 
 	boolean canMoveTwoSquares(int index_x);
