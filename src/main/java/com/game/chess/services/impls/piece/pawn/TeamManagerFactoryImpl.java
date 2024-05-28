@@ -39,6 +39,8 @@ public class TeamManagerFactoryImpl implements TeamManagerFactory {
       
     	return getGeneralTeamManager(team);
     }
+    
+
 
 	private ITeamManager getGeneralTeamManager(EnumTeam team) {
 		switch (team) {

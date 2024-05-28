@@ -19,6 +19,7 @@ import com.game.chess.dtos.MovimentOptionsAvailableDTO;
 import com.game.chess.dtos.MovimentRequestDTO;
 import com.game.chess.enums.EnumNameNotaionSquare;
 import com.game.chess.enums.EnumTeam;
+import com.game.chess.enums.EnumTypePiece;
 import com.game.chess.services.impls.piece.MovimentOptions;
 
 @ExtendWith(SpringExtension.class)
@@ -47,6 +48,7 @@ class PawnMovimentServiceTest {
         MovimentRequestDTO request = new MovimentRequestDTO();
         request.setCurrentPosition("G7");
         request.setTeam(EnumTeam.BLACK.getName());
+        request.setPieceToMove(EnumTypePiece.PAWN.getName());
 
         MovimentOptionsAvailableDTO result = pawnMovimentService.findMovimentsAvailable(request);
 
@@ -62,6 +64,7 @@ class PawnMovimentServiceTest {
         MovimentRequestDTO request = new MovimentRequestDTO();
         request.setCurrentPosition("G6");
         request.setTeam(EnumTeam.BLACK.getName());
+        request.setPieceToMove(EnumTypePiece.PAWN.getName());
 
         MovimentOptionsAvailableDTO result = pawnMovimentService.findMovimentsAvailable(request);
 
@@ -77,6 +80,7 @@ class PawnMovimentServiceTest {
         MovimentRequestDTO request = new MovimentRequestDTO();
         request.setCurrentPosition("A7");
         request.setTeam(EnumTeam.BLACK.getName());
+        request.setPieceToMove(EnumTypePiece.PAWN.getName());
 
         MovimentOptionsAvailableDTO result = pawnMovimentService.findMovimentsAvailable(request);
 
@@ -92,6 +96,7 @@ class PawnMovimentServiceTest {
         MovimentRequestDTO request = new MovimentRequestDTO();
         request.setCurrentPosition("F3");
         request.setTeam(EnumTeam.BLACK.getName());
+        request.setPieceToMove(EnumTypePiece.PAWN.getName());
 
         MovimentOptionsAvailableDTO result = pawnMovimentService.findMovimentsAvailable(request);
 
@@ -111,6 +116,7 @@ class PawnMovimentServiceTest {
         MovimentRequestDTO request = new MovimentRequestDTO();
         request.setCurrentPosition("F2");
         request.setTeam(EnumTeam.WHITE.getName());
+        request.setPieceToMove(EnumTypePiece.PAWN.getName());
 
         MovimentOptionsAvailableDTO result = pawnMovimentService.findMovimentsAvailable(request);
 
@@ -130,6 +136,7 @@ class PawnMovimentServiceTest {
         MovimentRequestDTO request = new MovimentRequestDTO();
         request.setCurrentPosition("G6");
         request.setTeam(EnumTeam.WHITE.getName());
+        request.setPieceToMove(EnumTypePiece.PAWN.getName());
 
         MovimentOptionsAvailableDTO result = pawnMovimentService.findMovimentsAvailable(request);
 
@@ -148,6 +155,7 @@ class PawnMovimentServiceTest {
         MovimentRequestDTO request = new MovimentRequestDTO();
         request.setCurrentPosition("G1");
         request.setTeam(EnumTeam.WHITE.getName());
+        request.setPieceToMove(EnumTypePiece.PAWN.getName());
 
         MovimentOptionsAvailableDTO result = pawnMovimentService.findMovimentsAvailable(request);
 

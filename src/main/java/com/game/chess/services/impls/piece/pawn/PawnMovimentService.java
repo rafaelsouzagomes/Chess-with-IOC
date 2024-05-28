@@ -13,6 +13,7 @@ import com.game.chess.dtos.MovimentOptionsAvailableDTO;
 import com.game.chess.dtos.MovimentRequestDTO;
 import com.game.chess.enums.EnumNameNotaionSquare;
 import com.game.chess.enums.EnumTeam;
+import com.game.chess.enums.EnumTypePiece;
 import com.game.chess.enums.NamePieces;
 import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.IMovimentPiece;
@@ -65,7 +66,8 @@ public class PawnMovimentService implements IMovimentPiece {
 	public MovimentOptionsAvailableDTO findMovimentsAvailable(MovimentRequestDTO mov) {
 
 		EnumTeam team = EnumTeam.get(mov.getTeam());
-		IPawnTeamManager pawnTeamManager = pawnTeamManagerFactory.getPawnTeamManager(mov.getPieceToMove(),team);
+		EnumTypePiece enumTypePiece = EnumTypePiece.get(mov.getPieceToMove());
+		IPawnTeamManager pawnTeamManager = (IPawnTeamManager) pawnTeamManagerFactory.getTeamManager(enumTypePiece,team);
 		iMovimentOptions.setTeamManager(pawnTeamManager); // isso precisa ser injetado apenas manualmente
 		iMovimentOptions.setChessBoard(chessBoard);
 		

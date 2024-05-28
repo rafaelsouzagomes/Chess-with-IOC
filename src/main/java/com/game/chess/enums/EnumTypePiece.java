@@ -1,5 +1,9 @@
 package com.game.chess.enums;
 
+import java.util.AbstractMap;
+import java.util.HashMap;
+import java.util.Map;
+
 public enum EnumTypePiece {
 
 	PAWN("P", NamePieces.PAWN,1), 
@@ -12,6 +16,20 @@ public enum EnumTypePiece {
 	private String abr; 
 	private String name; 
 	private int points;
+	
+	private static final Map<String, EnumTypePiece> ENUM_MAP;
+	
+	static {
+		ENUM_MAP = new HashMap<>();
+
+		for (EnumTypePiece instance : EnumTypePiece.values()) {
+            ENUM_MAP.put(instance.getName(), instance);
+        }
+    }
+	
+    public static EnumTypePiece get(String value) {
+        return ENUM_MAP.get(value);
+    }
 	
 	EnumTypePiece(String abr, String name, int points){
 		this.abr = abr;
@@ -34,5 +52,6 @@ public enum EnumTypePiece {
 	public boolean isPawn() {
 		return getName()==EnumTypePiece.PAWN.getName();
 	}
+	
 	
 }
