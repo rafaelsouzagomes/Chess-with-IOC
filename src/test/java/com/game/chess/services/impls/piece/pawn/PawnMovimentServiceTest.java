@@ -21,6 +21,8 @@ import com.game.chess.enums.EnumNameNotaionSquare;
 import com.game.chess.enums.EnumTeam;
 import com.game.chess.enums.EnumTypePiece;
 import com.game.chess.services.impls.piece.MovimentOptions;
+import com.game.chess.services.pieces.pawn.IPawnTeamManager;
+import com.game.chess.services.pieces.pawn.ITeamManagerFactory;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -35,11 +37,14 @@ class PawnMovimentServiceTest {
     
     @Autowired
     private MovimentOptions movimentOptions;
+    
+    @Autowired
+    private ITeamManagerFactory iTeamManagerFactory;
 
     @BeforeEach
     void setUp() {
         chessBoard.createNewGame();
-        pawnMovimentService.setChessBoard(chessBoard);
+        movimentOptions.setChessBoard(chessBoard);
         pawnMovimentService.setiMovimentOptions(movimentOptions);
     }
 
@@ -50,7 +55,8 @@ class PawnMovimentServiceTest {
         request.setTeam(EnumTeam.BLACK.getName());
         request.setPieceToMove(EnumTypePiece.PAWN.getName());
 
-        MovimentOptionsAvailableDTO result = pawnMovimentService.findMovimentsAvailable(request);
+        IPawnTeamManager pawnManager = (IPawnTeamManager) iTeamManagerFactory.getTeamManager(EnumTypePiece.PAWN, EnumTeam.BLACK);
+		pawnMovimentService.addSimpleMoviment(pawnManager);
 
         List<SquareBoard> moves = result.getChessSquaresAvailable();
 

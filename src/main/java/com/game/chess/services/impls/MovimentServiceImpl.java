@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import com.game.chess.components.ChessBoard;
 import com.game.chess.components.IBoard;
 import com.game.chess.dtos.MovimentOptionsAvailableDTO;
 import com.game.chess.dtos.MovimentRequestDTO;
@@ -12,9 +11,9 @@ import com.game.chess.enums.EnumNameNotaionSquare;
 import com.game.chess.enums.EnumTeam;
 import com.game.chess.enums.EnumTypePiece;
 import com.game.chess.services.IMovimentService;
-import com.game.chess.services.impls.piece.pawn.MovimentPieceFactory;
 import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.IMovimentPiece;
+import com.game.chess.services.pieces.IMovimentPieceFactory;
 import com.game.chess.services.pieces.pawn.ITeamManager;
 import com.game.chess.services.pieces.pawn.ITeamManagerFactory;
 
@@ -23,7 +22,7 @@ public class MovimentServiceImpl implements IMovimentService {
 	
 	private IBoard chessboard;
 	
-	private MovimentPieceFactory movimentPieceFactory;
+	private IMovimentPieceFactory movimentPieceFactory;
 	
 	private IMovimentOptions iMovimentOptions;
 	
@@ -32,10 +31,12 @@ public class MovimentServiceImpl implements IMovimentService {
 	@Override
 	public MovimentOptionsAvailableDTO getMovimentOptions(MovimentRequestDTO mov) {
 		chessboard.createNewGame();
-		IMovimentPiece movimentPiece = movimentPieceFactory.getMovimentPiece(mov.getPieceToMove());
-		ITeamManager teamManager =  teamManagerFactory.getTeamManager(getEnumTypePiece(mov), getEnumTeam(mov));
+		
+		IMovimentPiece piece = movimentPieceFactory.getMovimentPiece(mov.getPieceToMove());
+		ITeamManager team =  teamManagerFactory.getTeamManager(getEnumTypePiece(mov), getEnumTeam(mov));
 		EnumNameNotaionSquare currentPosition = EnumNameNotaionSquare.get(mov.getCurrentPosition());
-		movimentPiece.addMovimentsAvailable(teamManager, currentPosition);
+		
+		piece.addMovimentsAvailable(team, currentPosition);
 		 
 		return iMovimentOptions.getMovimentsOptions();
 	}
@@ -62,7 +63,7 @@ public class MovimentServiceImpl implements IMovimentService {
 		this.iMovimentOptions = iMovimentOptions;
 	}
 	@Autowired
-	public void setMovimentPieceFactory(MovimentPieceFactory movimentPieceFactory) {
+	public void setMovimentPieceFactory(IMovimentPieceFactory movimentPieceFactory) {
 		this.movimentPieceFactory = movimentPieceFactory;
 	}
 

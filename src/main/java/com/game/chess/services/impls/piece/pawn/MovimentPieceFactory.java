@@ -26,7 +26,7 @@ public class MovimentPieceFactory implements IMovimentPieceFactory{
         movimentPieceMap.put(NamePieces.PAWN, pieceB);
     }
 
-    
+    @Override
     public IMovimentPiece getMovimentPiece(String key) {
         return movimentPieceMap.get(key);
     }
