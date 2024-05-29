@@ -8,10 +8,10 @@ import com.game.chess.enums.EnumTeam;
 import com.game.chess.enums.EnumTypePiece;
 import com.game.chess.services.pieces.pawn.IPawnTeamManager;
 import com.game.chess.services.pieces.pawn.ITeamManager;
-import com.game.chess.services.pieces.pawn.TeamManagerFactory;
+import com.game.chess.services.pieces.pawn.ITeamManagerFactory;
 
 @Service
-public class TeamManagerFactoryImpl implements TeamManagerFactory {
+public class TeamManagerFactoryImpl implements ITeamManagerFactory {
 
     private  ITeamManager whitePawnTeamManager;
     private  ITeamManager blackPawnTeamManager;
