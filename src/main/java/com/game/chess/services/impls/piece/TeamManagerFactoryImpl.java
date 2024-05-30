@@ -1,4 +1,4 @@
-package com.game.chess.services.impls.piece.pawn;
+package com.game.chess.services.impls.piece;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,18 +13,16 @@ import com.game.chess.services.pieces.pawn.ITeamManagerFactory;
 @Service
 public class TeamManagerFactoryImpl implements ITeamManagerFactory {
 
-    private  ITeamManager whitePawnTeamManager;
-    private  ITeamManager blackPawnTeamManager;
-    
+    private ITeamManager whitePawnTeamManager;
+    private ITeamManager blackPawnTeamManager;
     private ITeamManager whiteTeamManager;
-    
     private ITeamManager blackTeamManager;
 
     @Autowired
     public TeamManagerFactoryImpl(@Qualifier("whitePawnTeamManager") IPawnTeamManager whitePawnTeamManager,
     							  @Qualifier("blackPawnTeamManager") IPawnTeamManager blackPawnTeamManager,
-    							  @Qualifier("whiteTeamManager") ITeamManager whiteTeamManager,
-    							  @Qualifier("blackTeamManager") ITeamManager blackTeamManager) {
+    							  @Qualifier("whiteTeamManager") 	 ITeamManager whiteTeamManager,
+    							  @Qualifier("blackTeamManager")	 ITeamManager blackTeamManager) {
     	
         this.whitePawnTeamManager = whitePawnTeamManager;
         this.blackPawnTeamManager = blackPawnTeamManager;
@@ -40,8 +38,6 @@ public class TeamManagerFactoryImpl implements ITeamManagerFactory {
     	return getGeneralTeamManager(team);
     }
     
-
-
 	private ITeamManager getGeneralTeamManager(EnumTeam team) {
 		switch (team) {
 	        case WHITE:

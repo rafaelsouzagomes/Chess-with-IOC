@@ -81,12 +81,22 @@ public class MovimentOptions implements IMovimentOptions {
 	}
 	
 	private boolean isEmpty() {
-		SquareBoard squareToMove = squareBoard[index_x][index_y];
+		return isEmpty(index_x, index_y );
+	}
+
+	@Override
+	public boolean isEmpty(int x, int y) {
+		SquareBoard squareToMove = squareBoard[x][y];
 		return squareToMove.isEmpty();
 	}
 
 	private boolean isExists() {
-		EnumNameNotaionSquare notationSquareToMove = EnumNameNotaionSquare.get(index_x, index_y);
+		return isExists(index_x,index_y );
+	}
+
+	@Override
+	public boolean isExists(int x, int y) {
+		EnumNameNotaionSquare notationSquareToMove = EnumNameNotaionSquare.get(x,y);
 		return Objects.nonNull(notationSquareToMove);
 	}
 	

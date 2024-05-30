@@ -20,12 +20,6 @@ public class PawnMovimentService implements IMovimentPiece {
 	private int index_y;
 	private int index_x;
 	
-	@Autowired
-	@Lazy
-	public void setiMovimentOptions(IMovimentOptions iMovimentOptions) {
-		this.iMovimentOptions = iMovimentOptions;
-	}
-	
 	@Override
 	public void addMovimentsAvailable(ITeamManager teamManager,
 									  EnumNameNotaionSquare currentPosition) {
@@ -85,6 +79,11 @@ public class PawnMovimentService implements IMovimentPiece {
 		this.index_y = index_y;
 	}
 
+	@Autowired
+	@Lazy
+	public void setiMovimentOptions(IMovimentOptions iMovimentOptions) {
+		this.iMovimentOptions = iMovimentOptions;
+	}
 
 	
 }

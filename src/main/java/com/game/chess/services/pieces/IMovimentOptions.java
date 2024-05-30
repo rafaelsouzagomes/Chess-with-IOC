@@ -16,4 +16,8 @@ public interface IMovimentOptions {
 
 	void setTeamManager(ITeamManager teamManager);
 
+	boolean isEmpty(int x, int y);
+
+	boolean isExists(int x, int y);
+
 }
