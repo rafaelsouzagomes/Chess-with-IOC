@@ -54,11 +54,10 @@ public class PawnMovimentService implements IMovimentPiece {
 		int index_x_to_move = pawnTeamManager.getDoubleMovimentAhead(index_x);
 		int index_y_to_Move =index_y;
 		
-		if(canMoveTwoSquares) {
+		if(canMoveTwoSquares) 
 			iMovimentOptions.addMove(index_x_to_move, index_y_to_Move);
-			return new int[] {index_x_to_move, index_y_to_Move};
-		}
-		return new int[] {};
+		
+		return new int[] {index_x_to_move, index_y_to_Move};
 	}
 
 	protected int[] addCaptureMovimentLeft(IPawnTeamManager pawnTeamManager) {
