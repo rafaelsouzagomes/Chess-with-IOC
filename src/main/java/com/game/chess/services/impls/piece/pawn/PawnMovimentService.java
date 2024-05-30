@@ -77,6 +77,14 @@ public class PawnMovimentService implements IMovimentPiece {
 		iMovimentOptions.addCaptureMove(index_x_to_move, index_y_to_Move);
 		return new int[] {index_x_to_move, index_y_to_Move};
 	}
+	
+	protected void setIndex_x(int index_x) {
+		this.index_x = index_x;
+	}
+	
+	protected void setIndex_y(int index_y) {
+		this.index_y = index_y;
+	}
 
 
 	

@@ -1,6 +1,8 @@
 package com.game.chess.services.impls.piece.pawn;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doNothing;
 
 import java.util.List;
 
@@ -9,10 +11,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.game.chess.components.ChessBoard;
 import com.game.chess.components.chessSquare.SquareBoard;
 import com.game.chess.configs.CustomTestConfig;
 import com.game.chess.dtos.MovimentOptionsAvailableDTO;
@@ -21,8 +23,6 @@ import com.game.chess.enums.EnumNameNotaionSquare;
 import com.game.chess.enums.EnumTeam;
 import com.game.chess.enums.EnumTypePiece;
 import com.game.chess.services.impls.piece.MovimentOptions;
-import com.game.chess.services.pieces.pawn.IPawnTeamManager;
-import com.game.chess.services.pieces.pawn.ITeamManagerFactory;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -32,37 +32,49 @@ class PawnMovimentServiceTest {
     @Autowired
     private PawnMovimentService pawnMovimentService;
 
-    @Autowired
-    private ChessBoard chessBoard;
-    
-    @Autowired
+    @MockBean
     private MovimentOptions movimentOptions;
+        
+    @Autowired
+    private BlackPawnTeamManager blackPawnTeamManager;
+    
     
     @Autowired
-    private ITeamManagerFactory iTeamManagerFactory;
-
+    private WhitePawnTeamManager whitePawnTeamManager;
+    
     @BeforeEach
     void setUp() {
-        chessBoard.createNewGame();
-        movimentOptions.setChessBoard(chessBoard);
-        pawnMovimentService.setiMovimentOptions(movimentOptions);
+        doNothing().when(movimentOptions).addCaptureMove(anyInt(), anyInt());
+        doNothing().when(movimentOptions).addMove(anyInt(), anyInt());
     }
 
     @Test
-    void validateBlackPawnMovimentsInChessBoardInit() {
-        MovimentRequestDTO request = new MovimentRequestDTO();
-        request.setCurrentPosition("G7");
-        request.setTeam(EnumTeam.BLACK.getName());
-        request.setPieceToMove(EnumTypePiece.PAWN.getName());
+    void testSimpleMoviment_Black() {
+        pawnMovimentService.setIndex_x(EnumNameNotaionSquare.G7.getIndex_x());
+        pawnMovimentService.setIndex_y(EnumNameNotaionSquare.G7.getIndex_y());
+        
+        int[] moves =  pawnMovimentService.addSimpleMoviment(blackPawnTeamManager);
 
-        IPawnTeamManager pawnManager = (IPawnTeamManager) iTeamManagerFactory.getTeamManager(EnumTypePiece.PAWN, EnumTeam.BLACK);
-		pawnMovimentService.addSimpleMoviment(pawnManager);
+        assertEquals(2, moves.length);
+        
+        EnumNameNotaionSquare enumAns = EnumNameNotaionSquare.get(moves[0], moves[1]);
+        
+        assertEquals(EnumNameNotaionSquare.G6, enumAns);
+    }
+    
+    
+    @Test
+    void testSimpleMoviment_White() {
+        pawnMovimentService.setIndex_x(EnumNameNotaionSquare.F5.getIndex_x());
+        pawnMovimentService.setIndex_y(EnumNameNotaionSquare.F5.getIndex_y());
+        
+        int[] moves =  pawnMovimentService.addSimpleMoviment(whitePawnTeamManager);
 
-        List<SquareBoard> moves = result.getChessSquaresAvailable();
-
-        assertEquals(2, moves.size());
-        assertEquals(EnumNameNotaionSquare.G6, moves.get(0).getNameNotationSquare());
-        assertEquals(EnumNameNotaionSquare.G5, moves.get(1).getNameNotationSquare());
+        assertEquals(2, moves.length);
+        
+        EnumNameNotaionSquare enumAns = EnumNameNotaionSquare.get(moves[0], moves[1]);
+        
+        assertEquals(EnumNameNotaionSquare.F6, enumAns);
     }
     
     @Test
