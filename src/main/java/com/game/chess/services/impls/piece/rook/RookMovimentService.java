@@ -41,7 +41,7 @@ public class RookMovimentService implements IMovimentPiece{
 				
 		if(iMovimentOptions.isEmpty(x, y) && !(sentido instanceof Init)) {
 			iMovimentOptions.addMove(x, y);
-			return addMoviments2(sentido, sentido.getX(x), sentido.getX(y));
+			return addMoviments2(sentido, sentido.getX(x), sentido.getY(y));
 		} 
 		if(!(sentido instanceof Init)) {
 			iMovimentOptions.addCaptureMove(x, y);				

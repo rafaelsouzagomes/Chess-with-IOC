@@ -58,10 +58,10 @@ class RookMovimentServiceTest {
 	}
 	
 	@Test
-	void test() {
+	void test_com_classes_2() {
 		
 		EnumNameNotaionSquare square = EnumNameNotaionSquare.C5;
-		int[] results = rookMovimentService.addMoviments("INIT",square.getIndex_x() , square.getIndex_y());
+		int[] results = rookMovimentService.addMoviments2(new Init(),square.getIndex_x() , square.getIndex_y());
 		
 		for(int i=0; i < results.length; i+=2) {
 			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results[i], results[i+1]);
