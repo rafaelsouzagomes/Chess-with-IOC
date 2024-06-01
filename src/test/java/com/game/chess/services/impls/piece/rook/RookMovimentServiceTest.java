@@ -42,7 +42,7 @@ class RookMovimentServiceTest {
 	void test() {
 		
 		EnumNameNotaionSquare square = EnumNameNotaionSquare.C5;
-		int[] results = rookMovimentService.searchMoviments("INIT",square.getIndex_x() , square.getIndex_y());
+		int[] results = rookMovimentService.addMoviments("INIT",square.getIndex_x() , square.getIndex_y());
 		
 		for(int i=0; i < results.length; i+=2) {
 			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results[i], results[i+1]);
@@ -53,6 +53,24 @@ class RookMovimentServiceTest {
 		assertEquals(EnumNameNotaionSquare.C2,EnumNameNotaionSquare.get(results[2], results[3]));
 		assertEquals(EnumNameNotaionSquare.H5,EnumNameNotaionSquare.get(results[4], results[5]));
 		assertEquals(EnumNameNotaionSquare.A5,EnumNameNotaionSquare.get(results[6], results[7]));
+		
+	}
+	
+	@Test
+	void test_2() {
+		
+		EnumNameNotaionSquare square = EnumNameNotaionSquare.A8 ;
+		int[] results = rookMovimentService.addMoviments("INIT",square.getIndex_x() , square.getIndex_y());
+		
+		for(int i=0; i < results.length; i+=2) {
+			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results[i], results[i+1]);
+			System.out.println(enumNotation.name() + " " + results[i] + ", "+ results[i+1]);
+		}
+		assertEquals(results.length, 8);
+		assertEquals(EnumNameNotaionSquare.A8,EnumNameNotaionSquare.get(results[0], results[1]));
+		assertEquals(EnumNameNotaionSquare.A7,EnumNameNotaionSquare.get(results[2], results[3]));
+		assertEquals(EnumNameNotaionSquare.B8,EnumNameNotaionSquare.get(results[4], results[5]));
+		assertEquals(EnumNameNotaionSquare.A8,EnumNameNotaionSquare.get(results[6], results[7]));
 		
 	}
 
