@@ -25,7 +25,6 @@ class RookMovimentServiceTest {
 	RookMovimentService rookMovimentService;
 	
 	@Autowired
-//	@MockBean
 	IMovimentOptions iMovimentOptions;
 	
 	@Autowired
@@ -35,15 +34,13 @@ class RookMovimentServiceTest {
     void setUp() {
     	chess.createNewGame();
     	iMovimentOptions.setChessBoard(chess);
-//        doNothing().when(iMovimentOptions).addCaptureMove(anyInt(), anyInt());
-//        doNothing().when(iMovimentOptions).addMove(anyInt(), anyInt());
     }
     
     @Test
-	void test_com_classes() {
+	void rook_moviment_v1() {
 		
 		EnumNameNotaionSquare square = EnumNameNotaionSquare.C5;
-		int[] results = rookMovimentService.addMoviments2(new Init(),square.getIndex_x() , square.getIndex_y());
+		int[] results = rookMovimentService.addMoviments2(null,square.getIndex_x() , square.getIndex_y());
 		
 		for(int i=0; i < results.length; i+=2) {
 			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results[i], results[i+1]);
@@ -61,7 +58,7 @@ class RookMovimentServiceTest {
 	void test_com_classes_2() {
 		
 		EnumNameNotaionSquare square = EnumNameNotaionSquare.C5;
-		int[] results = rookMovimentService.addMoviments2(new Init(),square.getIndex_x() , square.getIndex_y());
+		int[] results = rookMovimentService.addMoviments2(null,square.getIndex_x() , square.getIndex_y());
 		
 		for(int i=0; i < results.length; i+=2) {
 			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results[i], results[i+1]);
@@ -76,7 +73,7 @@ class RookMovimentServiceTest {
 	}
 	
 	@Test
-	void test_2() {
+	void rook_moviment_v2() {
 		
 		EnumNameNotaionSquare square = EnumNameNotaionSquare.A8 ;
 		int[] results = rookMovimentService.addMoviments("INIT",square.getIndex_x() , square.getIndex_y());

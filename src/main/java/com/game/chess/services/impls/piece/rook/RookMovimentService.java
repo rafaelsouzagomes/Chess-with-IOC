@@ -1,5 +1,6 @@
 package com.game.chess.services.impls.piece.rook;
 
+import java.util.Objects;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -26,24 +27,24 @@ public class RookMovimentService implements IMovimentPiece{
 
 	private IMovimentOptions iMovimentOptions;
 	
+	
 	@Override
 	public void addMovimentsAvailable(ITeamManager teamManager, EnumNameNotaionSquare currentPosition) {
-		currentPosition.getIndex_x();
-		
-		addMoviments2(new Init(), 0, 0);
+		iMovimentOptions.setTeamManager(teamManager);
+		addMoviments2(null, currentPosition.getIndex_x(), currentPosition.getIndex_y());
 	}
 	
 	protected int[] addMoviments2(ISenseDirection sentido, int x, int y) {
-		if(sentido.isFastReturn(x, y)) {
+		if( Objects.nonNull(sentido) && sentido.isFastReturn(x, y) ) {
 			iMovimentOptions.addMove(sentido.getFastXReturn(x), sentido.getYReturn(y));
 			return new int[] {sentido.getFastXReturn(x),sentido.getYReturn(y)};
 		}
 				
-		if(iMovimentOptions.isEmpty(x, y) && !(sentido instanceof Init)) {
+		if(Objects.nonNull(sentido) && iMovimentOptions.isEmpty(x, y)  ) {
 			iMovimentOptions.addMove(x, y);
 			return addMoviments2(sentido, sentido.getX(x), sentido.getY(y));
 		} 
-		if(!(sentido instanceof Init)) {
+		if(Objects.nonNull(sentido)) {
 			iMovimentOptions.addCaptureMove(x, y);				
 			return new int[] {x,y}; 
 		} 
@@ -53,10 +54,9 @@ public class RookMovimentService implements IMovimentPiece{
 		int[] maxRight = addMoviments2(new Right(), x, y+1);
 		int[] maxLeft = addMoviments2(new Left(),x, y-1);
 		
-		   return Stream.of(maxTop, maxBottom, maxRight, maxLeft)
-                   .flatMapToInt(IntStream::of)
-                   .toArray();
-		
+		return Stream.of(maxTop, maxBottom, maxRight, maxLeft)
+               .flatMapToInt(IntStream::of)
+               .toArray();
 	}
 	
 	protected int[] addMoviments(String sentido, int x, int y) {
@@ -118,6 +118,7 @@ public class RookMovimentService implements IMovimentPiece{
 	@Lazy
 	public void setiMovimentOptions(IMovimentOptions iMovimentOptions) {
 		this.iMovimentOptions = iMovimentOptions;
+		
 	}
 
 }

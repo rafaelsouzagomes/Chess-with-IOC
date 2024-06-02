@@ -10,7 +10,7 @@ import com.game.chess.enums.EnumTeam;
 import com.game.chess.services.pieces.pawn.IPawnTeamManager;
 
 @Service
-@Qualifier("whiteTeamManager")
+@Qualifier("whitePawnTeamManager")
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class WhitePawnTeamManager implements IPawnTeamManager {
 
