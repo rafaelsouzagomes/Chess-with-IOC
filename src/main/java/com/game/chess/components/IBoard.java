@@ -8,4 +8,8 @@ public interface IBoard {
 
 	void createNewGame();
 
+	void addChessSquareBoard(SquareBoard[][] especificChess);
+
+	void showBoard();
+
 }

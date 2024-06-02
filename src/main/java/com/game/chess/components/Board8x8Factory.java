@@ -6,7 +6,6 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import com.game.chess.components.chessSquare.SquareBoard;
 import com.game.chess.components.chessSquare.SquareBoardFactory;
@@ -15,7 +14,7 @@ import com.game.chess.enums.EnumTeam;
 import com.game.chess.enums.EnumTypePiece;
 
 @Component
-public class Board8x8Factory {
+public class Board8x8Factory implements IBoard8x8Factory{
 	
 	private SquareBoard[][] squareBoard;
 	
@@ -29,6 +28,7 @@ public class Board8x8Factory {
 		squareBoard = new SquareBoard[LINES][COLUMNS];
 	}
 	
+	@Override
 	public SquareBoard[][] build(){
 		validateBoard();
 		return squareBoard;
@@ -44,12 +44,24 @@ public class Board8x8Factory {
 		}
 	}
 	
+	@Override
 	public void addSquare(EnumTypePiece typePiece, EnumTeam team, EnumNameNotaionSquare enumNameNotation) {
 		squareBoard[enumNameNotation.getIndex_x()][enumNameNotation.getIndex_y()] = squareBoardFactory.build(typePiece, team, enumNameNotation);
 	}
 	
+	@Override
     public void addSquare_empty(EnumNameNotaionSquare enumNameNotation) {
         squareBoard[enumNameNotation.getIndex_x()][enumNameNotation.getIndex_y()] = squareBoardFactory.buildEmpty(enumNameNotation);
+    }
+    
+    @Override
+    public void addAllSquare_empty() {
+    	for(int line=0; line < LINES; line++) {
+			for(int column=0; column < COLUMNS; column++) {
+				EnumNameNotaionSquare enumNameNotaionSquare = EnumNameNotaionSquare.get(column, line);
+				squareBoard[line][column] = squareBoardFactory.buildEmpty(enumNameNotaionSquare);
+			}
+		}
     }
 
 	

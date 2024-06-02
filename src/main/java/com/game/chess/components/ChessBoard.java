@@ -33,6 +33,12 @@ public class ChessBoard implements IBoard{
 		this.chessBoardFactory = chessBoardFactory;
 	}
 	
+	@Override
+	public void addChessSquareBoard(SquareBoard[][] especificChess) {
+		chessBoard = especificChess;
+	}
+	
+	@Override
 	public void showBoard(){
 		Objects.requireNonNull(chessBoard);
 		for(int line=0; line < chessBoard.length; line++) {

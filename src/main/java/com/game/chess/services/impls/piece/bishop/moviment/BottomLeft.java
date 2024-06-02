@@ -6,16 +6,22 @@ public class BottomLeft implements ISenseDirection{
 
 	@Override
 	public boolean isFastReturn(int x, int y) {
-		return y <=0;
+		return y <=0 ||  x>=7;
 	}
 	
 	@Override
 	public int getYReturn(int y) {
-		return 0;
+		if(y<=0) {
+			return 0;
+		}
+		return y;
 	}
 
 	@Override
 	public int getFastXReturn(int x) {
+		if(x>=7) {
+			return x;
+		}
 		return x;
 	}
 
@@ -26,7 +32,7 @@ public class BottomLeft implements ISenseDirection{
 
 	@Override
 	public int getX(int x) {
-		return x-1;
+		return x+1;
 	}
 
 
