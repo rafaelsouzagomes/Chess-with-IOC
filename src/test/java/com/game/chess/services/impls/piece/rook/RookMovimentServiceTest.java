@@ -13,7 +13,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.game.chess.components.ChessBoard;
 import com.game.chess.configs.CustomTestConfig;
 import com.game.chess.enums.EnumNameNotaionSquare;
-import com.game.chess.services.impls.piece.rook.moviment.Init;
 import com.game.chess.services.pieces.IMovimentOptions;
 
 @ExtendWith(SpringExtension.class)
@@ -40,7 +39,7 @@ class RookMovimentServiceTest {
 	void rook_moviment_v1() {
 		
 		EnumNameNotaionSquare square = EnumNameNotaionSquare.C5;
-		int[] results = rookMovimentService.addMoviments2(null,square.getIndex_x() , square.getIndex_y());
+		int[] results = rookMovimentService.addMoviments(null,square.getIndex_x() , square.getIndex_y());
 		
 		for(int i=0; i < results.length; i+=2) {
 			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results[i], results[i+1]);
@@ -58,7 +57,7 @@ class RookMovimentServiceTest {
 	void test_com_classes_2() {
 		
 		EnumNameNotaionSquare square = EnumNameNotaionSquare.C5;
-		int[] results = rookMovimentService.addMoviments2(null,square.getIndex_x() , square.getIndex_y());
+		int[] results = rookMovimentService.addMoviments(null,square.getIndex_x() , square.getIndex_y());
 		
 		for(int i=0; i < results.length; i+=2) {
 			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results[i], results[i+1]);

@@ -1,4 +1,4 @@
-package com.game.chess.services.impls.piece.rook;
+package com.game.chess.services.impls.piece.bishop;
 
 import java.util.Objects;
 import java.util.stream.IntStream;
@@ -11,18 +11,18 @@ import org.springframework.stereotype.Service;
 
 import com.game.chess.enums.EnumNameNotaionSquare;
 import com.game.chess.enums.NamePieces;
-import com.game.chess.services.impls.piece.rook.moviment.Bottom;
+import com.game.chess.services.impls.piece.bishop.moviment.BottomLeft;
+import com.game.chess.services.impls.piece.bishop.moviment.TopLeft;
+import com.game.chess.services.impls.piece.bishop.moviment.TopRight;
 import com.game.chess.services.impls.piece.rook.moviment.Left;
-import com.game.chess.services.impls.piece.rook.moviment.Right;
-import com.game.chess.services.impls.piece.rook.moviment.Top;
 import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.IMovimentPiece;
 import com.game.chess.services.pieces.moviment.ISenseDirection;
 import com.game.chess.services.pieces.pawn.ITeamManager;
 
 @Service
-@Qualifier(NamePieces.ROOK)
-public class RookMovimentService implements IMovimentPiece{
+@Qualifier(NamePieces.BISHOP)
+public class BishopMovimentService   implements IMovimentPiece{
 
 	private IMovimentOptions iMovimentOptions;
 	
@@ -48,12 +48,12 @@ public class RookMovimentService implements IMovimentPiece{
 			return new int[] {x,y}; 
 		} 
 		
-		int[] maxTop = addMoviments(new Top(), x-1, y);
-		int[] maxBottom = addMoviments(new Bottom(), x+1, y);
-		int[] maxRight = addMoviments(new Right(), x, y+1);
+		int[] maxTopLeft = addMoviments(new TopLeft(), x-1, y-1);
+		int[] maxTopRight = addMoviments(new TopRight(), x-1, y+1);
+		int[] maxBottomLeft = addMoviments(new BottomLeft(), x-1, y-1);
 		int[] maxLeft = addMoviments(new Left(),x, y-1);
 		
-		return Stream.of(maxTop, maxBottom, maxRight, maxLeft)
+		return Stream.of(maxTopLeft, maxTopRight, maxBottomLeft, maxLeft)
                .flatMapToInt(IntStream::of)
                .toArray();
 	}

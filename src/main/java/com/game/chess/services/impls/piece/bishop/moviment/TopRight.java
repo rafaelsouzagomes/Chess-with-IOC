@@ -1,8 +1,8 @@
-package com.game.chess.services.impls.piece.rook.moviment;
+package com.game.chess.services.impls.piece.bishop.moviment;
 
 import com.game.chess.services.pieces.moviment.ISenseDirection;
 
-public class Init implements ISenseDirection {
+public class TopRight implements ISenseDirection{
 
 	@Override
 	public boolean isFastReturn(int x, int y) {
@@ -26,6 +26,9 @@ public class Init implements ISenseDirection {
 
 	@Override
 	public int getX(int x) {
-		return x;
+		return x-1;
 	}
+
+
+
 }
