@@ -33,7 +33,6 @@ class BishopMovimentServiceTest {
 	@Autowired
 	ChessBoard chess;
 	
-	
 	@Autowired
 	Board8x8Factory boardFactory;
 	

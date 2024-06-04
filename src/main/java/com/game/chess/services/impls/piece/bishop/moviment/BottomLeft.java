@@ -20,7 +20,7 @@ public class BottomLeft implements ISenseDirection{
 	@Override
 	public int getFastXReturn(int x) {
 		if(x>=7) {
-			return x;
+			return 7;
 		}
 		return x;
 	}
