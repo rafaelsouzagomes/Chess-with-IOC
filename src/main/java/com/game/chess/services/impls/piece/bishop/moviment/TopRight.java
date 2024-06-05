@@ -3,9 +3,12 @@ package com.game.chess.services.impls.piece.bishop.moviment;
 import com.game.chess.services.pieces.moviment.ISenseDirection;
 
 public class TopRight implements ISenseDirection{
+	
+	private Integer y;
 
 	@Override
 	public boolean isFastReturn(int x, int y) {
+		this.y=y;
 		return y>=7 || x<=0;
 	}
 	
