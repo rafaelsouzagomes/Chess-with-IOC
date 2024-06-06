@@ -6,6 +6,7 @@ import com.game.chess.services.pieces.moviment.ISenseDirection;
 public class TopLeft implements ISenseDirection {
 
 	private EnumNameNotaionSquare initPos;
+	private boolean secondPosExists;
 	
 	@Override
 	public boolean isFastReturn(int x, int y) {
@@ -14,9 +15,8 @@ public class TopLeft implements ISenseDirection {
 	
 	@Override
 	public int getYReturn(int y) {
-		if(!secondPositionExists()) {
+		if(!secondPosExists)
 			return initPos.getIndex_y();
-		}
 		if(y<=0) {
 			return 0;
 		}
@@ -25,9 +25,8 @@ public class TopLeft implements ISenseDirection {
 
 	@Override
 	public int getFastXReturn(int x) {
-		if(!secondPositionExists()) {
+		if(!secondPosExists) 
 			return initPos.getIndex_x();
-		}
 		if(x<=0) {
 			return 0;
 		}
@@ -44,17 +43,10 @@ public class TopLeft implements ISenseDirection {
 		return x-1;
 	}
 	
-	public boolean secondPositionExists() {
-		int index_x = getX(initPos.getIndex_x());
-		int index_y = getY(initPos.getIndex_y());
-		EnumNameNotaionSquare enumNameNotaionSquare = EnumNameNotaionSquare.get(index_x, index_y);
-		return enumNameNotaionSquare!=null;
-	}
-	
-
 	@Override
 	public ISenseDirection setInitPosition(int x, int y) {
 		this.initPos = EnumNameNotaionSquare.get(x, y);
+		this.secondPosExists = EnumNameNotaionSquare.get(getX(initPos.getIndex_x()), getY(initPos.getIndex_y()))!=null;
 		return this;
 	}
 

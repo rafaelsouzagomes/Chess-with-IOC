@@ -7,6 +7,8 @@ public class BottomRight implements ISenseDirection {
 
 	private EnumNameNotaionSquare initPos;
 	
+	private boolean secondPosExists;
+	
 	@Override
 	public boolean isFastReturn(int x, int y) {
 		return y >=7 || x <=0;
@@ -14,9 +16,8 @@ public class BottomRight implements ISenseDirection {
 	
 	@Override
 	public int getYReturn(int y) {
-		if(!secondPositionExists()) {
+		if(!secondPosExists)
 			return initPos.getIndex_y();
-		}
 		if(y>=7) {
 			return 7;
 		}
@@ -25,9 +26,8 @@ public class BottomRight implements ISenseDirection {
 
 	@Override
 	public int getFastXReturn(int x) {
-		if(!secondPositionExists()) {
+		if(!secondPosExists) 
 			return initPos.getIndex_x();
-		}
 		if(x<=0) {
 			return 0;
 		}
@@ -54,6 +54,7 @@ public class BottomRight implements ISenseDirection {
 	@Override
 	public ISenseDirection setInitPosition(int x, int y) {
 		this.initPos = EnumNameNotaionSquare.get(x, y);
+		this.secondPosExists = EnumNameNotaionSquare.get(getX(initPos.getIndex_x()), getY(initPos.getIndex_y()))!=null;
 		return this;
 	}
 
