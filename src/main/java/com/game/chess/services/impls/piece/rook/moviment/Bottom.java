@@ -31,4 +31,10 @@ public class Bottom implements ISenseDirection {
 	public int getX(int x) {
 		return x+1;
 	}
+
+	@Override
+	public ISenseDirection setInitPosition(int x, int y) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

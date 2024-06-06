@@ -11,4 +11,6 @@ public interface ISenseDirection {
 	int getYReturn(int y);
 
 	int getFastXReturn(int x);
+
+	ISenseDirection setInitPosition(int x, int y);
 }

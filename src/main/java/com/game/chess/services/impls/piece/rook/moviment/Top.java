@@ -28,4 +28,10 @@ public class Top implements ISenseDirection{
 	public int getY(int y) {
 		return y;
 	}
+
+	@Override
+	public ISenseDirection setInitPosition(int x, int y) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

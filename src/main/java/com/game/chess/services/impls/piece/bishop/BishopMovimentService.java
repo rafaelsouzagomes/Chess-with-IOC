@@ -48,10 +48,10 @@ public class BishopMovimentService implements IMovimentPiece{
 			return new int[] {x,y}; 
 		} 
 		
-		int[] maxTopLeft = addMoviments(new TopLeft(), x-1, y-1);
-		int[] maxTopRight = addMoviments(new TopRight(), x-1, y+1);
-		int[] maxBottomLeft = addMoviments(new BottomLeft(), x+1, y-1);
-		int[] maxBottomRight = addMoviments(new BottomRight(),x+1, y+1);
+		int[] maxTopLeft = addMoviments(new TopLeft().setInitPosition(x,y), x-1, y-1);
+		int[] maxTopRight = addMoviments(new TopRight().setInitPosition(x,y), x-1, y+1);
+		int[] maxBottomLeft = addMoviments(new BottomLeft().setInitPosition(x,y), x+1, y-1);
+		int[] maxBottomRight = addMoviments(new BottomRight().setInitPosition(x,y),x+1, y+1);
 		
 		return Stream.of(maxTopLeft, maxTopRight, maxBottomLeft, maxBottomRight)
                .flatMapToInt(IntStream::of)

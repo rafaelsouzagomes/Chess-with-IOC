@@ -19,6 +19,15 @@ public enum EnumNameNotaionSquare {
 	
 	private int index_y;
 	
+	public boolean isBorder() {
+		return index_x == 0 || index_x==0 || index_y ==0 || index_y ==7;
+	}
+	
+	public boolean isCorner() {
+		return (index_x == 7 && index_y==7) || (index_x==0  && index_y==7)
+				|| (index_x==0  && index_y==0)  || (index_x==7 && index_y==0);
+	}
+	
 	private static final Map<String, EnumNameNotaionSquare> ENUM_MAP;
 	
 	private static final Map<Map.Entry<Integer, Integer>, EnumNameNotaionSquare> ENUM_BY_INDEX;

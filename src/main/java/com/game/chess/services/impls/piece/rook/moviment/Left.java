@@ -28,4 +28,10 @@ public class Left implements ISenseDirection {
 	public int getX(int x) {
 		return x;
 	}
+
+	@Override
+	public ISenseDirection setInitPosition(int x, int y) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
