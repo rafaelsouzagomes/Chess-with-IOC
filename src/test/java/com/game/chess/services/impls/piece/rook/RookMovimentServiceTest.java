@@ -178,4 +178,86 @@ class RookMovimentServiceTest {
 		assertEquals(EnumNameNotaionSquare.C2,EnumNameNotaionSquare.get(results[6], results[7]));
 		
 	}
+	
+	@Test
+	void test_com_classes_v4_customizateBoard() {
+		
+		chess.showBoard();
+		boardFactory.addAllSquare_empty();
+		
+		boardFactory.addSquare(EnumTypePiece.ROOK, EnumTeam.BLACK, EnumNameNotaionSquare.H1);
+		
+		SquareBoard[][] squareBoards = boardFactory.build();
+		chess.addChessSquareBoard(squareBoards);
+		chess.showBoard();
+		
+		EnumNameNotaionSquare square = EnumNameNotaionSquare.H1;
+		int[] results = rookMovimentService.addMoviments(null,square.getIndex_x() , square.getIndex_y());
+		
+		for(int i=0; i < results.length; i+=2) {
+			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results[i], results[i+1]);
+			System.out.println(enumNotation.name() + " " + results[i] + ", "+ results[i+1]);
+		}
+		assertEquals(results.length, 8);
+		assertEquals(EnumNameNotaionSquare.H8,EnumNameNotaionSquare.get(results[0], results[1]));
+		assertEquals(EnumNameNotaionSquare.H1,EnumNameNotaionSquare.get(results[2], results[3]));
+		assertEquals(EnumNameNotaionSquare.H1,EnumNameNotaionSquare.get(results[4], results[5]));
+		assertEquals(EnumNameNotaionSquare.A1,EnumNameNotaionSquare.get(results[6], results[7]));
+		
+	}
+	
+	
+	@Test
+	void test_com_classes_v5_customizateBoard() {
+		
+		chess.showBoard();
+		boardFactory.addAllSquare_empty();
+		
+		boardFactory.addSquare(EnumTypePiece.ROOK, EnumTeam.BLACK, EnumNameNotaionSquare.H8);
+		
+		SquareBoard[][] squareBoards = boardFactory.build();
+		chess.addChessSquareBoard(squareBoards);
+		chess.showBoard();
+		
+		EnumNameNotaionSquare square = EnumNameNotaionSquare.H8;
+		int[] results = rookMovimentService.addMoviments(null,square.getIndex_x() , square.getIndex_y());
+		
+		for(int i=0; i < results.length; i+=2) {
+			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results[i], results[i+1]);
+			System.out.println(enumNotation.name() + " " + results[i] + ", "+ results[i+1]);
+		}
+		assertEquals(results.length, 8);
+		assertEquals(EnumNameNotaionSquare.H8,EnumNameNotaionSquare.get(results[0], results[1]));
+		assertEquals(EnumNameNotaionSquare.H1,EnumNameNotaionSquare.get(results[2], results[3]));
+		assertEquals(EnumNameNotaionSquare.H8,EnumNameNotaionSquare.get(results[4], results[5]));
+		assertEquals(EnumNameNotaionSquare.A8,EnumNameNotaionSquare.get(results[6], results[7]));
+		
+	}
+	
+	@Test
+	void test_com_classes_v6_customizateBoard() {
+		
+		chess.showBoard();
+		boardFactory.addAllSquare_empty();
+		
+		boardFactory.addSquare(EnumTypePiece.ROOK, EnumTeam.BLACK, EnumNameNotaionSquare.A8);
+		
+		SquareBoard[][] squareBoards = boardFactory.build();
+		chess.addChessSquareBoard(squareBoards);
+		chess.showBoard();
+		
+		EnumNameNotaionSquare square = EnumNameNotaionSquare.A8;
+		int[] results = rookMovimentService.addMoviments(null,square.getIndex_x() , square.getIndex_y());
+		
+		for(int i=0; i < results.length; i+=2) {
+			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results[i], results[i+1]);
+			System.out.println(enumNotation.name() + " " + results[i] + ", "+ results[i+1]);
+		}
+		assertEquals(results.length, 8);
+		assertEquals(EnumNameNotaionSquare.A8,EnumNameNotaionSquare.get(results[0], results[1]));
+		assertEquals(EnumNameNotaionSquare.A1,EnumNameNotaionSquare.get(results[2], results[3]));
+		assertEquals(EnumNameNotaionSquare.H8,EnumNameNotaionSquare.get(results[4], results[5]));
+		assertEquals(EnumNameNotaionSquare.A8,EnumNameNotaionSquare.get(results[6], results[7]));
+		
+	}
 }
