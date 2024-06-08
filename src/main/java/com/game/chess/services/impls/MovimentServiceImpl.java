@@ -23,9 +23,7 @@ public class MovimentServiceImpl implements IMovimentService {
 	private IBoard chessboard;
 	
 	private IMovimentPieceFactory movimentPieceFactory;
-	
 	private IMovimentOptions iMovimentOptions;
-	
 	private ITeamManagerFactory teamManagerFactory;
 	
 	@Override
@@ -35,6 +33,7 @@ public class MovimentServiceImpl implements IMovimentService {
 		IMovimentPiece piece = movimentPieceFactory.getMovimentPiece(mov.getPieceToMove());
 		ITeamManager team =  teamManagerFactory.getTeamManager(getEnumTypePiece(mov), getEnumTeam(mov));
 		EnumNameNotaionSquare currentPosition = EnumNameNotaionSquare.get(mov.getCurrentPosition());
+		iMovimentOptions.setTeamManager(team);
 		
 		piece.addMovimentsAvailable(team, currentPosition);
 		 
