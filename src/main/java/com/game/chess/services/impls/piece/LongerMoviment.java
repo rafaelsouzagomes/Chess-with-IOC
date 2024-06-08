@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.game.chess.enums.EnumNameNotaionSquare;
 import com.game.chess.services.pieces.ILongerMoviment;
@@ -16,7 +17,7 @@ import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.moviment.ISenseDirection;
 
 @Service
-@Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class LongerMoviment implements ILongerMoviment {
 	
 	private IMovimentOptions iMovimentOptions;
@@ -46,10 +47,21 @@ public class LongerMoviment implements ILongerMoviment {
 			return new int[] {x,y}; 
 		} 
 		
-		int[] maxTopLeft = addMoviments(firstDirection.setInitPosition(x,y), x-1, y-1);
-		int[] maxTopRight = addMoviments(secondDirection.setInitPosition(x,y), x-1, y+1);
-		int[] maxBottomLeft = addMoviments(thirdDirection.setInitPosition(x,y), x+1, y-1);
-		int[] maxBottomRight = addMoviments(fourthDirection.setInitPosition(x,y),x+1, y+1);
+		int[] maxTopLeft = addMoviments(firstDirection.setInitPosition(x,y), 
+										firstDirection.getX(x), 
+										firstDirection.getY(y));
+		
+		int[] maxTopRight = addMoviments(secondDirection.setInitPosition(x,y),
+										 secondDirection.getX(x), 
+										 secondDirection.getY(y));
+		
+		int[] maxBottomLeft = addMoviments(thirdDirection.setInitPosition(x,y), 
+										   thirdDirection.getX(x), 
+										   thirdDirection.getY(y));
+		
+		int[] maxBottomRight = addMoviments(fourthDirection.setInitPosition(x,y),
+											fourthDirection.getX(x), 
+											fourthDirection.getY(y));
 		
 		return Stream.of(maxTopLeft, maxTopRight, maxBottomLeft, maxBottomRight)
                .flatMapToInt(IntStream::of)
@@ -85,6 +97,7 @@ public class LongerMoviment implements ILongerMoviment {
 	public void setFourthDirection(ISenseDirection fourthDirection) {
 		this.fourthDirection = fourthDirection;
 	}
+	
 	
 	
 }
