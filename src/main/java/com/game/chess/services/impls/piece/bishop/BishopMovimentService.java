@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.game.chess.enums.EnumNameNotaionSquare;
 import com.game.chess.enums.NamePieces;
+import com.game.chess.services.impls.piece.LongerMoviment;
 import com.game.chess.services.impls.piece.bishop.moviment.BottomLeft;
 import com.game.chess.services.impls.piece.bishop.moviment.BottomRight;
 import com.game.chess.services.impls.piece.bishop.moviment.TopLeft;
@@ -26,11 +27,31 @@ public class BishopMovimentService implements IMovimentPiece{
 
 	private IMovimentOptions iMovimentOptions;
 	
+	private TopLeft topLeft;
+	
+	private BottomRight bottomRight;
+	
+	private BottomLeft bottomLeft;
+	
+	private TopRight topRight;
+	
+	private LongerMoviment longerMoviment;
 	
 	@Override
 	public void addMovimentsAvailable(ITeamManager teamManager, EnumNameNotaionSquare currentPosition) {
 		iMovimentOptions.setTeamManager(teamManager);
-		addMoviments(null, currentPosition.getIndex_x(), currentPosition.getIndex_y());
+		
+		longerMoviment.setFirstDirection(topLeft);
+		longerMoviment.setSecondDirection(topRight);
+		longerMoviment.setThirdDirection(bottomLeft);
+		longerMoviment.setFourthDirection(bottomRight);
+		
+		extracted(currentPosition);
+//		addMoviments(null, currentPosition.getIndex_x(), currentPosition.getIndex_y());
+	}
+
+	private void extracted(EnumNameNotaionSquare currentPosition) {
+		longerMoviment.addMoviments(currentPosition);
 	}
 	
 	protected int[] addMoviments(ISenseDirection sentido, int x, int y) {
@@ -48,10 +69,10 @@ public class BishopMovimentService implements IMovimentPiece{
 			return new int[] {x,y}; 
 		} 
 		
-		int[] maxTopLeft = addMoviments(new TopLeft().setInitPosition(x,y), x-1, y-1);
-		int[] maxTopRight = addMoviments(new TopRight().setInitPosition(x,y), x-1, y+1);
-		int[] maxBottomLeft = addMoviments(new BottomLeft().setInitPosition(x,y), x+1, y-1);
-		int[] maxBottomRight = addMoviments(new BottomRight().setInitPosition(x,y),x+1, y+1);
+		int[] maxTopLeft = addMoviments(topLeft.setInitPosition(x,y), x-1, y-1);
+		int[] maxTopRight = addMoviments(topRight.setInitPosition(x,y), x-1, y+1);
+		int[] maxBottomLeft = addMoviments(bottomLeft.setInitPosition(x,y), x+1, y-1);
+		int[] maxBottomRight = addMoviments(bottomRight.setInitPosition(x,y),x+1, y+1);
 		
 		return Stream.of(maxTopLeft, maxTopRight, maxBottomLeft, maxBottomRight)
                .flatMapToInt(IntStream::of)

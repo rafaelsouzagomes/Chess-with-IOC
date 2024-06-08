@@ -1,8 +1,14 @@
 package com.game.chess.services.impls.piece.bishop.moviment;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Service;
+
 import com.game.chess.enums.EnumNameNotaionSquare;
 import com.game.chess.services.pieces.moviment.ISenseDirection;
 
+@Service
+@Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class BottomRight implements ISenseDirection {
 
 	private EnumNameNotaionSquare initPos;
