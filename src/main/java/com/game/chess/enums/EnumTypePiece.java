@@ -1,6 +1,5 @@
 package com.game.chess.enums;
 
-import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
 
