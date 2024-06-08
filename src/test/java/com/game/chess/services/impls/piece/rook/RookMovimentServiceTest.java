@@ -17,46 +17,43 @@ import com.game.chess.configs.CustomTestConfig;
 import com.game.chess.enums.EnumNameNotaionSquare;
 import com.game.chess.enums.EnumTeam;
 import com.game.chess.enums.EnumTypePiece;
-import com.game.chess.services.pieces.IMovimentOptions;
+import com.game.chess.services.impls.piece.LongerMoviment;
+import com.game.chess.services.impls.piece.rook.moviment.Bottom;
+import com.game.chess.services.impls.piece.rook.moviment.Left;
+import com.game.chess.services.impls.piece.rook.moviment.Right;
+import com.game.chess.services.impls.piece.rook.moviment.Top;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Import(CustomTestConfig.class)
 class RookMovimentServiceTest {
 
-	@Autowired
 	RookMovimentService rookMovimentService;
-	
-	@Autowired
-	IMovimentOptions iMovimentOptions;
-	
-	@Autowired
 	ChessBoard chess;
-	
-	@Autowired
 	IBoard8x8Factory boardFactory;
 	
-    @BeforeEach
-    void setUp() {
-    	chess.createNewGame();
-    	iMovimentOptions.setChessBoard(chess);
-    }
-    
+	private LongerMoviment longerMoviment;
+	
+	private Bottom bottom;
+	private Top top;
+	private Left left;
+	private Right right;
+	
     @Test
 	void rook_moviment_v15_initboard() {
 		
 		EnumNameNotaionSquare square = EnumNameNotaionSquare.C5;
-		int[] results = rookMovimentService.addMoviments(null,square.getIndex_x() , square.getIndex_y());
+		int[] results = rookMovimentService.addMoviment(square);
 		
 		for(int i=0; i < results.length; i+=2) {
 			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results[i], results[i+1]);
 			System.out.println(enumNotation.name() + " " + results[i] + ", "+ results[i+1]);
 		}
-//		assertEquals(results.length, 8);
-//		assertEquals(EnumNameNotaionSquare.C7,EnumNameNotaionSquare.get(results[0], results[1]));
-//		assertEquals(EnumNameNotaionSquare.C2,EnumNameNotaionSquare.get(results[2], results[3]));
-//		assertEquals(EnumNameNotaionSquare.H5,EnumNameNotaionSquare.get(results[4], results[5]));
-//		assertEquals(EnumNameNotaionSquare.A5,EnumNameNotaionSquare.get(results[6], results[7]));
+		assertEquals(results.length, 8);
+		assertEquals(EnumNameNotaionSquare.C7,EnumNameNotaionSquare.get(results[0], results[1]));
+		assertEquals(EnumNameNotaionSquare.C2,EnumNameNotaionSquare.get(results[2], results[3]));
+		assertEquals(EnumNameNotaionSquare.H5,EnumNameNotaionSquare.get(results[4], results[5]));
+		assertEquals(EnumNameNotaionSquare.A5,EnumNameNotaionSquare.get(results[6], results[7]));
 		
 	}
 	
@@ -64,7 +61,7 @@ class RookMovimentServiceTest {
 	void rook_moviment_v2_initboard() {
 		
 		EnumNameNotaionSquare square = EnumNameNotaionSquare.A8 ;
-		int[] results = rookMovimentService.addMoviments(null,square.getIndex_x() , square.getIndex_y());
+		int[] results = rookMovimentService.addMoviment(square);
 		
 		for(int i=0; i < results.length; i+=2) {
 			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results[i], results[i+1]);
@@ -82,7 +79,7 @@ class RookMovimentServiceTest {
 	void rook_moviment_v3_inittboard() {
 		
 		EnumNameNotaionSquare square = EnumNameNotaionSquare.A8 ;
-		int[] results = rookMovimentService.addMoviments(null,square.getIndex_x() , square.getIndex_y());
+		int[] results = rookMovimentService.addMoviment(square);
 		
 		for(int i=0; i < results.length; i+=2) {
 			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results[i], results[i+1]);
@@ -109,7 +106,7 @@ class RookMovimentServiceTest {
 		chess.showBoard();
 		
 		EnumNameNotaionSquare square = EnumNameNotaionSquare.D5;
-		int[] results = rookMovimentService.addMoviments(null,square.getIndex_x() , square.getIndex_y());
+		int[] results = rookMovimentService.addMoviment(square);
 		
 		for(int i=0; i < results.length; i+=2) {
 			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results[i], results[i+1]);
@@ -135,7 +132,7 @@ class RookMovimentServiceTest {
 		chess.showBoard();
 		
 		EnumNameNotaionSquare square = EnumNameNotaionSquare.H1;
-		int[] results = rookMovimentService.addMoviments(null,square.getIndex_x() , square.getIndex_y());
+		int[] results = rookMovimentService.addMoviment(square);
 		
 		for(int i=0; i < results.length; i+=2) {
 			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results[i], results[i+1]);
@@ -165,7 +162,7 @@ class RookMovimentServiceTest {
 		chess.showBoard();
 		
 		EnumNameNotaionSquare square = EnumNameNotaionSquare.E2;
-		int[] results = rookMovimentService.addMoviments(null,square.getIndex_x() , square.getIndex_y());
+		int[] results = rookMovimentService.addMoviment(square);
 		
 		for(int i=0; i < results.length; i+=2) {
 			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results[i], results[i+1]);
@@ -192,7 +189,7 @@ class RookMovimentServiceTest {
 		chess.showBoard();
 		
 		EnumNameNotaionSquare square = EnumNameNotaionSquare.H1;
-		int[] results = rookMovimentService.addMoviments(null,square.getIndex_x() , square.getIndex_y());
+		int[] results = rookMovimentService.addMoviment(square);
 		
 		for(int i=0; i < results.length; i+=2) {
 			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results[i], results[i+1]);
@@ -220,7 +217,7 @@ class RookMovimentServiceTest {
 		chess.showBoard();
 		
 		EnumNameNotaionSquare square = EnumNameNotaionSquare.H8;
-		int[] results = rookMovimentService.addMoviments(null,square.getIndex_x() , square.getIndex_y());
+		int[] results = rookMovimentService.addMoviment(square);
 		
 		for(int i=0; i < results.length; i+=2) {
 			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results[i], results[i+1]);
@@ -259,5 +256,51 @@ class RookMovimentServiceTest {
 		assertEquals(EnumNameNotaionSquare.H8,EnumNameNotaionSquare.get(results[4], results[5]));
 		assertEquals(EnumNameNotaionSquare.A8,EnumNameNotaionSquare.get(results[6], results[7]));
 		
+	}
+	
+    @BeforeEach
+    void setUp() {
+    	chess.createNewGame();
+    	longerMoviment.setFirstDirection(top);
+		longerMoviment.setSecondDirection(bottom);
+		longerMoviment.setThirdDirection(right);
+		longerMoviment.setFourthDirection(left);
+    }
+	
+	@Autowired
+	public void setRookMovimentService(RookMovimentService rookMovimentService) {
+		this.rookMovimentService = rookMovimentService;
+	}
+//	@Autowired
+//	public void setiMovimentOptions(IMovimentOptions iMovimentOptions) {
+//		this.iMovimentOptions = iMovimentOptions;
+//	}
+	@Autowired
+	public void setChess(ChessBoard chess) {
+		this.chess = chess;
+	}
+	@Autowired
+	public void setBoardFactory(IBoard8x8Factory boardFactory) {
+		this.boardFactory = boardFactory;
+	}
+	@Autowired
+	public void setLongerMoviment(LongerMoviment longerMoviment) {
+		this.longerMoviment = longerMoviment;
+	}
+	@Autowired
+	public void setBottom(Bottom bottom) {
+		this.bottom = bottom;
+	}
+	@Autowired
+	public void setTop(Top top) {
+		this.top = top;
+	}
+	@Autowired
+	public void setLeft(Left left) {
+		this.left = left;
+	}
+	@Autowired
+	public void setRight(Right right) {
+		this.right = right;
 	}
 }
