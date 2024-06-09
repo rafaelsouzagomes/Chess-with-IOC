@@ -20,12 +20,14 @@ public class MovimentPieceFactory implements IMovimentPieceFactory{
     @Autowired
     public MovimentPieceFactory(@Qualifier(NamePieces.ROOK) IMovimentPiece pieceA,
                                 @Qualifier(NamePieces.PAWN) IMovimentPiece pieceB,
-                                @Qualifier(NamePieces.BISHOP) IMovimentPiece pieceBishop) {
+                                @Qualifier(NamePieces.BISHOP) IMovimentPiece pieceBishop,
+                                @Qualifier(NamePieces.QUEEN) IMovimentPiece pieceQuen) {
     	
         movimentPieceMap = new HashMap<>();
         movimentPieceMap.put(NamePieces.ROOK, pieceA);
         movimentPieceMap.put(NamePieces.PAWN, pieceB);
         movimentPieceMap.put(NamePieces.BISHOP, pieceBishop);
+        movimentPieceMap.put(NamePieces.QUEEN, pieceQuen);
     }
 
     @Override
