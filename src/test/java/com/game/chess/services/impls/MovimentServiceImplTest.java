@@ -31,7 +31,5 @@ class MovimentServiceImplTest {
 		MovimentOptionsAvailableDTO movimentOptions = service.getMovimentOptions(movDTO);
 		List<SquareBoard> moves = movimentOptions.getChessSquaresAvailable();
 		assertEquals(7, moves.size());
-//        assertEquals(EnumNameNotaionSquare.G6, moves.get(0).getNameNotationSquare());
-//        assertEquals(EnumNameNotaionSquare.G5, moves.get(1).getNameNotationSquare());
 	}
 }
