@@ -22,22 +22,40 @@ public class MovimentServiceImpl implements IMovimentService {
 	
 	private IBoard chessboard;
 	
+	private ITeamManager team;
+	private IMovimentPiece piece;
+	private EnumNameNotaionSquare currentPosition;
+	
 	private IMovimentPieceFactory movimentPieceFactory;
 	private IMovimentOptions iMovimentOptions;
 	private ITeamManagerFactory teamManagerFactory;
 	
 	@Override
-	public MovimentOptionsAvailableDTO getMovimentOptions(MovimentRequestDTO mov) {
+	public MovimentOptionsAvailableDTO getMovimentOptions(MovimentRequestDTO movDTO) {
 		chessboard.createNewGame();
 		
-		IMovimentPiece piece = movimentPieceFactory.getMovimentPiece(mov.getPieceToMove());
-		ITeamManager team =  teamManagerFactory.getTeamManager(getEnumTypePiece(mov), getEnumTeam(mov));
-		EnumNameNotaionSquare currentPosition = EnumNameNotaionSquare.get(mov.getCurrentPosition());
-		iMovimentOptions.setTeamManager(team);
+		setUpTeamManager(movDTO);
+		
+		setUpPieceMoviment(movDTO);
+		
+		setUpCurrentPosition(movDTO);
 		
 		piece.addMovimentsAvailable(team, currentPosition);
 		 
 		return iMovimentOptions.getMovimentsOptions();
+	}
+
+	private void setUpCurrentPosition(MovimentRequestDTO mov) {
+		currentPosition = EnumNameNotaionSquare.get(mov.getCurrentPosition());
+	}
+
+	private void setUpPieceMoviment(MovimentRequestDTO mov) {
+		piece = movimentPieceFactory.getMovimentPiece(mov.getPieceToMove());
+	}
+
+	private void setUpTeamManager(MovimentRequestDTO mov) {
+		team =  teamManagerFactory.getTeamManager(getEnumTypePiece(mov), getEnumTeam(mov));
+		iMovimentOptions.setTeamManager(team);
 	}
 
 	private EnumTypePiece getEnumTypePiece(MovimentRequestDTO mov) {
