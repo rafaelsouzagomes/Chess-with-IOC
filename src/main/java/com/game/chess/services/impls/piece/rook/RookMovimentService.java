@@ -2,7 +2,6 @@ package com.game.chess.services.impls.piece.rook;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.game.chess.enums.EnumNameNotaionSquare;
@@ -12,7 +11,6 @@ import com.game.chess.services.impls.piece.rook.moviment.Bottom;
 import com.game.chess.services.impls.piece.rook.moviment.Left;
 import com.game.chess.services.impls.piece.rook.moviment.Right;
 import com.game.chess.services.impls.piece.rook.moviment.Top;
-import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.IMovimentPiece;
 import com.game.chess.services.pieces.pawn.ITeamManager;
 
@@ -20,8 +18,6 @@ import com.game.chess.services.pieces.pawn.ITeamManager;
 @Qualifier(NamePieces.ROOK)
 public class RookMovimentService implements IMovimentPiece{
 
-	private IMovimentOptions iMovimentOptions;
-	
 	private LongerMoviment longerMoviment;
 	
 	private Bottom bottom;
@@ -32,9 +28,6 @@ public class RookMovimentService implements IMovimentPiece{
 	
 	@Override
 	public void addMovimentsOptionsAvailable(ITeamManager teamManager, EnumNameNotaionSquare currentPosition) {
-		iMovimentOptions.setTeamManager(teamManager);
-		
-		
 		longerMoviment.setFirstDirection(top);
 		longerMoviment.setSecondDirection(bottom);
 		longerMoviment.setThirdDirection(right);
@@ -45,13 +38,6 @@ public class RookMovimentService implements IMovimentPiece{
 
 	protected int[] addMoviment(EnumNameNotaionSquare currentPosition) {
 		return longerMoviment.addMoviments(currentPosition);
-	}
-	
-	@Autowired
-	@Lazy
-	public void setiMovimentOptions(IMovimentOptions iMovimentOptions) {
-		this.iMovimentOptions = iMovimentOptions;
-		
 	}
 	@Autowired
 	public void setLongerMoviment(LongerMoviment longerMoviment) {
