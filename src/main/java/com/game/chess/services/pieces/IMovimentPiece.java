@@ -5,7 +5,7 @@ import com.game.chess.services.pieces.pawn.ITeamManager;
 
 public interface IMovimentPiece {
 
-	void addMovimentsAvailable(ITeamManager teamManager, EnumNameNotaionSquare currentPosition);
+	void addMovimentsOptionsAvailable(ITeamManager teamManager, EnumNameNotaionSquare currentPosition);
 
 	
 }

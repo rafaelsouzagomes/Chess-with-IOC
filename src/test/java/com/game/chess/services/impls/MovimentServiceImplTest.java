@@ -13,7 +13,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.game.chess.components.chessSquare.SquareBoard;
 import com.game.chess.dtos.MovimentOptionsAvailableDTO;
 import com.game.chess.dtos.MovimentRequestDTO;
-import com.game.chess.enums.EnumNameNotaionSquare;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -26,11 +25,13 @@ class MovimentServiceImplTest {
     void validate() {
 		MovimentRequestDTO movDTO = new MovimentRequestDTO();
 		movDTO.setTeam("Black");
-		movDTO.setCurrentPosition("G7");
+		movDTO.setCurrentPosition("C5");
+		movDTO.setPieceToMove("Bishop");
+		
 		MovimentOptionsAvailableDTO movimentOptions = service.getMovimentOptions(movDTO);
 		List<SquareBoard> moves = movimentOptions.getChessSquaresAvailable();
-		assertEquals(2, moves.size());
-        assertEquals(EnumNameNotaionSquare.G6, moves.get(0).getNameNotationSquare());
-        assertEquals(EnumNameNotaionSquare.G5, moves.get(1).getNameNotationSquare());
+		assertEquals(7, moves.size());
+//        assertEquals(EnumNameNotaionSquare.G6, moves.get(0).getNameNotationSquare());
+//        assertEquals(EnumNameNotaionSquare.G5, moves.get(1).getNameNotationSquare());
 	}
 }

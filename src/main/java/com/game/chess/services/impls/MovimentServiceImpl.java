@@ -40,7 +40,7 @@ public class MovimentServiceImpl implements IMovimentService {
 		
 		setUpCurrentPosition(movDTO);
 		
-		piece.addMovimentsAvailable(team, currentPosition);
+		piece.addMovimentsOptionsAvailable(team, currentPosition);
 		 
 		return iMovimentOptions.getMovimentsOptions();
 	}

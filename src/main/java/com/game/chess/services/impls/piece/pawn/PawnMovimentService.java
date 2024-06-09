@@ -21,7 +21,7 @@ public class PawnMovimentService implements IMovimentPiece {
 	private int index_x;
 	
 	@Override
-	public void addMovimentsAvailable(ITeamManager teamManager,
+	public void addMovimentsOptionsAvailable(ITeamManager teamManager,
 									  EnumNameNotaionSquare currentPosition) {
 	
 		IPawnTeamManager pawnTeamManager = (IPawnTeamManager) teamManager;

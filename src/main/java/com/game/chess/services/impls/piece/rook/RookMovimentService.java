@@ -1,9 +1,5 @@
 package com.game.chess.services.impls.piece.rook;
 
-import java.util.Objects;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
@@ -18,7 +14,6 @@ import com.game.chess.services.impls.piece.rook.moviment.Right;
 import com.game.chess.services.impls.piece.rook.moviment.Top;
 import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.IMovimentPiece;
-import com.game.chess.services.pieces.moviment.ISenseDirection;
 import com.game.chess.services.pieces.pawn.ITeamManager;
 
 @Service
@@ -36,7 +31,7 @@ public class RookMovimentService implements IMovimentPiece{
 	
 	
 	@Override
-	public void addMovimentsAvailable(ITeamManager teamManager, EnumNameNotaionSquare currentPosition) {
+	public void addMovimentsOptionsAvailable(ITeamManager teamManager, EnumNameNotaionSquare currentPosition) {
 		iMovimentOptions.setTeamManager(teamManager);
 		
 		longerMoviment.setFirstDirection(top);
@@ -45,37 +40,10 @@ public class RookMovimentService implements IMovimentPiece{
 		longerMoviment.setFourthDirection(left);
 		
 		addMoviment(currentPosition);
-		
-//		addMoviments(null, currentPosition.getIndex_x(), currentPosition.getIndex_y());
 	}
 
 	protected int[] addMoviment(EnumNameNotaionSquare currentPosition) {
 		return longerMoviment.addMoviments(currentPosition);
-	}
-	
-	protected int[] addMoviments(ISenseDirection sentido, int x, int y) {
-		if( Objects.nonNull(sentido) && sentido.isFastReturn(x, y) ) {
-			iMovimentOptions.addMove(sentido.getFastXReturn(x), sentido.getYReturn(y));
-			return new int[] {sentido.getFastXReturn(x),sentido.getYReturn(y)};
-		}
-				
-		if(Objects.nonNull(sentido) && iMovimentOptions.isEmpty(x, y)  ) {
-			iMovimentOptions.addMove(x, y);
-			return addMoviments(sentido, sentido.getX(x), sentido.getY(y));
-		} 
-		if(Objects.nonNull(sentido)) {
-			iMovimentOptions.addCaptureMove(x, y);				
-			return new int[] {x,y}; 
-		} 
-		
-		int[] maxTop = addMoviments(new Top(), x-1, y);
-		int[] maxBottom = addMoviments(new Bottom(), x+1, y);
-		int[] maxRight = addMoviments(new Right(), x, y+1);
-		int[] maxLeft = addMoviments(new Left(),x, y-1);
-		
-		return Stream.of(maxTop, maxBottom, maxRight, maxLeft)
-               .flatMapToInt(IntStream::of)
-               .toArray();
 	}
 	
 	@Autowired
@@ -84,32 +52,24 @@ public class RookMovimentService implements IMovimentPiece{
 		this.iMovimentOptions = iMovimentOptions;
 		
 	}
-	
 	@Autowired
 	public void setLongerMoviment(LongerMoviment longerMoviment) {
 		this.longerMoviment = longerMoviment;
 	}
-	
 	@Autowired
 	public void setBottom(Bottom bottom) {
 		this.bottom = bottom;
 	}
-	
 	@Autowired
 	public void setLeft(Left left) {
 		this.left = left;
 	}
-	
 	@Autowired
 	public void setRight(Right right) {
 		this.right = right;
 	}
-	
 	@Autowired
 	public void setTop(Top top) {
 		this.top = top;
 	}
-	
-	
-
 }

@@ -244,7 +244,7 @@ class RookMovimentServiceTest {
 		chess.showBoard();
 		
 		EnumNameNotaionSquare square = EnumNameNotaionSquare.A8;
-		int[] results = rookMovimentService.addMoviments(null,square.getIndex_x() , square.getIndex_y());
+		int[] results = rookMovimentService.addMoviment(square);
 		
 		for(int i=0; i < results.length; i+=2) {
 			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results[i], results[i+1]);
