@@ -77,7 +77,7 @@ class RookMovimentServiceTest {
 	
 	@Test
 	void rook_moviment_v3_inittboard() {
-		
+
 		EnumNameNotaionSquare square = EnumNameNotaionSquare.A8 ;
 		int[] results = rookMovimentService.addMoviment(square);
 		

@@ -34,6 +34,7 @@ public class RookMovimentService implements IMovimentPiece{
 	public void addMovimentsOptionsAvailable(ITeamManager teamManager, EnumNameNotaionSquare currentPosition) {
 		iMovimentOptions.setTeamManager(teamManager);
 		
+		
 		longerMoviment.setFirstDirection(top);
 		longerMoviment.setSecondDirection(bottom);
 		longerMoviment.setThirdDirection(right);
