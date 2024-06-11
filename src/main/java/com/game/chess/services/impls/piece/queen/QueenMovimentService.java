@@ -60,7 +60,7 @@ public class QueenMovimentService implements IMovimentPiece{
 		return IntStream.concat(Arrays.stream(rookMovs), Arrays.stream(bishopMovs)).toArray();
 	}
 	
-	protected int[] addMoviment(EnumNameNotaionSquare currentPosition) {
+	private int[] addMoviment(EnumNameNotaionSquare currentPosition) {
 		return longerMoviment.addMoviments(currentPosition);
 	}
 	
