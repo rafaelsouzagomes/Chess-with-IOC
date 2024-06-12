@@ -9,6 +9,8 @@ public interface IMovimentOptions {
 	void addMove(int index_x_to_move, int index_y_to_Move);
 
 	void addCaptureMove(int index_x_to_move, int index_y_to_Move);
+	
+	void addAnyMoveType(int index_x_to_move, int index_y_to_Move);
 
 	MovimentOptionsAvailableDTO getMovimentsOptions();
 
