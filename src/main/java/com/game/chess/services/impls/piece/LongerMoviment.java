@@ -34,16 +34,16 @@ public class LongerMoviment implements ILongerMoviment {
 	
 	protected int[] addMoviments(ISenseDirection sentido, int x, int y) {
 		if( Objects.nonNull(sentido) && sentido.isFastReturn(x, y) ) {
-			iMovimentOptions.addMove(sentido.getFastXReturn(x), sentido.getYReturn(y));
+			iMovimentOptions.addAnyMoveType(sentido.getFastXReturn(x), sentido.getYReturn(y));
 			return new int[] {sentido.getFastXReturn(x),sentido.getYReturn(y)};
 		}
 				
 		if(Objects.nonNull(sentido) && iMovimentOptions.isEmpty(x, y)  ) {
-			iMovimentOptions.addMove(x, y);
+			iMovimentOptions.addAnyMoveType(x, y);
 			return addMoviments(sentido, sentido.getX(x), sentido.getY(y));
 		} 
 		if(Objects.nonNull(sentido)) {
-			iMovimentOptions.addCaptureMove(x, y);				
+			iMovimentOptions.addAnyMoveType(x, y);				
 			return new int[] {x,y}; 
 		} 
 		

@@ -40,7 +40,6 @@ public class MovimentOptions implements IMovimentOptions {
 	@PostConstruct
 	public void iniMoviments() {
 		movesAvailable = new ArrayList<>();
-		
 	}
 	
 	@Override
@@ -64,6 +63,12 @@ public class MovimentOptions implements IMovimentOptions {
 		this.index_y = index_y_to_Move;
 
 		addCaptureMove();
+	}
+	
+	@Override
+	public void addAnyMoveType( int index_x_to_move, int index_y_to_Move) {
+		addMove(index_x_to_move, index_y_to_Move);
+		addCaptureMove(index_x_to_move, index_y_to_Move);
 	}
 
 	private void addMove() {
