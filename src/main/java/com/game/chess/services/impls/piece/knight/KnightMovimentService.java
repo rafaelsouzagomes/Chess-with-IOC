@@ -3,7 +3,9 @@ package com.game.chess.services.impls.piece.knight;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.game.chess.enums.EnumNameNotaionSquare;
@@ -22,13 +24,13 @@ public class KnightMovimentService implements IMovimentPiece {
 	
 	@Override
 	public void addMovimentsOptionsAvailable(ITeamManager teamManager, EnumNameNotaionSquare currentPosition) {
+		addMoviments(currentPosition);
+	}
+
+	protected List<int[]> addMoviments(EnumNameNotaionSquare currentPosition) {
 		int index_x = currentPosition.getIndex_x();
 		int index_y = currentPosition.getIndex_y();
 		
-		addMoviments(index_x, index_y);
-	}
-
-	protected List<int[]> addMoviments(int index_x, int index_y) {
 		addMovimentBottomLeft(index_x, index_y);
 		addMovimentBottomRight(index_x, index_y);
 		
@@ -106,6 +108,12 @@ public class KnightMovimentService implements IMovimentPiece {
 		iMovimentOptions.addAnyMoveType(index_x_toMove, index_y_toMove);
 		
 		moviments.add(new int[] {index_x_toMove,index_y_toMove});
+	}
+	
+	@Autowired
+	@Lazy
+	public void setiMovimentOptions(IMovimentOptions iMovimentOptions) {
+		this.iMovimentOptions = iMovimentOptions;
 	}
 	
 }
