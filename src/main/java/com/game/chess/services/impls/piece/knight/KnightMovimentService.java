@@ -79,7 +79,7 @@ public class KnightMovimentService implements IMovimentPiece {
 	}
 	
 	private void addMovimentTopRight(int index_x, int index_y) {
-		int index_x_toMove =index_x+2;
+		int index_x_toMove =index_x-2;
 		int index_y_toMove =index_y+1;	
 		iMovimentOptions.addAnyMoveType(index_x_toMove, index_y_toMove);
 		
@@ -87,7 +87,7 @@ public class KnightMovimentService implements IMovimentPiece {
 	}
 	
 	private void addMovimentTopLeft(int index_x, int index_y) {
-		int index_x_toMove =index_x+2;
+		int index_x_toMove =index_x-2;
 		int index_y_toMove =index_y-1;	
 		iMovimentOptions.addAnyMoveType(index_x_toMove, index_y_toMove);
 		

@@ -1,5 +1,7 @@
 package com.game.chess.services.impls.piece.knight;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -41,15 +43,19 @@ class KnightMovimentServiceTest {
 		EnumNameNotaionSquare square = EnumNameNotaionSquare.C5;
 		List<int[]> results = service.addMoviments(square);
 		
-		for(int i=0; i < results.size(); i+=2) {
+		for(int i=0; i < results.size(); i++) {
 			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results.get(i)[0], results.get(i)[1]);
 			System.out.println(enumNotation.name());
 		}
-//		assertEquals(results.length, 8);
-//		assertEquals(EnumNameNotaionSquare.A7,EnumNameNotaionSquare.get(results[0], results[1]));
-//		assertEquals(EnumNameNotaionSquare.E7,EnumNameNotaionSquare.get(results[2], results[3]));
-//		assertEquals(EnumNameNotaionSquare.A3,EnumNameNotaionSquare.get(results[4], results[5]));
-//		assertEquals(EnumNameNotaionSquare.F2,EnumNameNotaionSquare.get(results[6], results[7]));
+		assertEquals(results.size(), 8);
+		assertEquals(EnumNameNotaionSquare.B3,EnumNameNotaionSquare.get(results.get(0)[0], results.get(0)[1]));
+		assertEquals(EnumNameNotaionSquare.D3,EnumNameNotaionSquare.get(results.get(1)[0], results.get(1)[1]));
+		assertEquals(EnumNameNotaionSquare.E6,EnumNameNotaionSquare.get(results.get(2)[0], results.get(2)[1]));
+		assertEquals(EnumNameNotaionSquare.E4,EnumNameNotaionSquare.get(results.get(3)[0], results.get(3)[1]));
+		assertEquals(EnumNameNotaionSquare.D7,EnumNameNotaionSquare.get(results.get(4)[0], results.get(4)[1]));
+		assertEquals(EnumNameNotaionSquare.B7,EnumNameNotaionSquare.get(results.get(5)[0], results.get(5)[1]));
+		assertEquals(EnumNameNotaionSquare.A6,EnumNameNotaionSquare.get(results.get(6)[0], results.get(6)[1]));
+		assertEquals(EnumNameNotaionSquare.A4,EnumNameNotaionSquare.get(results.get(7)[0], results.get(7)[1]));
 	}
 
 }
