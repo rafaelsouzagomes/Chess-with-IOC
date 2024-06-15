@@ -21,10 +21,8 @@ public class KnightMovimentService implements IMovimentPiece {
 
 	private IMovimentOptions iMovimentOptions;
 	
-	private List<int[]> moviments = new ArrayList<>();
-
+	private List<int[]> movimentsToTest = new ArrayList<>();
 	private int index_x_toMove;
-
 	private int index_y_toMove;
 	
 	@Override
@@ -48,8 +46,8 @@ public class KnightMovimentService implements IMovimentPiece {
 		addRightTop(index_x,index_y);
 		addRightBottom(index_x,index_y);
 		
-		List<int[]> movesToReturn = moviments;
-		moviments = new ArrayList<>();
+		List<int[]> movesToReturn = movimentsToTest;
+		movimentsToTest = new ArrayList<>();
 		return movesToReturn;
 	}
 
@@ -115,7 +113,7 @@ public class KnightMovimentService implements IMovimentPiece {
 		iMovimentOptions.addAnyMoveType(index_x_toMove, index_y_toMove);
 		
 		if(Objects.nonNull(EnumNameNotaionSquare.get(index_x_toMove,index_y_toMove))) 			
-			moviments.add(new int[] {index_x_toMove,index_y_toMove});
+			movimentsToTest.add(new int[] {index_x_toMove,index_y_toMove});
 	}
 	
 	@Autowired

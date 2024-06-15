@@ -7,6 +7,6 @@ public class NamePieces {
 	public static final String KNIGHT = "Knight";
 	public static final String BISHOP = "Bishop";
 	public static final String QUEEN = "Queen";
-	public static final String King = "King";
+	public static final String KING = "King";
 	
 }
