@@ -30,7 +30,7 @@ public class KingMovimentService implements IMovimentPiece {
 		addMoviments(currentPosition);
 	}
 
-	private List<int[]> addMoviments(EnumNameNotaionSquare currentPosition) {
+	protected List<int[]> addMoviments(EnumNameNotaionSquare currentPosition) {
 		int index_x = currentPosition.getIndex_x();
 		int index_y = currentPosition.getIndex_y();
 		
