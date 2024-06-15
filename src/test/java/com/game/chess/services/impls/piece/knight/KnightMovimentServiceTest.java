@@ -58,4 +58,24 @@ class KnightMovimentServiceTest {
 		assertEquals(EnumNameNotaionSquare.A4,EnumNameNotaionSquare.get(results.get(7)[0], results.get(7)[1]));
 	}
 
+	
+	@Test
+	void test_2() {
+		EnumNameNotaionSquare square = EnumNameNotaionSquare.A8;
+		List<int[]> results = service.addMoviments(square);
+		
+		for(int i=0; i < results.size(); i++) {
+			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results.get(i)[0], results.get(i)[1]);
+			System.out.println(enumNotation.name());
+		}
+//		assertEquals(results.size(), 8);
+//		assertEquals(EnumNameNotaionSquare.B3,EnumNameNotaionSquare.get(results.get(0)[0], results.get(0)[1]));
+//		assertEquals(EnumNameNotaionSquare.D3,EnumNameNotaionSquare.get(results.get(1)[0], results.get(1)[1]));
+//		assertEquals(EnumNameNotaionSquare.E6,EnumNameNotaionSquare.get(results.get(2)[0], results.get(2)[1]));
+//		assertEquals(EnumNameNotaionSquare.E4,EnumNameNotaionSquare.get(results.get(3)[0], results.get(3)[1]));
+//		assertEquals(EnumNameNotaionSquare.D7,EnumNameNotaionSquare.get(results.get(4)[0], results.get(4)[1]));
+//		assertEquals(EnumNameNotaionSquare.B7,EnumNameNotaionSquare.get(results.get(5)[0], results.get(5)[1]));
+//		assertEquals(EnumNameNotaionSquare.A6,EnumNameNotaionSquare.get(results.get(6)[0], results.get(6)[1]));
+//		assertEquals(EnumNameNotaionSquare.A4,EnumNameNotaionSquare.get(results.get(7)[0], results.get(7)[1]));
+	}
 }
