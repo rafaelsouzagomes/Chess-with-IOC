@@ -22,21 +22,16 @@ import com.game.chess.services.pieces.IMovimentOptions;
 @Import(CustomTestConfig.class)
 class KnightMovimentServiceTest {
 
-	@Autowired
 	KnightMovimentService service;
-	
-	@Autowired
 	IMovimentOptions iMovimentOptions;
-	
-	@Autowired
 	ChessBoard chess;
 	
-	  @BeforeEach
-	    void setUp() {
-	    	chess.createNewGame();
-	    	iMovimentOptions.setChessBoard(chess);
-	    	service.setiMovimentOptions(iMovimentOptions);
-	    }
+	@BeforeEach
+    void setUp() {
+    	chess.createNewGame();
+    	iMovimentOptions.setChessBoard(chess);
+    	service.setiMovimentOptions(iMovimentOptions);
+    }
 	
 	@Test
 	void test() {
@@ -58,7 +53,6 @@ class KnightMovimentServiceTest {
 		assertEquals(EnumNameNotaionSquare.A4,EnumNameNotaionSquare.get(results.get(7)[0], results.get(7)[1]));
 	}
 
-	
 	@Test
 	void test_2() {
 		EnumNameNotaionSquare square = EnumNameNotaionSquare.A8;
@@ -72,4 +66,19 @@ class KnightMovimentServiceTest {
 		assertEquals(EnumNameNotaionSquare.B6,EnumNameNotaionSquare.get(results.get(0)[0], results.get(0)[1]));
 		assertEquals(EnumNameNotaionSquare.C7,EnumNameNotaionSquare.get(results.get(1)[0], results.get(1)[1]));
 	}
+
+	@Autowired
+	public void setService(KnightMovimentService service) {
+		this.service = service;
+	}
+	@Autowired
+	public void setiMovimentOptions(IMovimentOptions iMovimentOptions) {
+		this.iMovimentOptions = iMovimentOptions;
+	}
+	@Autowired
+	public void setChess(ChessBoard chess) {
+		this.chess = chess;
+	}
+	
+	
 }
