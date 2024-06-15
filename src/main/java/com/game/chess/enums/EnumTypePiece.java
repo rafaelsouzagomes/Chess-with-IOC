@@ -10,7 +10,7 @@ public enum EnumTypePiece {
 	KNIGHT("N", NamePieces.KNIGHT, 3), 
 	BISHOP("B", NamePieces.BISHOP, 3), 
 	QUEEN("Q", NamePieces.QUEEN, 9),
-	KING("K", NamePieces.King, 0);
+	KING("K", NamePieces.KING, 0);
 	
 	private String abr; 
 	private String name; 

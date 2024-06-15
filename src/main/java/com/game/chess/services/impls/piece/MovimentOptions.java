@@ -15,6 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.game.chess.components.IBoard;
 import com.game.chess.components.chessSquare.SquareBoard;
+import com.game.chess.components.chessSquare.SquareBoardFactory;
 import com.game.chess.components.piece.Piece;
 import com.game.chess.dtos.MovimentOptionsAvailableDTO;
 import com.game.chess.enums.EnumNameNotaionSquare;
@@ -25,17 +26,21 @@ import com.game.chess.services.pieces.pawn.ITeamManager;
 @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class MovimentOptions implements IMovimentOptions {
 
-	private List<SquareBoard> movesAvailable;
 	
 	private IBoard chessBoard;
-	
 	private ITeamManager teamManager;
+	private SquareBoardFactory factory;
+	
+	private List<SquareBoard> movesAvailable;
 	
 	private SquareBoard[][] squareBoard;
-	
+	private EnumNameNotaionSquare currentPosition;
 	private int index_x = -1;
-	
 	private int index_y = -1;
+	
+	public void setCurrentPosition(EnumNameNotaionSquare currentPosition) {
+		this.currentPosition = currentPosition;
+	}
 	
 	@PostConstruct
 	public void iniMoviments() {
@@ -73,12 +78,22 @@ public class MovimentOptions implements IMovimentOptions {
 	}
 
 	private void addMove() {
-		if (isExists() && isEmpty()) 
+		if (isExists() && isEmpty() && isNotCheckMateResult()) 
 			movesAvailable.add(squareBoard[index_x][index_y]);
 	}
 	
+	private boolean isNotCheckMateResult() {
+		SquareBoard square = squareBoard[currentPosition.getIndex_x()][ currentPosition.getIndex_y()];
+		Piece removedPiece = square.removePiece();
+				
+		SquareBoard newSquare = squareBoard[index_x][index_y];
+		newSquare.setPiece(removedPiece);
+		
+		return false;
+	}
+
 	private void addCaptureMove() {
-		if (isExists() && !isEmpty()) {
+		if (isExists() && !isEmpty()  && isNotCheckMateResult()) {
 			SquareBoard squareToMove = squareBoard[index_x][index_y];
 			Piece piece = squareToMove.getPiece();
 			if (piece.getTeam() != teamManager.getTeam())

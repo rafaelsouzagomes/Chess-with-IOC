@@ -22,11 +22,11 @@ public class SquareBoard {
 				this.piece.equals(squareToCompare.getPiece());
 	}
 	
-	protected void setPiece(Piece piece) {
+	public void setPiece(Piece piece) {
 		this.piece = piece;
 	}
 	
-	protected void setNameNotationSquare(EnumNameNotaionSquare nameNotationSquare) {
+	public void setNameNotationSquare(EnumNameNotaionSquare nameNotationSquare) {
 		this.nameNotationSquare = nameNotationSquare;
 	}
 	
@@ -40,6 +40,12 @@ public class SquareBoard {
 	
 	public Piece getPiece() {
 		return piece;
+	}
+	
+	public Piece removePiece() {
+		Piece pieceToRemove = piece;
+		piece = null;
+		return pieceToRemove;
 	}
 
 }
