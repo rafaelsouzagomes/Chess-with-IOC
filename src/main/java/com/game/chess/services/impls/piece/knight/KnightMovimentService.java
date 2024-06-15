@@ -2,6 +2,7 @@ package com.game.chess.services.impls.piece.knight;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,6 +22,10 @@ public class KnightMovimentService implements IMovimentPiece {
 	private IMovimentOptions iMovimentOptions;
 	
 	private List<int[]> moviments = new ArrayList<>();
+
+	private int index_x_toMove;
+
+	private int index_y_toMove;
 	
 	@Override
 	public void addMovimentsOptionsAvailable(ITeamManager teamManager, EnumNameNotaionSquare currentPosition) {
@@ -43,71 +48,74 @@ public class KnightMovimentService implements IMovimentPiece {
 		addRightTop(index_x,index_y);
 		addRightBottom(index_x,index_y);
 		
-		return moviments;
+		List<int[]> movesToReturn = moviments;
+		moviments = new ArrayList<>();
+		return movesToReturn;
 	}
 
 	private void addMovimentBottomLeft(int index_x, int index_y) {
-		int index_x_toMove =index_x+2;
-		int index_y_toMove =index_y-1;	
-		iMovimentOptions.addAnyMoveType(index_x_toMove, index_y_toMove);
-		
-		moviments.add(new int[] {index_x_toMove,index_y_toMove});
+		index_x_toMove =index_x+2;
+		index_y_toMove =index_y-1;	
+
+		addMoviment();
 	}
+
+
 	
 	private void addMovimentBottomRight(int index_x, int index_y) {
-		int index_x_toMove =index_x+2;
-		int index_y_toMove =index_y+1;	
-		iMovimentOptions.addAnyMoveType(index_x_toMove, index_y_toMove);
+		index_x_toMove =index_x+2;
+		index_y_toMove =index_y+1;	
 		
-		moviments.add(new int[] {index_x_toMove,index_y_toMove});
+		addMoviment();
 	}
 	
 	private void addMovimentRightTop(int index_x, int index_y) {
-		int index_x_toMove =index_x-1;
-		int index_y_toMove =index_y+2;	
-		iMovimentOptions.addAnyMoveType(index_x_toMove, index_y_toMove);
+		index_x_toMove =index_x-1;
+		index_y_toMove =index_y+2;	
 		
-		moviments.add(new int[] {index_x_toMove,index_y_toMove});
+		addMoviment();
 	}
 	
 	private void addMovimentRightBottom(int index_x, int index_y) {
-		int index_x_toMove =index_x+1;
-		int index_y_toMove =index_y+2;	
-		iMovimentOptions.addAnyMoveType(index_x_toMove, index_y_toMove);
+		index_x_toMove =index_x+1;
+		index_y_toMove =index_y+2;	
 		
-		moviments.add(new int[] {index_x_toMove,index_y_toMove});
+		addMoviment();
 	}
 	
 	private void addMovimentTopRight(int index_x, int index_y) {
-		int index_x_toMove =index_x-2;
-		int index_y_toMove =index_y+1;	
-		iMovimentOptions.addAnyMoveType(index_x_toMove, index_y_toMove);
+		index_x_toMove =index_x-2;
+		index_y_toMove =index_y+1;	
 		
-		moviments.add(new int[] {index_x_toMove,index_y_toMove});
+		addMoviment();
 	}
 	
 	private void addMovimentTopLeft(int index_x, int index_y) {
-		int index_x_toMove =index_x-2;
-		int index_y_toMove =index_y-1;	
-		iMovimentOptions.addAnyMoveType(index_x_toMove, index_y_toMove);
+		index_x_toMove =index_x-2;
+		index_y_toMove =index_y-1;	
 		
-		moviments.add(new int[] {index_x_toMove,index_y_toMove});
+		addMoviment();
 	}
 
 	private void addRightTop(int index_x, int index_y) {
-		int index_x_toMove =index_x-1;
-		int index_y_toMove =index_y-2;	
-		iMovimentOptions.addAnyMoveType(index_x_toMove, index_y_toMove);
+		index_x_toMove =index_x-1;
+		index_y_toMove =index_y-2;	
 		
-		moviments.add(new int[] {index_x_toMove,index_y_toMove});
+		addMoviment();
 	}
 	
 	private void addRightBottom(int index_x, int index_y) {
-		int index_x_toMove =index_x+1;
-		int index_y_toMove =index_y-2;	
+		index_x_toMove =index_x+1;
+		index_y_toMove =index_y-2;	
+
+		addMoviment();
+	}
+	
+	private void addMoviment() {
 		iMovimentOptions.addAnyMoveType(index_x_toMove, index_y_toMove);
 		
-		moviments.add(new int[] {index_x_toMove,index_y_toMove});
+		if(Objects.nonNull(EnumNameNotaionSquare.get(index_x_toMove,index_y_toMove))) 			
+			moviments.add(new int[] {index_x_toMove,index_y_toMove});
 	}
 	
 	@Autowired

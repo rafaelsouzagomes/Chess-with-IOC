@@ -69,6 +69,7 @@ public class MovimentOptions implements IMovimentOptions {
 	public void addAnyMoveType( int index_x_to_move, int index_y_to_Move) {
 		addMove(index_x_to_move, index_y_to_Move);
 		addCaptureMove(index_x_to_move, index_y_to_Move);
+		
 	}
 
 	private void addMove() {
