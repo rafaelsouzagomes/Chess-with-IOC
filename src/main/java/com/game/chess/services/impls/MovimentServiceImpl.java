@@ -20,7 +20,7 @@ import com.game.chess.services.pieces.pawn.ITeamManagerFactory;
 @Service
 public class MovimentServiceImpl implements IMovimentService {
 	
-	private IBoard chessboard;
+	private IBoard chess;
 	
 	private ITeamManager team;
 	private IMovimentPiece piece;
@@ -32,7 +32,7 @@ public class MovimentServiceImpl implements IMovimentService {
 	
 	@Override
 	public MovimentOptionsAvailableDTO getMovimentOptions(MovimentRequestDTO movDTO) {
-		chessboard.createNewGame();
+		chess.createNewGame();
 		
 		setUpTeamManager(movDTO);
 		
@@ -68,7 +68,7 @@ public class MovimentServiceImpl implements IMovimentService {
 	
 	@Autowired
 	public void setChessboard(IBoard chessboard) {
-		this.chessboard = chessboard;
+		this.chess = chessboard;
 	}
 	@Autowired
 	public void setTeamManagerFactory(ITeamManagerFactory teamManagerFactory) {
