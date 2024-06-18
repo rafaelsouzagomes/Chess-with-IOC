@@ -45,5 +45,9 @@ public class Piece {
 	public EnumTypePiece getType() {
 		return type;
 	}
+
+	public boolean isKing() {
+		return type == EnumTypePiece.KING;
+	}
 	
 }
