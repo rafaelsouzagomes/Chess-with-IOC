@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.lang3.SerializationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
@@ -19,19 +20,20 @@ import com.game.chess.components.chessSquare.SquareBoardFactory;
 import com.game.chess.components.piece.Piece;
 import com.game.chess.dtos.MovimentOptionsAvailableDTO;
 import com.game.chess.enums.EnumNameNotaionSquare;
+import com.game.chess.services.pieces.ICheckMateChecker;
 import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.pawn.ITeamManager;
 
 @Service
 @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class MovimentOptions implements IMovimentOptions {
-
 	
 	private IBoard chessBoard;
 	private ITeamManager teamManager;
 	private SquareBoardFactory factory;
 	
 	private List<SquareBoard> movesAvailable;
+	private ICheckMateChecker checkMateChecker;
 	
 	private SquareBoard[][] squareBoard;
 	private EnumNameNotaionSquare currentPosition;
@@ -83,13 +85,21 @@ public class MovimentOptions implements IMovimentOptions {
 	}
 	
 	private boolean isNotCheckMateResult() {
-		SquareBoard square = squareBoard[currentPosition.getIndex_x()][ currentPosition.getIndex_y()];
+		
+		List<SquareBoard> movesPrevious = new ArrayList<>(movesAvailable);
+		
+		SquareBoard[][] squareCopy = SerializationUtils.clone(squareBoard);
+		
+		SquareBoard square = squareCopy[currentPosition.getIndex_x()][ currentPosition.getIndex_y()];
 		Piece removedPiece = square.removePiece();
 				
-		SquareBoard newSquare = squareBoard[index_x][index_y];
+		SquareBoard newSquare = squareCopy[index_x][index_y];
 		newSquare.setPiece(removedPiece);
 		
-		return false;
+		boolean isAvailable = checkMateChecker.isAvailable(squareCopy);
+		
+		movesAvailable = new ArrayList<>(movesPrevious);
+		return isAvailable;
 	}
 
 	private void addCaptureMove() {
@@ -103,6 +113,11 @@ public class MovimentOptions implements IMovimentOptions {
 	
 	private boolean isEmpty() {
 		return isEmpty(index_x, index_y );
+	}
+	
+	@Override
+	public void clear() {
+		movesAvailable = new ArrayList<>();
 	}
 
 	@Override
@@ -132,5 +147,11 @@ public class MovimentOptions implements IMovimentOptions {
 	public void setTeamManager(@Lazy  ITeamManager teamManager) {
 		this.teamManager = teamManager;
 	}
+
+	@Autowired
+	public void setCheckMateChecker(ICheckMateChecker checkMateChecker) {
+		this.checkMateChecker = checkMateChecker;
+	}
+
 
 }
