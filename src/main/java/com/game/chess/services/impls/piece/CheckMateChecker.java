@@ -32,22 +32,35 @@ public class CheckMateChecker implements ICheckMateChecker {
 				if(currentSquare.isEmpty())	
 					continue;
 				
-				Piece piece = currentSquare.getPiece();
-				IMovimentPiece movimentPiece = movimentPieceFactory.getMovimentPiece(piece.getType().getName());
-				EnumNameNotaionSquare nameNotationSquare = currentSquare.getNameNotationSquare();
-				
-				movimentOptions.clear();
-				movimentPiece.addMovimentsOptionsAvailable(teamManager, nameNotationSquare);
-				MovimentOptionsAvailableDTO movimentsOptions = movimentOptions.getMovimentsOptions();
-				List<SquareBoard> chessSquaresAvailable = movimentsOptions.getChessSquaresAvailable();
-				
-				for( SquareBoard movOptions: chessSquaresAvailable )
-					if(Objects.nonNull(movOptions.getPiece()) &&  movOptions.getPiece().isKing() &&  movOptions.getPiece().getTeam()==teamManager.getTeam()) 
+				List<SquareBoard> movimentsAvailables = simulateMoviments(currentSquare);
+				for( SquareBoard movOptions: movimentsAvailables )
+					if( isImpossivelMoviment(movOptions) )  
 						return false;
-				}
+			}
 		}
 		
 		return true;
+	}
+	
+	public boolean isImpossivelMoviment(SquareBoard movOptions) {
+		return Objects.nonNull(movOptions.getPiece()) && movOptions.getPiece().isKing() &&  movOptions.getPiece().getTeam()==teamManager.getTeam();
+	}
+	
+	public List<SquareBoard> simulateMoviments(SquareBoard currentSquare ){
+		MovimentOptionsAvailableDTO movimentsOptions = setUpMoviments(currentSquare);
+		List<SquareBoard> chessSquaresAvailable = movimentsOptions.getChessSquaresAvailable();
+		return chessSquaresAvailable;
+	}
+
+	private MovimentOptionsAvailableDTO setUpMoviments(SquareBoard currentSquare) {
+		Piece piece = currentSquare.getPiece();
+		IMovimentPiece movimentPiece = movimentPieceFactory.getMovimentPiece(piece.getType().getName());
+		EnumNameNotaionSquare nameNotationSquare = currentSquare.getNameNotationSquare();
+		
+		movimentOptions.clear();
+		movimentPiece.addMovimentsOptionsAvailable(teamManager, nameNotationSquare);
+		MovimentOptionsAvailableDTO movimentsOptions = movimentOptions.getMovimentsOptions();
+		return movimentsOptions;
 	}
 	
 	@Autowired
