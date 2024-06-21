@@ -6,7 +6,6 @@ import java.util.Objects;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.commons.lang3.SerializationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
@@ -23,6 +22,7 @@ import com.game.chess.enums.EnumNameNotaionSquare;
 import com.game.chess.services.pieces.ICheckMateChecker;
 import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.pawn.ITeamManager;
+import com.game.chess.services.pieces.pawn.ITeamManagerFactory;
 
 @Service
 @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
@@ -34,6 +34,7 @@ public class MovimentOptions implements IMovimentOptions {
 	
 	private List<SquareBoard> movesAvailable;
 	private ICheckMateChecker checkMateChecker;
+	private Boolean checkCheckMate=true;
 	
 	private SquareBoard[][] squareBoard;
 	private EnumNameNotaionSquare currentPosition;
@@ -85,17 +86,21 @@ public class MovimentOptions implements IMovimentOptions {
 	}
 	
 	private boolean isNotCheckMateResult() {
+		if(!checkCheckMate) {
+			return true;
+		}
 		
 		List<SquareBoard> movesPrevious = new ArrayList<>(movesAvailable);
 		
-		SquareBoard[][] squareCopy = SerializationUtils.clone(squareBoard);
+		SquareBoard[][] squareCopy = squareBoard.clone();
 		
-		SquareBoard square = squareCopy[currentPosition.getIndex_x()][ currentPosition.getIndex_y()];
+		SquareBoard square = squareCopy[index_x][index_y];
 		Piece removedPiece = square.removePiece();
 				
 		SquareBoard newSquare = squareCopy[index_x][index_y];
 		newSquare.setPiece(removedPiece);
 		
+		checkMateChecker.setTeamManager(teamManager);
 		boolean isAvailable = checkMateChecker.isAvailable(squareCopy);
 		
 		movesAvailable = new ArrayList<>(movesPrevious);
@@ -153,5 +158,9 @@ public class MovimentOptions implements IMovimentOptions {
 		this.checkMateChecker = checkMateChecker;
 	}
 
-
+	@Override
+	public void dontCheckCheckMate() {
+		checkCheckMate = false;
+	}
+	
 }

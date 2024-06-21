@@ -3,6 +3,7 @@ package com.game.chess.services.impls.piece.pawn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.game.chess.enums.EnumNameNotaionSquare;
@@ -14,6 +15,7 @@ import com.game.chess.services.pieces.pawn.ITeamManager;
 
 @Service
 @Qualifier(NamePieces.PAWN)
+@Scope("prototype")
 public class PawnMovimentService implements IMovimentPiece {
 	
 	private IMovimentOptions iMovimentOptions;
@@ -22,7 +24,7 @@ public class PawnMovimentService implements IMovimentPiece {
 	
 	@Override
 	public void addMovimentsOptionsAvailable(ITeamManager teamManager,
-									  EnumNameNotaionSquare currentPosition) {
+									  		 EnumNameNotaionSquare currentPosition) {
 	
 		IPawnTeamManager pawnTeamManager = (IPawnTeamManager) teamManager;
 		index_x = currentPosition.getIndex_x();

@@ -16,6 +16,7 @@ import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.IMovimentPiece;
 import com.game.chess.services.pieces.IMovimentPieceFactory;
 import com.game.chess.services.pieces.pawn.ITeamManager;
+import com.game.chess.services.pieces.pawn.ITeamManagerFactory;
 
 @Service
 public class CheckMateChecker implements ICheckMateChecker {
@@ -23,6 +24,7 @@ public class CheckMateChecker implements ICheckMateChecker {
 	private ITeamManager teamManager;
 	private IMovimentPieceFactory movimentPieceFactory;
 	private IMovimentOptions movimentOptions;
+	private ITeamManagerFactory teamManagerFactory;
 	
 	@Override
 	public boolean isAvailable(SquareBoard[][] squareBoard) {
@@ -58,7 +60,10 @@ public class CheckMateChecker implements ICheckMateChecker {
 		EnumNameNotaionSquare nameNotationSquare = currentSquare.getNameNotationSquare();
 		
 		movimentOptions.clear();
-		movimentPiece.addMovimentsOptionsAvailable(teamManager, nameNotationSquare);
+		movimentOptions.dontCheckCheckMate();
+		
+		ITeamManager team =  teamManagerFactory.getTeamManager(piece.getType(), piece.getTeam());
+		movimentPiece.addMovimentsOptionsAvailable(team, nameNotationSquare);
 		MovimentOptionsAvailableDTO movimentsOptions = movimentOptions.getMovimentsOptions();
 		return movimentsOptions;
 	}
@@ -72,8 +77,12 @@ public class CheckMateChecker implements ICheckMateChecker {
 		this.movimentPieceFactory = movimentPieceFactory;
 	}
 	@Autowired
-	@Lazy
-	public void setTeamManager(ITeamManager teamManager) {
+	@Override
+	public void setTeamManager(@Lazy ITeamManager teamManager) {
 		this.teamManager = teamManager;
+	}
+	@Autowired
+	public void setTeamManagerFactory(ITeamManagerFactory teamManagerFactory) {
+		this.teamManagerFactory = teamManagerFactory;
 	}
 }

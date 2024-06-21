@@ -108,8 +108,8 @@ public class KingMovimentService implements IMovimentPiece {
 			movimentsToTest.add(new int[] {index_x_toMove,index_y_toMove});
 	}
 	
-	@Autowired
 	@Lazy
+	@Autowired
 	public void setiMovimentOptions(IMovimentOptions iMovimentOptions) {
 		this.iMovimentOptions = iMovimentOptions;
 	}

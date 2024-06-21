@@ -24,4 +24,6 @@ public interface IMovimentOptions {
 
 	void clear();
 
+	void dontCheckCheckMate();
+
 }
