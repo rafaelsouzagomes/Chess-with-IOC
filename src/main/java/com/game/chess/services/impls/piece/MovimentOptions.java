@@ -88,14 +88,12 @@ public class MovimentOptions implements IMovimentOptions {
 		if(!checkCheckMate) {
 			return true;
 		}
-//		return true;
 		
 		List<SquareBoard> movesPrevious = new ArrayList<>(movesAvailable);
 		
 		SquareBoard[][] squareCopy = squareBoard.clone();
 		int index_x_copy = Integer.valueOf(index_x);
 		int index_y_copy = Integer.valueOf(index_y);
-//		EnumNameNotaionSquare currentPosition_copy = currentPosition;
 		
 		SquareBoard square = squareCopy[index_x][index_y];
 		Piece removedPiece = square.removePiece();
