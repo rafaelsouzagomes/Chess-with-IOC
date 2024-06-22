@@ -31,11 +31,10 @@ public class MovimentOptions implements IMovimentOptions {
 	private IBoard chessBoard;
 	private ITeamManager teamManager;
 	private SquareBoardFactory factory;
+	private ICheckMateChecker checkMateChecker;
 	
 	private List<SquareBoard> movesAvailable;
-	private ICheckMateChecker checkMateChecker;
 	private Boolean checkCheckMate=true;
-	
 	private SquareBoard[][] squareBoard;
 	private EnumNameNotaionSquare currentPosition;
 	private int index_x = -1;
@@ -94,6 +93,9 @@ public class MovimentOptions implements IMovimentOptions {
 		List<SquareBoard> movesPrevious = new ArrayList<>(movesAvailable);
 		
 		SquareBoard[][] squareCopy = squareBoard.clone();
+		int index_x_copy = Integer.valueOf(index_x);
+		int index_y_copy = Integer.valueOf(index_y);
+//		EnumNameNotaionSquare currentPosition_copy = currentPosition;
 		
 		SquareBoard square = squareCopy[index_x][index_y];
 		Piece removedPiece = square.removePiece();
@@ -101,9 +103,13 @@ public class MovimentOptions implements IMovimentOptions {
 		SquareBoard newSquare = squareCopy[index_x][index_y];
 		newSquare.setPiece(removedPiece);
 		
+		
 		checkMateChecker.setTeamManager(teamManager);
 		boolean isAvailable = checkMateChecker.isAvailable(squareCopy);
 		
+		index_x =  index_x_copy;
+		index_y = index_y_copy;
+		checkCheckMate = true;
 		movesAvailable = new ArrayList<>(movesPrevious);
 		return isAvailable;
 	}
