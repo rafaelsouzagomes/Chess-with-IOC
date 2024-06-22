@@ -35,8 +35,8 @@ public class CheckMateChecker implements ICheckMateChecker {
 					continue;
 				
 				List<SquareBoard> movimentsAvailables = simulateMoviments(currentSquare);
-				for( SquareBoard movOptions: movimentsAvailables )
-					if( isImpossivelMoviment(movOptions) )  
+				for(SquareBoard movOptions: movimentsAvailables )
+					if(isImpossivelMoviment(movOptions) )  
 						return false;
 			}
 		}

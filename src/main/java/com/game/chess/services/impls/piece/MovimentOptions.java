@@ -89,6 +89,7 @@ public class MovimentOptions implements IMovimentOptions {
 		if(!checkCheckMate) {
 			return true;
 		}
+//		return true;
 		
 		List<SquareBoard> movesPrevious = new ArrayList<>(movesAvailable);
 		
