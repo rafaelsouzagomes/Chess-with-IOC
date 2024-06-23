@@ -22,7 +22,6 @@ import com.game.chess.enums.EnumNameNotaionSquare;
 import com.game.chess.services.pieces.ICheckMateChecker;
 import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.pawn.ITeamManager;
-import com.game.chess.services.pieces.pawn.ITeamManagerFactory;
 
 @Service
 @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
@@ -166,6 +165,11 @@ public class MovimentOptions implements IMovimentOptions {
 	@Override
 	public void dontCheckCheckMate() {
 		checkCheckMate = false;
+	}
+	
+	@Override
+	public void setSquareBoard(SquareBoard[][] squareBoard) {
+		this.squareBoard = squareBoard;
 	}
 	
 }

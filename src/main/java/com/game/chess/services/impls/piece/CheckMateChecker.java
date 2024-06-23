@@ -25,6 +25,7 @@ public class CheckMateChecker implements ICheckMateChecker {
 	private IMovimentPieceFactory movimentPieceFactory;
 	private IMovimentOptions movimentOptions;
 	private ITeamManagerFactory teamManagerFactory;
+	private Piece pieceToMove;
 	
 	@Override
 	public boolean isAvailable(SquareBoard[][] squareBoard) {
@@ -45,7 +46,11 @@ public class CheckMateChecker implements ICheckMateChecker {
 	}
 	
 	public boolean isImpossivelMoviment(SquareBoard movOptions) {
-		return Objects.nonNull(movOptions.getPiece()) && movOptions.getPiece().isKing() &&  movOptions.getPiece().getTeam()==teamManager.getTeam();
+		boolean teste =pieceToMove.getTeam() != teamManager.getTeam();
+		return Objects.nonNull(movOptions.getPiece()) 
+					&& movOptions.getPiece().isKing() 
+					&& movOptions.getPiece().getTeam()==teamManager.getTeam()
+					&& pieceToMove.getTeam() != teamManager.getTeam();
 	}
 	
 	public List<SquareBoard> simulateMoviments(SquareBoard currentSquare ){
@@ -55,14 +60,14 @@ public class CheckMateChecker implements ICheckMateChecker {
 	}
 
 	private MovimentOptionsAvailableDTO setUpMoviments(SquareBoard currentSquare) {
-		Piece piece = currentSquare.getPiece();
-		IMovimentPiece movimentPiece = movimentPieceFactory.getMovimentPiece(piece.getType().getName());
+		pieceToMove = currentSquare.getPiece();
+		IMovimentPiece movimentPiece = movimentPieceFactory.getMovimentPiece(pieceToMove.getType().getName());
 		EnumNameNotaionSquare nameNotationSquare = currentSquare.getNameNotationSquare();
 		
 		movimentOptions.clear();
 		movimentOptions.dontCheckCheckMate();
 		
-		ITeamManager team =  teamManagerFactory.getTeamManager(piece.getType(), piece.getTeam());
+		ITeamManager team =  teamManagerFactory.getTeamManager(pieceToMove.getType(), pieceToMove.getTeam());
 		movimentPiece.addMovimentsOptionsAvailable(team, nameNotationSquare);
 		MovimentOptionsAvailableDTO movimentsOptions = movimentOptions.getMovimentsOptions();
 		return movimentsOptions;
