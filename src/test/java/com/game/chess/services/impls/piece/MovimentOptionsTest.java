@@ -94,14 +94,17 @@ class MovimentOptionsTest {
 		boardFactory.addSquare(EnumTypePiece.BISHOP, EnumTeam.WHITE, EnumNameNotaionSquare.D5);
 		boardFactory.addSquare(EnumTypePiece.KING, EnumTeam.BLACK, EnumNameNotaionSquare.E4);
 		
+		
+		EnumNameNotaionSquare enumNameNotaionSquare = EnumNameNotaionSquare.C8;
+		boardFactory.addSquare(EnumTypePiece.BISHOP, EnumTeam.BLACK, enumNameNotaionSquare);
+		
 		SquareBoard[][] squareBoards = boardFactory.build();
 		
-		EnumNameNotaionSquare enumNameNotaionSquare = EnumNameNotaionSquare.get(0, 2);
-		boardFactory.addSquare(EnumTypePiece.BISHOP, EnumTeam.BLACK, enumNameNotaionSquare);
+		movOptions.setCurrentPosition(enumNameNotaionSquare);
 		movOptions.setTeamManager(blackTeamManager);
 		
 		movOptions.setSquareBoard(squareBoards);
-		movOptions.addAnyMoveType(0, 3);
+		movOptions.addAnyMoveType(EnumNameNotaionSquare.D7.getIndex_x(), EnumNameNotaionSquare.D7.getIndex_y());
 		MovimentOptionsAvailableDTO movimentsOptions = movOptions.getMovimentsOptions();
 		assertEquals(0, movimentsOptions.getChessSquaresAvailable().size());
 	}

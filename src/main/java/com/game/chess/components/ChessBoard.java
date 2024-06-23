@@ -43,7 +43,7 @@ public class ChessBoard implements IBoard{
 		Objects.requireNonNull(chessBoard);
 		for(int line=0; line < chessBoard.length; line++) {
 			for(int column=0; column < chessBoard[0].length; column++) {
-				SquareBoard chessSquare = chessBoard[line][column];
+				SquareBoard chessSquare = chessBoard[column][line];
 				if(chessSquare.isEmpty()) 
 					System.out.print(" ["+chessSquare.getNameNotationSquare()+"] ");
 				else
@@ -51,6 +51,11 @@ public class ChessBoard implements IBoard{
 			}
 			System.out.println("");
 		}
+	}
+	
+	@Override
+	public void setChessBoard(SquareBoard[][] chessBoard) {
+		this.chessBoard = chessBoard;
 	}
 	
 

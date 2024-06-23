@@ -47,6 +47,7 @@ public class MovimentServiceImpl implements IMovimentService {
 
 	private void setUpCurrentPosition(MovimentRequestDTO mov) {
 		currentPosition = EnumNameNotaionSquare.get(mov.getCurrentPosition());
+		iMovimentOptions.setCurrentPosition(currentPosition);
 	}
 
 	private void setUpPieceMoviment(MovimentRequestDTO mov) {

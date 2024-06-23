@@ -39,6 +39,7 @@ public class MovimentOptions implements IMovimentOptions {
 	private int index_x = -1;
 	private int index_y = -1;
 	
+	@Override
 	public void setCurrentPosition(EnumNameNotaionSquare currentPosition) {
 		this.currentPosition = currentPosition;
 	}
@@ -93,8 +94,9 @@ public class MovimentOptions implements IMovimentOptions {
 		SquareBoard[][] squareCopy = squareBoard.clone();
 		int index_x_copy = Integer.valueOf(index_x);
 		int index_y_copy = Integer.valueOf(index_y);
+		EnumNameNotaionSquare currentPosition_copy =  EnumNameNotaionSquare.get(currentPosition.getIndex_x(), currentPosition.getIndex_y());
 		
-		SquareBoard square = squareCopy[index_x][index_y];
+		SquareBoard square = squareCopy[currentPosition.getIndex_x()][currentPosition.getIndex_y()];
 		Piece removedPiece = square.removePiece();
 				
 		SquareBoard newSquare = squareCopy[index_x][index_y];
@@ -107,6 +109,7 @@ public class MovimentOptions implements IMovimentOptions {
 		index_x =  index_x_copy;
 		index_y = index_y_copy;
 		checkCheckMate = true;
+		currentPosition = currentPosition_copy;
 		movesAvailable = new ArrayList<>(movesPrevious);
 		return isAvailable;
 	}

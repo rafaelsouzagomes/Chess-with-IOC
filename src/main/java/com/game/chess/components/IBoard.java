@@ -12,4 +12,6 @@ public interface IBoard {
 
 	void showBoard();
 
+	void setChessBoard(SquareBoard[][] chessBoard);
+
 }

@@ -3,6 +3,7 @@ package com.game.chess.services.pieces;
 import com.game.chess.components.IBoard;
 import com.game.chess.components.chessSquare.SquareBoard;
 import com.game.chess.dtos.MovimentOptionsAvailableDTO;
+import com.game.chess.enums.EnumNameNotaionSquare;
 import com.game.chess.services.pieces.pawn.ITeamManager;
 
 public interface IMovimentOptions {
@@ -28,5 +29,7 @@ public interface IMovimentOptions {
 	void dontCheckCheckMate();
 
 	void setSquareBoard(SquareBoard[][] squareBoard);
+
+	void setCurrentPosition(EnumNameNotaionSquare currentPosition);
 
 }
