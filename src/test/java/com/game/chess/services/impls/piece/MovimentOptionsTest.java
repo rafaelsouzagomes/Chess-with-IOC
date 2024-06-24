@@ -57,6 +57,7 @@ class MovimentOptionsTest {
         chessBoard.createNewGame();
         movOptions.setChessBoard(chessBoard);
         movOptions.setTeamManager(blackPawnTeamManager);
+        movOptions.setCurrentPosition(EnumNameNotaionSquare.A1);
     }
 	  
 	@Test
