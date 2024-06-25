@@ -50,7 +50,7 @@ class MovimentOptionsTest {
 	private IMovimentOptions movOptions;
 	
 	@Autowired
-	Board8x8Factory boardFactory;
+	Board8x8Factory bFactory;
 
 	@BeforeEach
     void setUp() {
@@ -91,15 +91,15 @@ class MovimentOptionsTest {
 	
 	@Test
 	void checkerCheckMateTester_1() {
-		boardFactory.addAllSquare_empty();
-		boardFactory.addSquare(EnumTypePiece.BISHOP, EnumTeam.WHITE, EnumNameNotaionSquare.D5);
-		boardFactory.addSquare(EnumTypePiece.KING, EnumTeam.BLACK, EnumNameNotaionSquare.E4);
+		bFactory.addAllSquare_empty();
+		bFactory.addSquare(EnumTypePiece.BISHOP, EnumTeam.WHITE, EnumNameNotaionSquare.D5);
+		bFactory.addSquare(EnumTypePiece.KING, EnumTeam.BLACK, EnumNameNotaionSquare.E4);
 		
 		
 		EnumNameNotaionSquare enumNameNotaionSquare = EnumNameNotaionSquare.C8;
-		boardFactory.addSquare(EnumTypePiece.BISHOP, EnumTeam.BLACK, enumNameNotaionSquare);
+		bFactory.addSquare(EnumTypePiece.BISHOP, EnumTeam.BLACK, enumNameNotaionSquare);
 		
-		SquareBoard[][] squareBoards = boardFactory.build();
+		SquareBoard[][] squareBoards = bFactory.build();
 		
 		movOptions.setCurrentPosition(enumNameNotaionSquare);
 		movOptions.setTeamManager(blackTeamManager);
@@ -112,14 +112,14 @@ class MovimentOptionsTest {
 	
 	@Test
 	void checkerCheckMateTester_2() {
-		boardFactory.addAllSquare_empty();
-		boardFactory.addSquare(EnumTypePiece.BISHOP, EnumTeam.WHITE, EnumNameNotaionSquare.D5);
-		boardFactory.addSquare(EnumTypePiece.KING, EnumTeam.BLACK, EnumNameNotaionSquare.E5);
+		bFactory.addAllSquare_empty();
+		bFactory.addSquare(EnumTypePiece.BISHOP, EnumTeam.WHITE, EnumNameNotaionSquare.D5);
+		bFactory.addSquare(EnumTypePiece.KING, EnumTeam.BLACK, EnumNameNotaionSquare.E5);
 		
-		SquareBoard[][] squareBoards = boardFactory.build();
+		SquareBoard[][] squareBoards = bFactory.build();
 		
 		EnumNameNotaionSquare enumNameNotaionSquare = EnumNameNotaionSquare.get(0, 2);
-		boardFactory.addSquare(EnumTypePiece.BISHOP, EnumTeam.BLACK, enumNameNotaionSquare);
+		bFactory.addSquare(EnumTypePiece.BISHOP, EnumTeam.BLACK, enumNameNotaionSquare);
 		
 		movOptions.setSquareBoard(squareBoards);
 		movOptions.addAnyMoveType(0, 3);
@@ -129,14 +129,14 @@ class MovimentOptionsTest {
 	
 	@Test
 	void checkerCheckMateTester_3() {
-		boardFactory.addAllSquare_empty();
-		boardFactory.addSquare(EnumTypePiece.BISHOP, EnumTeam.WHITE, EnumNameNotaionSquare.D5);
-		boardFactory.addSquare(EnumTypePiece.KING, EnumTeam.WHITE, EnumNameNotaionSquare.E4);
+		bFactory.addAllSquare_empty();
+		bFactory.addSquare(EnumTypePiece.BISHOP, EnumTeam.WHITE, EnumNameNotaionSquare.D5);
+		bFactory.addSquare(EnumTypePiece.KING, EnumTeam.WHITE, EnumNameNotaionSquare.E4);
 		
-		SquareBoard[][] squareBoards = boardFactory.build();
+		SquareBoard[][] squareBoards = bFactory.build();
 		
 		EnumNameNotaionSquare enumNameNotaionSquare = EnumNameNotaionSquare.get(0, 2);
-		boardFactory.addSquare(EnumTypePiece.BISHOP, EnumTeam.BLACK, enumNameNotaionSquare);
+		bFactory.addSquare(EnumTypePiece.BISHOP, EnumTeam.BLACK, enumNameNotaionSquare);
 		
 		movOptions.setSquareBoard(squareBoards);
 		movOptions.addAnyMoveType(0, 3);
