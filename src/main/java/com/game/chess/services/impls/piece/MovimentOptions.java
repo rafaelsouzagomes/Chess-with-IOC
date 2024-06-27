@@ -96,21 +96,22 @@ public class MovimentOptions implements IMovimentOptions {
 		int index_y_copy = Integer.valueOf(index_y);
 		EnumNameNotaionSquare currentPosition_copy =  EnumNameNotaionSquare.get(currentPosition.getIndex_x(), currentPosition.getIndex_y());
 		
-		SquareBoard square = squareCopy[currentPosition.getIndex_x()][currentPosition.getIndex_y()];
+		SquareBoard square = squareBoard[currentPosition.getIndex_x()][currentPosition.getIndex_y()];
 		Piece removedPiece = square.removePiece();
 				
-		SquareBoard newSquare = squareCopy[index_x][index_y];
+		SquareBoard newSquare = squareBoard[index_x][index_y];
 		newSquare.setPiece(removedPiece);
 		
 		
 		checkMateChecker.setTeamManager(teamManager);
-		boolean isAvailable = checkMateChecker.isAvailable(squareCopy);
+		boolean isAvailable = checkMateChecker.isAvailable(squareBoard);
 		
 		index_x =  index_x_copy;
 		index_y = index_y_copy;
 		checkCheckMate = true;
 		currentPosition = currentPosition_copy;
 		movesAvailable = new ArrayList<>(movesPrevious);
+		squareBoard = squareCopy.clone();
 		return isAvailable;
 	}
 
