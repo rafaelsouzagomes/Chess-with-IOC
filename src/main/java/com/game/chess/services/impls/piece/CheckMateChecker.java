@@ -51,7 +51,6 @@ public class CheckMateChecker implements ICheckMateChecker {
 	}
 	
 	public boolean isImpossivelMoviment(SquareBoard movOptions) {
-		boolean teste =pieceToMove.getTeam() != teamManager.getTeam();
 		return Objects.nonNull(movOptions.getPiece()) 
 					&& movOptions.getPiece().isKing() 
 					&& movOptions.getPiece().getTeam()==teamManager.getTeam()
