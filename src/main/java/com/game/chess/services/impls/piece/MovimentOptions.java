@@ -112,6 +112,7 @@ public class MovimentOptions implements IMovimentOptions {
 		currentPosition = currentPosition_copy;
 		movesAvailable = new ArrayList<>(movesPrevious);
 		squareBoard = squareCopy.clone();
+		Piece teste = squareBoard[index_x][index_y].getPiece();
 		return isAvailable;
 	}
 
@@ -119,7 +120,7 @@ public class MovimentOptions implements IMovimentOptions {
 		if (isExists() && !isEmpty()  && isNotCheckMateResult()) {
 			SquareBoard squareToMove = squareBoard[index_x][index_y];
 			Piece piece = squareToMove.getPiece();
-			if (piece.getTeam() != teamManager.getTeam())
+			if ( piece!=null && piece.getTeam() != teamManager.getTeam())
 				movesAvailable.add(squareToMove);
 		}
 	}
