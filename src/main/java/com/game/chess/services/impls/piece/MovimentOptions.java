@@ -112,7 +112,7 @@ public class MovimentOptions implements IMovimentOptions {
 		currentPosition = currentPosition_copy;
 		movesAvailable = new ArrayList<>(movesPrevious);
 		squareBoard = squareCopy.clone();
-		Piece teste = squareBoard[index_x][index_y].getPiece();
+		squareBoard[index_x][index_y].setPiece(removedPiece); 
 		return isAvailable;
 	}
 
