@@ -62,7 +62,7 @@ class MovimentOptionsTest {
 	  
 	@Test
 	void invalid_moviment_in_init_chessBoard() {
-		movOptions.addMove(0, 0);
+		movOptions.addAnyMoveType(0, 0);
 		MovimentOptionsAvailableDTO movimentsOptions = movOptions.getMovimentsOptions();
 		assertEquals(0, movimentsOptions.getChessSquaresAvailable().size());
 	}

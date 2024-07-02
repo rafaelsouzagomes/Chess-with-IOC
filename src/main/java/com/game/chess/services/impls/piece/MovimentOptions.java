@@ -74,19 +74,28 @@ public class MovimentOptions implements IMovimentOptions {
 	
 	@Override
 	public void addAnyMoveType( int index_x_to_move, int index_y_to_Move) {
+		this.index_x = index_x_to_move;
+		this.index_y = index_y_to_Move;
+		System.out.println("CONTADOR: "+ count++);
+		if(!isNotCheckMateResult()) {
+			return;
+		}
 		addMove(index_x_to_move, index_y_to_Move);
 		addCaptureMove(index_x_to_move, index_y_to_Move);
 		
 	}
 
 	private void addMove() {
-		if (isExists() && isEmpty() && isNotCheckMateResult()) 
+		if (isExists() && isEmpty() ) 
 			movesAvailable.add(squareBoard[index_x][index_y]);
 	}
 	
 	private boolean isNotCheckMateResult() {
 		if(!checkCheckMate) {
 			return true;
+		}
+		if(!isExists()) {
+			return false;
 		}
 		
 		List<SquareBoard> movesPrevious = new ArrayList<>(movesAvailable);
@@ -108,16 +117,18 @@ public class MovimentOptions implements IMovimentOptions {
 		
 		index_x =  index_x_copy;
 		index_y = index_y_copy;
-		checkCheckMate = true;
+		checkCheckMate = false;
 		currentPosition = currentPosition_copy;
 		movesAvailable = new ArrayList<>(movesPrevious);
 		squareBoard = squareCopy.clone();
-		squareBoard[index_x][index_y].setPiece(removedPiece); 
+		
 		return isAvailable;
 	}
+	
+	private static int count = 0;
 
 	private void addCaptureMove() {
-		if (isExists() && !isEmpty()  && isNotCheckMateResult()) {
+		if (isExists() && !isEmpty()) {
 			SquareBoard squareToMove = squareBoard[index_x][index_y];
 			Piece piece = squareToMove.getPiece();
 			if ( piece!=null && piece.getTeam() != teamManager.getTeam())

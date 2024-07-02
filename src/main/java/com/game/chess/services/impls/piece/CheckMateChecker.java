@@ -72,7 +72,9 @@ public class CheckMateChecker implements ICheckMateChecker {
 		movimentOptions.dontCheckCheckMate();
 		movimentOptions.setCurrentPosition(nameNotationSquare);
 		
+		
 		ITeamManager team =  teamManagerFactory.getTeamManager(pieceToMove.getType(), pieceToMove.getTeam());
+		movimentOptions.setTeamManager(team);
 		movimentPiece.addMovimentsOptionsAvailable(team, nameNotationSquare);
 		MovimentOptionsAvailableDTO movimentsOptions = movimentOptions.getMovimentsOptions();
 		return movimentsOptions;
