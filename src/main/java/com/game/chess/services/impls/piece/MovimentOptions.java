@@ -76,7 +76,6 @@ public class MovimentOptions implements IMovimentOptions {
 	public void addAnyMoveType( int index_x_to_move, int index_y_to_Move) {
 		this.index_x = index_x_to_move;
 		this.index_y = index_y_to_Move;
-		System.out.println("CONTADOR: "+ count++);
 		if(!isNotCheckMateResult()) {
 			return;
 		}
@@ -125,8 +124,6 @@ public class MovimentOptions implements IMovimentOptions {
 		return isAvailable;
 	}
 	
-	private static int count = 0;
-
 	private void addCaptureMove() {
 		if (isExists() && !isEmpty()) {
 			SquareBoard squareToMove = squareBoard[index_x][index_y];

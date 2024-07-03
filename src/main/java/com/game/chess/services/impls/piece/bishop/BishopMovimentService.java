@@ -28,7 +28,7 @@ public class BishopMovimentService implements IMovimentPiece{
 	
 	@Override
 	public void addMovimentsOptionsAvailable(ITeamManager teamManager, 
-									  EnumNameNotaionSquare currentPosition) {
+									 		 EnumNameNotaionSquare currentPosition) {
 		
 		longerMoviment.setFirstDirection(topLeft);
 		longerMoviment.setSecondDirection(topRight);

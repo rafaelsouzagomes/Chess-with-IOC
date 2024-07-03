@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.game.chess.dtos.MovimentOptionsAvailableDTO;
 import com.game.chess.dtos.MovimentRequestDTO;
+import com.game.chess.services.GameService;
 import com.game.chess.services.IMovimentService;
 
 @RestController()
@@ -18,17 +19,19 @@ public class ChessController {
 	
 	IMovimentService movimentService;
 	
+	GameService gameService;
+	
 	@CrossOrigin
 	@GetMapping("/moviment/options")
 	public MovimentOptionsAvailableDTO getMovimentOptions(@RequestBody MovimentRequestDTO mov)  {
 		return movimentService.getMovimentOptions(mov);
 	}
 	
-//	@CrossOrigin
-//	@GetMapping("/init")
-//	public ChessBoardDTO initGame()  {
-//		return chessService.initGame();
-//	}
+	@CrossOrigin
+	@GetMapping("/init")
+	public void initGame()  {
+		 gameService.initGame();
+	}
 //	
 
 //	
@@ -41,6 +44,11 @@ public class ChessController {
 	@Autowired
 	public void setMovimentService(IMovimentService movimentService) {
 		this.movimentService = movimentService;
+	}
+	
+	@Autowired
+	public void setGameService(GameService gameService) {
+		this.gameService = gameService;
 	}
 
 }
