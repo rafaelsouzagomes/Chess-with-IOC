@@ -1,14 +1,18 @@
 package com.game.chess.services.impls.piece.bishop;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.game.chess.components.Board8x8Factory;
 import com.game.chess.components.ChessBoard;
@@ -24,15 +28,16 @@ import com.game.chess.services.impls.piece.bishop.moviment.TopLeft;
 import com.game.chess.services.impls.piece.bishop.moviment.TopRight;
 import com.game.chess.services.pieces.IMovimentOptions;
 
-@ExtendWith(SpringExtension.class)
+@ExtendWith(MockitoExtension.class)
 @SpringBootTest
 @Import(CustomTestConfig.class)
 class BishopMovimentServiceTest {
 
+	@InjectMocks 
 	@Autowired
 	BishopMovimentService bishopMovimentService;
 	
-	@Autowired
+	@MockBean
 	IMovimentOptions iMovimentOptions;
 	
 	@Autowired
@@ -60,11 +65,13 @@ class BishopMovimentServiceTest {
     void setUp() {
     	chess.createNewGame();
     	iMovimentOptions.setChessBoard(chess);
+    	when(iMovimentOptions.isNotCheckMateResult()).thenReturn(true);
     	
     	longerMoviment.setFirstDirection(topLeft);
 		longerMoviment.setSecondDirection(topRight);
 		longerMoviment.setThirdDirection(bottomLeft);
 		longerMoviment.setFourthDirection(bottomRight);
+		
     }
     
 	@Test

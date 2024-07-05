@@ -22,6 +22,7 @@ public interface IMovimentOptions {
 	boolean isExists(int x, int y);
 	void clear();
 	void dontCheckCheckMate();
+	boolean isNotCheckMateResult();
 
 
 

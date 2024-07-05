@@ -89,7 +89,8 @@ public class MovimentOptions implements IMovimentOptions {
 			movesAvailable.add(squareBoard[index_x][index_y]);
 	}
 	
-	private boolean isNotCheckMateResult() {
+	@Override
+	public boolean isNotCheckMateResult() {
 		if(!checkCheckMate) {
 			return true;
 		}
