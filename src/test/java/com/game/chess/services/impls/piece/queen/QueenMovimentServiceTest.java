@@ -14,6 +14,8 @@ import com.game.chess.components.Board8x8Factory;
 import com.game.chess.components.ChessBoard;
 import com.game.chess.configs.CustomTestConfig;
 import com.game.chess.enums.EnumNameNotaionSquare;
+import com.game.chess.services.impls.piece.MovimentOptions;
+import com.game.chess.services.pieces.IMovimentOptions;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -23,10 +25,12 @@ class QueenMovimentServiceTest {
 	QueenMovimentService movimentService;
 	ChessBoard chess;
 	Board8x8Factory boardFactory;
+	IMovimentOptions iMovimentOptions;
 	
     @BeforeEach
     void setUp() {
     	chess.createNewGame();
+    	iMovimentOptions.dontCheckCheckMate();
     }
 	
 	@Test
@@ -60,5 +64,10 @@ class QueenMovimentServiceTest {
 	@Autowired
 	public void setBoardFactory(Board8x8Factory boardFactory) {
 		this.boardFactory = boardFactory;
+	}
+	
+	@Autowired
+	public void setiMovimentOptions(IMovimentOptions iMovimentOptions) {
+		this.iMovimentOptions = iMovimentOptions;
 	}
 }

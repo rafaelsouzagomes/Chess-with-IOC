@@ -31,6 +31,7 @@ class KnightMovimentServiceTest {
     	chess.createNewGame();
     	iMovimentOptions.setChessBoard(chess);
     	service.setiMovimentOptions(iMovimentOptions);
+    	iMovimentOptions.dontCheckCheckMate();
     }
 	
 	@Test
