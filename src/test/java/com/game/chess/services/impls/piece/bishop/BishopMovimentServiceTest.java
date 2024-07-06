@@ -37,7 +37,7 @@ class BishopMovimentServiceTest {
 	@Autowired
 	BishopMovimentService bishopMovimentService;
 	
-	@MockBean
+	@Autowired
 	IMovimentOptions iMovimentOptions;
 	
 	@Autowired
@@ -65,7 +65,7 @@ class BishopMovimentServiceTest {
     void setUp() {
     	chess.createNewGame();
     	iMovimentOptions.setChessBoard(chess);
-    	when(iMovimentOptions.isNotCheckMateResult()).thenReturn(true);
+    	iMovimentOptions.dontCheckCheckMate();
     	
     	longerMoviment.setFirstDirection(topLeft);
 		longerMoviment.setSecondDirection(topRight);
