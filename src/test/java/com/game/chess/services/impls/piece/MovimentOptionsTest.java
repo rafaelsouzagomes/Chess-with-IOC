@@ -11,14 +11,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.game.chess.components.Board8x8Factory;
-import com.game.chess.components.IBoard;
-import com.game.chess.components.chessSquare.SquareBoard;
 import com.game.chess.configs.CustomTestConfig;
-import com.game.chess.dtos.MovimentOptionsAvailableDTO;
-import com.game.chess.enums.EnumNameNotaionSquare;
-import com.game.chess.enums.EnumTeam;
-import com.game.chess.enums.EnumTypePiece;
+import com.game.chess.models.dtos.MovimentOptionsAvailableDTO;
+import com.game.chess.models.enums.EnumNameNotaionSquare;
+import com.game.chess.models.enums.EnumTeam;
+import com.game.chess.models.enums.EnumTypePiece;
+import com.game.chess.services.components.Board8x8Factory;
+import com.game.chess.services.components.IBoard;
+import com.game.chess.services.components.squareboard.SquareBoard;
 import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.pawn.ITeamManager;
 

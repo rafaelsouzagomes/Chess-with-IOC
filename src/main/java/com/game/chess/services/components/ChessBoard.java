@@ -1,4 +1,4 @@
-package com.game.chess.components;
+package com.game.chess.services.components;
 
 import java.util.Objects;
 
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.game.chess.components.chessSquare.SquareBoard;
+import com.game.chess.services.components.squareboard.SquareBoard;
 
 @Component
 @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)

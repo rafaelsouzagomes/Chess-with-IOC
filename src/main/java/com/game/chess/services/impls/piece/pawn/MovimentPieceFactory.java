@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.game.chess.enums.NamePieces;
+import com.game.chess.models.enums.NamePieces;
 import com.game.chess.services.pieces.IMovimentPiece;
 import com.game.chess.services.pieces.IMovimentPieceFactory;
 

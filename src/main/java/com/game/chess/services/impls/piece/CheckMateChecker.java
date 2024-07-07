@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import com.game.chess.components.IBoard;
-import com.game.chess.components.chessSquare.SquareBoard;
-import com.game.chess.components.piece.Piece;
-import com.game.chess.dtos.MovimentOptionsAvailableDTO;
-import com.game.chess.enums.EnumNameNotaionSquare;
+import com.game.chess.models.dtos.MovimentOptionsAvailableDTO;
+import com.game.chess.models.enums.EnumNameNotaionSquare;
+import com.game.chess.services.components.IBoard;
+import com.game.chess.services.components.piece.Piece;
+import com.game.chess.services.components.squareboard.SquareBoard;
 import com.game.chess.services.pieces.ICheckMateChecker;
 import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.IMovimentPiece;

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.game.chess.enums.EnumNameNotaionSquare;
+import com.game.chess.models.enums.EnumNameNotaionSquare;
 import com.game.chess.services.pieces.ILongerMoviment;
 import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.moviment.ISenseDirection;

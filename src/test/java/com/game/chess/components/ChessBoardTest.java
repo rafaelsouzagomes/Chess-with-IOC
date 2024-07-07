@@ -10,11 +10,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.game.chess.components.chessSquare.SquareBoard;
-import com.game.chess.components.chessSquare.SquareBoardFactory;
-import com.game.chess.enums.EnumNameNotaionSquare;
-import com.game.chess.enums.EnumTeam;
-import com.game.chess.enums.EnumTypePiece;
+import com.game.chess.models.enums.EnumNameNotaionSquare;
+import com.game.chess.models.enums.EnumTeam;
+import com.game.chess.models.enums.EnumTypePiece;
+import com.game.chess.services.components.ChessBoard;
+import com.game.chess.services.components.squareboard.SquareBoard;
+import com.game.chess.services.components.squareboard.SquareBoardFactory;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)

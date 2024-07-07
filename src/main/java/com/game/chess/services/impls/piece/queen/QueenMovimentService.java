@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.game.chess.enums.EnumNameNotaionSquare;
-import com.game.chess.enums.NamePieces;
+import com.game.chess.models.enums.EnumNameNotaionSquare;
+import com.game.chess.models.enums.NamePieces;
 import com.game.chess.services.impls.piece.LongerMoviment;
 import com.game.chess.services.impls.piece.bishop.moviment.BottomLeft;
 import com.game.chess.services.impls.piece.bishop.moviment.BottomRight;

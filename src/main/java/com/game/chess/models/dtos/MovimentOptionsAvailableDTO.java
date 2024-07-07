@@ -1,8 +1,8 @@
-package com.game.chess.dtos;
+package com.game.chess.models.dtos;
 
 import java.util.List;
 
-import com.game.chess.components.chessSquare.SquareBoard;
+import com.game.chess.services.components.squareboard.SquareBoard;
 
 public class MovimentOptionsAvailableDTO {
 

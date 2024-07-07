@@ -1,6 +1,6 @@
-package com.game.chess.components;
+package com.game.chess.services.components;
 
-import com.game.chess.components.chessSquare.SquareBoard;
+import com.game.chess.services.components.squareboard.SquareBoard;
 
 public interface IBoard {
 

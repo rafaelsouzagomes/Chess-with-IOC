@@ -1,11 +1,9 @@
-package com.game.chess.components.chessSquare;
+package com.game.chess.services.components.squareboard;
 
 import java.util.Objects;
 
-import org.springframework.stereotype.Component;
-
-import com.game.chess.components.piece.Piece;
-import com.game.chess.enums.EnumNameNotaionSquare;
+import com.game.chess.models.enums.EnumNameNotaionSquare;
+import com.game.chess.services.components.piece.Piece;
 
 public class SquareBoard {
 

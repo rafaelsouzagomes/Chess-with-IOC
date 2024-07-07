@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import com.game.chess.enums.EnumNameNotaionSquare;
-import com.game.chess.enums.NamePieces;
+import com.game.chess.models.enums.EnumNameNotaionSquare;
+import com.game.chess.models.enums.NamePieces;
 import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.IMovimentPiece;
 import com.game.chess.services.pieces.pawn.IPawnTeamManager;

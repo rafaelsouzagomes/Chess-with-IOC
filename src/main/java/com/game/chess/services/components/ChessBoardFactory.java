@@ -1,12 +1,12 @@
-package com.game.chess.components;
+package com.game.chess.services.components;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.game.chess.components.chessSquare.SquareBoard;
-import com.game.chess.enums.EnumNameNotaionSquare;
-import com.game.chess.enums.EnumTeam;
-import com.game.chess.enums.EnumTypePiece;
+import com.game.chess.models.enums.EnumNameNotaionSquare;
+import com.game.chess.models.enums.EnumTeam;
+import com.game.chess.models.enums.EnumTypePiece;
+import com.game.chess.services.components.squareboard.SquareBoard;
 
 @Service
 public class ChessBoardFactory implements GameBoardFactory {

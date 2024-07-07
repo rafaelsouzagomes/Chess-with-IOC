@@ -1,7 +1,7 @@
 package com.game.chess.services;
 
-import com.game.chess.dtos.MovimentOptionsAvailableDTO;
-import com.game.chess.dtos.MovimentRequestDTO;
+import com.game.chess.models.dtos.MovimentOptionsAvailableDTO;
+import com.game.chess.models.dtos.MovimentRequestDTO;
 
 public interface IMovimentService {
 

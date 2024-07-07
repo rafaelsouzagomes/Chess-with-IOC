@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.game.chess.components.chessSquare.SquareBoard;
-import com.game.chess.dtos.MovimentOptionsAvailableDTO;
-import com.game.chess.dtos.MovimentRequestDTO;
+import com.game.chess.models.dtos.MovimentOptionsAvailableDTO;
+import com.game.chess.models.dtos.MovimentRequestDTO;
+import com.game.chess.services.components.squareboard.SquareBoard;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest

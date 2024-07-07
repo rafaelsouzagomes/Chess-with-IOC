@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.game.chess.enums.EnumTeam;
-import com.game.chess.enums.EnumTypePiece;
+import com.game.chess.models.enums.EnumTeam;
+import com.game.chess.models.enums.EnumTypePiece;
 import com.game.chess.services.pieces.pawn.IPawnTeamManager;
 import com.game.chess.services.pieces.pawn.ITeamManager;
 import com.game.chess.services.pieces.pawn.ITeamManagerFactory;

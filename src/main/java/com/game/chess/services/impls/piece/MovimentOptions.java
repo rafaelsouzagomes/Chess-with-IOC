@@ -13,12 +13,12 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.game.chess.components.IBoard;
-import com.game.chess.components.chessSquare.SquareBoard;
-import com.game.chess.components.chessSquare.SquareBoardFactory;
-import com.game.chess.components.piece.Piece;
-import com.game.chess.dtos.MovimentOptionsAvailableDTO;
-import com.game.chess.enums.EnumNameNotaionSquare;
+import com.game.chess.models.dtos.MovimentOptionsAvailableDTO;
+import com.game.chess.models.enums.EnumNameNotaionSquare;
+import com.game.chess.services.components.IBoard;
+import com.game.chess.services.components.piece.Piece;
+import com.game.chess.services.components.squareboard.SquareBoard;
+import com.game.chess.services.components.squareboard.SquareBoardFactory;
 import com.game.chess.services.pieces.ICheckMateChecker;
 import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.pawn.ITeamManager;

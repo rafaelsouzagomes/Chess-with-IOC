@@ -13,9 +13,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.game.chess.components.Board8x8Factory;
 import com.game.chess.configs.CustomTestConfig;
-import com.game.chess.enums.EnumNameNotaionSquare;
+import com.game.chess.models.enums.EnumNameNotaionSquare;
+import com.game.chess.services.components.Board8x8Factory;
 import com.game.chess.services.impls.piece.MovimentOptions;
 
 @ExtendWith(SpringExtension.class)

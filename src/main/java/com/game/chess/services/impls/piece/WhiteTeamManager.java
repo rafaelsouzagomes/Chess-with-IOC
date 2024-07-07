@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
-import com.game.chess.enums.EnumTeam;
+import com.game.chess.models.enums.EnumTeam;
 import com.game.chess.services.pieces.pawn.ITeamManager;
 
 @Service

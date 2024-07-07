@@ -1,4 +1,4 @@
-package com.game.chess.dtos;
+package com.game.chess.models.dtos;
 
 import org.springframework.lang.NonNull;
 

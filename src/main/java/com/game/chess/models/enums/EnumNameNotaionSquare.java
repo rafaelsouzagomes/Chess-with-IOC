@@ -1,4 +1,4 @@
-package com.game.chess.enums;
+package com.game.chess.models.enums;
 
 import java.util.AbstractMap;
 import java.util.HashMap;

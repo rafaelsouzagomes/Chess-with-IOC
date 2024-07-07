@@ -7,10 +7,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.game.chess.dtos.MovimentOptionsAvailableDTO;
-import com.game.chess.dtos.MovimentRequestDTO;
+import com.game.chess.models.dtos.InitGameDTO;
+import com.game.chess.models.dtos.MovimentOptionsAvailableDTO;
+import com.game.chess.models.dtos.MovimentRequestDTO;
+import com.game.chess.models.dtos.PlayerDTO;
 import com.game.chess.services.GameService;
 import com.game.chess.services.IMovimentService;
+import com.game.chess.services.player.PlayerService;
 
 @RestController()
 @RequestMapping("/chess")
@@ -21,6 +24,9 @@ public class ChessController {
 	
 	GameService gameService;
 	
+	@Autowired
+	PlayerService playerSerivce;
+	
 	@CrossOrigin
 	@GetMapping("/moviment/options")
 	public MovimentOptionsAvailableDTO getMovimentOptions(@RequestBody MovimentRequestDTO mov)  {
@@ -28,9 +34,15 @@ public class ChessController {
 	}
 	
 	@CrossOrigin
-	@GetMapping("/init")
-	public void initGame()  {
-		 gameService.initGame();
+	@GetMapping("/game/init")
+	public void initGame(@RequestBody InitGameDTO dto)  {
+		 gameService.initGame(dto);
+	}
+	
+	@CrossOrigin
+	@GetMapping("/game/init")
+	public void createPlayer(@RequestBody PlayerDTO dto)  {
+		playerSerivce.createPlayer(dto);
 	}
 //	
 
