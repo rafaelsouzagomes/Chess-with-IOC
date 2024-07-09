@@ -3,6 +3,7 @@ package com.game.chess.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,8 @@ import com.game.chess.models.dtos.InitGameDTO;
 import com.game.chess.models.dtos.MovimentOptionsAvailableDTO;
 import com.game.chess.models.dtos.MovimentRequestDTO;
 import com.game.chess.models.dtos.PlayerDTO;
+import com.game.chess.models.entities.Game;
+import com.game.chess.models.entities.Player;
 import com.game.chess.services.GameService;
 import com.game.chess.services.IMovimentService;
 import com.game.chess.services.player.PlayerService;
@@ -35,14 +38,20 @@ public class ChessController {
 	
 	@CrossOrigin
 	@GetMapping("/game/init")
-	public void initGame(@RequestBody InitGameDTO dto)  {
-		 gameService.initGame(dto);
+	public Game initGame(@RequestBody InitGameDTO dto)  {
+		 return gameService.initGame(dto);
 	}
 	
 	@CrossOrigin
-	@GetMapping("/game/init")
-	public void createPlayer(@RequestBody PlayerDTO dto)  {
-		playerSerivce.createPlayer(dto);
+	@GetMapping("/game/get")
+	public Game getGame(@RequestBody InitGameDTO dto)  {
+		 return gameService.getGame(dto);
+	}
+	
+	@CrossOrigin
+	@PostMapping("/player/add")
+	public Player createPlayer(@RequestBody PlayerDTO dto)  {
+		return playerSerivce.createPlayer(dto);
 	}
 //	
 

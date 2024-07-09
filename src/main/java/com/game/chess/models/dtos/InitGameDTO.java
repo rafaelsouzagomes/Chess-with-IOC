@@ -5,6 +5,16 @@ public class InitGameDTO {
 	private Long idPlayer_A;
 	
 	private Long idPlayer_B;
+	
+	private Long idGame;
+	
+	public void setIdGame(Long idGame) {
+		this.idGame = idGame;
+	}
+	
+	public Long getIdGame() {
+		return idGame;
+	}
 
 	public Long getIdPlayer_A() {
 		return idPlayer_A;

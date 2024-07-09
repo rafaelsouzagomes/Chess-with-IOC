@@ -14,5 +14,4 @@ public class PieceBuilder {
 		p.setType(typePiece);
 		return p;
 	}
-
 }

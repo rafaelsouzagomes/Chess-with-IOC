@@ -13,11 +13,11 @@ public class PlayerService {
 	@Autowired
 	PlayerRepository playerRepo;
 	
-	public void createPlayer(PlayerDTO dto) {
+	public Player createPlayer(PlayerDTO dto) {
 		Player p1 = new Player();
 		p1.setUsername(dto.getName());
 		
-		playerRepo.save(p1);	
+		return playerRepo.save(p1);	
 	}
 
 }

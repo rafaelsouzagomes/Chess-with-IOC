@@ -32,20 +32,31 @@ public class GameServiceImpl implements GameService {
 	private Player player_B;
 	
 	@Override
-	public void initGame(InitGameDTO dto) {
+	public Game initGame(InitGameDTO dto) {
 		setUpNewChessGame();
 		setUpPlayers(dto);
-		saveNewGame();
+		return saveNewGame();
+	}
+	
+	@Override
+	public Game getGame(InitGameDTO dto) {
+		Optional<Game> gameOpt = gameRepository.findById(dto.getIdGame());
+		SquareBoard[][] squareBoard = gameOpt.get().getSquareBoard();
+		chess.setChessBoard(squareBoard);
+		chess.showBoard();
+		if(gameOpt.isPresent())
+			return gameOpt.get();
+		return null;
 	}
 
-	private void saveNewGame() {
+	private Game saveNewGame() {
 		Game game = new Game();
 		game.setName("Chess Game");
 		game.setPlayer_A(player_A);
 		game.setPlayer_B(player_B);
 		game.setSquareBoard(squareBoards);
 		
-		gameRepository.save(game);
+		return gameRepository.save(game);
 	}
 
 	private void setUpPlayers(InitGameDTO dto) {
@@ -67,4 +78,6 @@ public class GameServiceImpl implements GameService {
 		chess.createNewGame();
 		this.squareBoards = chess.getBoard();
 	}
+
+
 }

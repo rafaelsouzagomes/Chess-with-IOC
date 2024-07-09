@@ -1,9 +1,12 @@
 package com.game.chess.services;
 
 import com.game.chess.models.dtos.InitGameDTO;
+import com.game.chess.models.entities.Game;
 
 public interface GameService {
 
-	void initGame(InitGameDTO dto);
+	Game initGame(InitGameDTO dto);
+
+	Game getGame(InitGameDTO dto);
 
 }
