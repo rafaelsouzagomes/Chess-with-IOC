@@ -11,6 +11,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.game.chess.services.components.squareboard.SquareBoard;
@@ -23,10 +24,12 @@ public class Game {
 	private Long idGame;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    private Player player_A;
+	@JsonIgnore
+	private Player player_A;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    private Player player_B;
+	@JsonIgnore
+	private Player player_B;
 	
 	@Lob
 	@Column(name = "board", columnDefinition = "TEXT")

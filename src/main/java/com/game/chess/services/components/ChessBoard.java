@@ -41,8 +41,8 @@ public class ChessBoard implements IBoard{
 	@Override
 	public void showBoard(){
 		Objects.requireNonNull(chessBoard);
-		for(int line=0; line < chessBoard.length; line++) {
-			for(int column=0; column < chessBoard[0].length; column++) {
+		for(int column=0; column < chessBoard[0].length; column++) {
+			for(int line=0; line < chessBoard.length; line++) {
 				SquareBoard chessSquare = chessBoard[column][line];
 				if(chessSquare.isEmpty()) 
 					System.out.print(" ["+chessSquare.getNameNotationSquare()+"] ");

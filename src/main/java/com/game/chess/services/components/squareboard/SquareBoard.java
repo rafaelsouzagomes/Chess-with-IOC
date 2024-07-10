@@ -2,6 +2,7 @@ package com.game.chess.services.components.squareboard;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.game.chess.models.enums.EnumNameNotaionSquare;
 import com.game.chess.services.components.piece.Piece;
 
@@ -27,6 +28,7 @@ public class SquareBoard {
 		this.nameNotationSquare = nameNotationSquare;
 	}
 	
+	@JsonIgnore
 	public boolean isEmpty() {
 		return Objects.isNull(piece);
 	}
