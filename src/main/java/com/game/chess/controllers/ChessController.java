@@ -37,6 +37,12 @@ public class ChessController {
 	}
 	
 	@CrossOrigin
+	@GetMapping("/moviment/new")
+	public MovimentOptionsAvailableDTO doANewMoviment(@RequestBody MovimentRequestDTO mov)  {
+		return movimentService.getMovimentOptions(mov);
+	}
+	
+	@CrossOrigin
 	@GetMapping("/game/init")
 	public Game initGame(@RequestBody InitGameDTO dto)  {
 		 return gameService.initGame(dto);
@@ -53,15 +59,7 @@ public class ChessController {
 	public Player createPlayer(@RequestBody PlayerDTO dto)  {
 		return playerSerivce.createPlayer(dto);
 	}
-//	
 
-//	
-//	@CrossOrigin
-//	@GetMapping("/testeAlterar")
-//	public int[][] testeAlterar()  {
-//		return chessService.testeAlterar();
-//	}
-	
 	@Autowired
 	public void setMovimentService(IMovimentService movimentService) {
 		this.movimentService = movimentService;
