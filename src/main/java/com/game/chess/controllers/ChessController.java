@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.game.chess.models.dtos.InitGameDTO;
 import com.game.chess.models.dtos.MovimentOptionsAvailableDTO;
 import com.game.chess.models.dtos.MovimentRequestDTO;
+import com.game.chess.models.dtos.NewMovimentDTO;
 import com.game.chess.models.dtos.PlayerDTO;
 import com.game.chess.models.entities.Game;
 import com.game.chess.models.entities.Player;
 import com.game.chess.services.GameService;
 import com.game.chess.services.IMovimentService;
+import com.game.chess.services.INewMovimentService;
 import com.game.chess.services.player.PlayerService;
 
 @RestController()
@@ -24,10 +26,8 @@ import com.game.chess.services.player.PlayerService;
 public class ChessController {
 	
 	IMovimentService movimentService;
-	
 	GameService gameService;
-	
-	@Autowired
+	INewMovimentService newMovimentService;
 	PlayerService playerSerivce;
 	
 	@CrossOrigin
@@ -37,9 +37,9 @@ public class ChessController {
 	}
 	
 	@CrossOrigin
-	@GetMapping("/moviment/new")
-	public MovimentOptionsAvailableDTO doANewMoviment(@RequestBody MovimentRequestDTO mov)  {
-		return movimentService.getMovimentOptions(mov);
+	@PostMapping("/moviment/new")
+	public Game doANewMoviment(@RequestBody NewMovimentDTO mov)  {
+		return newMovimentService.addNewMoviment(mov);
 	}
 	
 	@CrossOrigin
@@ -69,5 +69,14 @@ public class ChessController {
 	public void setGameService(GameService gameService) {
 		this.gameService = gameService;
 	}
-
+	
+	@Autowired
+	public void setNewMovimentService(INewMovimentService newMovimentService) {
+		this.newMovimentService = newMovimentService;
+	}
+	
+	@Autowired
+	public void setPlayerSerivce(PlayerService playerSerivce) {
+		this.playerSerivce = playerSerivce;
+	}
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.game.chess.models.dtos.MovimentOptionsAvailableDTO;
 import com.game.chess.models.dtos.MovimentRequestDTO;
+import com.game.chess.models.dtos.NewMovimentDTO;
 import com.game.chess.models.enums.EnumNameNotaionSquare;
 import com.game.chess.models.enums.EnumTeam;
 import com.game.chess.models.enums.EnumTypePiece;
@@ -44,7 +45,7 @@ public class MovimentServiceImpl implements IMovimentService {
 		 
 		return iMovimentOptions.getMovimentsOptions();
 	}
-
+	
 	private void setUpCurrentPosition(MovimentRequestDTO mov) {
 		currentPosition = EnumNameNotaionSquare.get(mov.getCurrentPosition());
 		iMovimentOptions.setCurrentPosition(currentPosition);
@@ -84,5 +85,6 @@ public class MovimentServiceImpl implements IMovimentService {
 	public void setMovimentPieceFactory(IMovimentPieceFactory movimentPieceFactory) {
 		this.movimentPieceFactory = movimentPieceFactory;
 	}
+
 
 }
