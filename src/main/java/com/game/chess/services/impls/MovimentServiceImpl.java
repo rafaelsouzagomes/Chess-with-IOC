@@ -1,7 +1,5 @@
 package com.game.chess.services.impls;
 
-import javax.management.RuntimeErrorException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -21,6 +19,7 @@ import com.game.chess.services.pieces.IMovimentPiece;
 import com.game.chess.services.pieces.IMovimentPieceFactory;
 import com.game.chess.services.pieces.pawn.ITeamManager;
 import com.game.chess.services.pieces.pawn.ITeamManagerFactory;
+import com.game.chess.validations.ValidationException;
 
 @Service
 public class MovimentServiceImpl implements IMovimentService {
@@ -46,17 +45,21 @@ public class MovimentServiceImpl implements IMovimentService {
 		
 		setUpCurrentPosition(movDTO);
 		
+		validadeIfThePieceisOnTheInformedSquared(movDTO);
+		
+		piece.addMovimentsOptionsAvailable(team, currentPosition);
+		 
+		return iMovimentOptions.getMovimentsOptions();
+	}
+
+	private void validadeIfThePieceisOnTheInformedSquared(MovimentRequestDTO movDTO) {
 		SquareBoard[][] board = chess.getBoard();
 		EnumNameNotaionSquare enumNameNotaionSquare = EnumNameNotaionSquare.get(movDTO.getCurrentPosition());
 		SquareBoard squareToConfirm = board[enumNameNotaionSquare.getIndex_x()][enumNameNotaionSquare.getIndex_y()];
 		EnumTypePiece enumPieceToMove = EnumTypePiece.get(movDTO.getPieceToMove());
 		
-		if(!squareToConfirm.isEmpty() && squareToConfirm.getPiece().getType().equals(enumPieceToMove))
-				throw new RuntimeException("This Piece isn't on " + enumNameNotaionSquare.name())
-		
-		piece.addMovimentsOptionsAvailable(team, currentPosition);
-		 
-		return iMovimentOptions.getMovimentsOptions();
+		if(squareToConfirm.isEmpty() || !squareToConfirm.getPiece().getType().equals(enumPieceToMove))
+				throw new ValidationException("This Piece isn't on " + enumNameNotaionSquare.name());
 	}
 
 	private void setUpGame(MovimentRequestDTO movDTO) {
