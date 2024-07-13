@@ -4,7 +4,6 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.game.chess.models.enums.EnumTeam;
 import com.game.chess.models.enums.EnumTypePiece;
 

@@ -1,5 +1,7 @@
 package com.game.chess.services.player;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,10 @@ public class PlayerService {
 		p1.setUsername(dto.getName());
 		
 		return playerRepo.save(p1);	
+	}
+
+	public List<Player> getPlayers() {
+		return playerRepo.findAll();
 	}
 
 }

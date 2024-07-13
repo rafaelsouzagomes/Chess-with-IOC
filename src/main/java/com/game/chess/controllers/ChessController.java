@@ -1,5 +1,7 @@
 package com.game.chess.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,6 +60,12 @@ public class ChessController {
 	@PostMapping("/player/add")
 	public Player createPlayer(@RequestBody PlayerDTO dto)  {
 		return playerSerivce.createPlayer(dto);
+	}
+	
+	@CrossOrigin
+	@GetMapping("/players")
+	public List<Player> getPLayers()  {
+		return playerSerivce.getPlayers();
 	}
 
 	@Autowired

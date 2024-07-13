@@ -13,6 +13,7 @@ import com.game.chess.models.repositories.PlayerRepository;
 import com.game.chess.services.INewMovimentService;
 import com.game.chess.services.components.piece.Piece;
 import com.game.chess.services.components.squareboard.SquareBoard;
+import com.game.chess.validations.ValidationException;
 
 @Service
 public class NewMovimentServiceImpl implements INewMovimentService{
@@ -34,9 +35,9 @@ public class NewMovimentServiceImpl implements INewMovimentService{
 		Piece piece = squareWithPieceToMove.getPiece();
 		EnumTeam pieceTeam = piece.getTeam();
 		
-		if(!pieceTeam.equals(player.getTeam())) {
-			//validate
-		}
+		if(!pieceTeam.equals(player.getTeam())) 
+			throw new ValidationException("Moviment invalid - this piece isn't on " + squareWithPieceToMove.getNameNotationSquare());
+		
 		squareWithPieceToMove.removePiece();
 		
 		SquareBoard squareToPutPiece = squareBoard[enumNameNotarionSquaredestination.getIndex_x()][enumNameNotarionSquaredestination.getIndex_y()];
