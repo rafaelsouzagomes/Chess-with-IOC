@@ -16,7 +16,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
-    // Classe interna para a resposta de erro
     public static class ErrorResponse {
         private int status;
         private String message;
