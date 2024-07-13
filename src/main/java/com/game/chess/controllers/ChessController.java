@@ -64,17 +64,14 @@ public class ChessController {
 	public void setMovimentService(IMovimentService movimentService) {
 		this.movimentService = movimentService;
 	}
-	
 	@Autowired
 	public void setGameService(GameService gameService) {
 		this.gameService = gameService;
 	}
-	
 	@Autowired
 	public void setNewMovimentService(INewMovimentService newMovimentService) {
 		this.newMovimentService = newMovimentService;
 	}
-	
 	@Autowired
 	public void setPlayerSerivce(PlayerService playerSerivce) {
 		this.playerSerivce = playerSerivce;

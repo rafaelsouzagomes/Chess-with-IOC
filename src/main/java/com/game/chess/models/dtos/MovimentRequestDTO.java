@@ -15,6 +15,17 @@ public class MovimentRequestDTO {
 	
 	@NonNull
 	private String currentPosition;
+	
+	@NonNull
+	private Long idGame;
+	
+	public void setIdGame(Long idGame) {
+		this.idGame = idGame;
+	}
+	
+	public Long getIdGame() {
+		return idGame;
+	}
 
 	public Long getIdBoard() {
 		return idBoard;

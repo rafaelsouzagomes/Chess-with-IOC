@@ -28,6 +28,7 @@ class MovimentServiceImplTest {
 		movDTO.setCurrentPosition("C5");
 		movDTO.setPieceToMove("Bishop");
 		
+		
 		MovimentOptionsAvailableDTO movimentOptions = service.getMovimentOptions(movDTO);
 		List<SquareBoard> moves = movimentOptions.getChessSquaresAvailable();
 		assertEquals(7, moves.size());

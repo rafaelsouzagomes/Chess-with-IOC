@@ -6,12 +6,14 @@ import org.springframework.stereotype.Service;
 
 import com.game.chess.models.dtos.MovimentOptionsAvailableDTO;
 import com.game.chess.models.dtos.MovimentRequestDTO;
-import com.game.chess.models.dtos.NewMovimentDTO;
+import com.game.chess.models.entities.Game;
 import com.game.chess.models.enums.EnumNameNotaionSquare;
 import com.game.chess.models.enums.EnumTeam;
 import com.game.chess.models.enums.EnumTypePiece;
+import com.game.chess.models.repositories.GameRepository;
 import com.game.chess.services.IMovimentService;
 import com.game.chess.services.components.IBoard;
+import com.game.chess.services.components.squareboard.SquareBoard;
 import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.IMovimentPiece;
 import com.game.chess.services.pieces.IMovimentPieceFactory;
@@ -21,19 +23,20 @@ import com.game.chess.services.pieces.pawn.ITeamManagerFactory;
 @Service
 public class MovimentServiceImpl implements IMovimentService {
 	
+	private GameRepository gameRepository;
 	private IBoard chess;
 	
 	private ITeamManager team;
 	private IMovimentPiece piece;
 	private EnumNameNotaionSquare currentPosition;
-	
 	private IMovimentPieceFactory movimentPieceFactory;
 	private IMovimentOptions iMovimentOptions;
 	private ITeamManagerFactory teamManagerFactory;
 	
 	@Override
 	public MovimentOptionsAvailableDTO getMovimentOptions(MovimentRequestDTO movDTO) {
-		chess.createNewGame();
+		
+		setUpGame(movDTO);
 		
 		setUpTeamManager(movDTO);
 		
@@ -44,6 +47,12 @@ public class MovimentServiceImpl implements IMovimentService {
 		piece.addMovimentsOptionsAvailable(team, currentPosition);
 		 
 		return iMovimentOptions.getMovimentsOptions();
+	}
+
+	private void setUpGame(MovimentRequestDTO movDTO) {
+		Game game = gameRepository.findById(movDTO.getIdGame()).get();
+		SquareBoard[][] squareBoard = game.getSquareBoard();
+		chess.setChessBoard(squareBoard);
 	}
 	
 	private void setUpCurrentPosition(MovimentRequestDTO mov) {
@@ -84,6 +93,10 @@ public class MovimentServiceImpl implements IMovimentService {
 	@Autowired
 	public void setMovimentPieceFactory(IMovimentPieceFactory movimentPieceFactory) {
 		this.movimentPieceFactory = movimentPieceFactory;
+	}
+	@Autowired
+	public void setGameRepository(GameRepository gameRepository) {
+		this.gameRepository = gameRepository;
 	}
 
 
