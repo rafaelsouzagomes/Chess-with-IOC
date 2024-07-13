@@ -5,7 +5,7 @@ import com.game.chess.services.pieces.pawn.ITeamManager;
 
 public interface ICheckMateChecker {
 
-	boolean isAvailable(SquareBoard[][] squareBoard);
+	boolean isAvailableForTeamToCheck(SquareBoard[][] squareBoard);
 
 	void setTeamManager(ITeamManager teamManager);
 

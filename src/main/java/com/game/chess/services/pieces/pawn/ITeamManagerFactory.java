@@ -7,4 +7,6 @@ public interface ITeamManagerFactory {
 
 	ITeamManager getTeamManager(EnumTypePiece piece,EnumTeam team);
 
+	ITeamManager getTeamManager(EnumTeam team);
+
 }

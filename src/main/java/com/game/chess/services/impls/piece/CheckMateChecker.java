@@ -22,15 +22,15 @@ import com.game.chess.services.pieces.pawn.ITeamManagerFactory;
 @Service
 public class CheckMateChecker implements ICheckMateChecker {
 
-	private ITeamManager teamManager;
 	private IMovimentPieceFactory movimentPieceFactory;
 	private IMovimentOptions movimentOptions;
 	private ITeamManagerFactory teamManagerFactory;
 	private Piece pieceToMove;
 	private IBoard IBoard;
+	private ITeamManager teamToCheck;
 	
 	@Override
-	public boolean isAvailable(SquareBoard[][] squareBoard) {
+	public boolean isAvailableForTeamToCheck(SquareBoard[][] squareBoard) {
 		IBoard.setChessBoard(squareBoard);
 		IBoard.showBoard();
 		
@@ -53,8 +53,8 @@ public class CheckMateChecker implements ICheckMateChecker {
 	public boolean isImpossivelMoviment(SquareBoard movOptions) {
 		return Objects.nonNull(movOptions.getPiece()) 
 					&& movOptions.getPiece().isKing() 
-					&& movOptions.getPiece().getTeam()==teamManager.getTeam()
-					&& pieceToMove.getTeam() != teamManager.getTeam();
+					&& movOptions.getPiece().getTeam()==teamToCheck.getTeam()
+					&& pieceToMove.getTeam() != teamToCheck.getTeam();
 	}
 	
 	public List<SquareBoard> simulateMoviments(SquareBoard currentSquare ){
@@ -91,7 +91,7 @@ public class CheckMateChecker implements ICheckMateChecker {
 	@Autowired
 	@Override
 	public void setTeamManager(@Lazy ITeamManager teamManager) {
-		this.teamManager = teamManager;
+		this.teamToCheck = teamManager;
 	}
 	@Autowired
 	public void setTeamManagerFactory(ITeamManagerFactory teamManagerFactory) {

@@ -38,6 +38,11 @@ public class TeamManagerFactoryImpl implements ITeamManagerFactory {
     	return getGeneralTeamManager(team);
     }
     
+    @Override
+    public ITeamManager getTeamManager(EnumTeam team) {
+    	return getGeneralTeamManager(team);
+    }
+    
 	private ITeamManager getGeneralTeamManager(EnumTeam team) {
 		switch (team) {
 	        case WHITE:

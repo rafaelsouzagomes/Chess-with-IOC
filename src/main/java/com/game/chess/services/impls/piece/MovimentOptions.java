@@ -113,7 +113,7 @@ public class MovimentOptions implements IMovimentOptions {
 		
 		
 		checkMateChecker.setTeamManager(teamManager);
-		boolean isAvailable = checkMateChecker.isAvailable(squareBoard);
+		boolean isAvailable = checkMateChecker.isAvailableForTeamToCheck(squareBoard);
 		
 		index_x =  index_x_copy;
 		index_y = index_y_copy;

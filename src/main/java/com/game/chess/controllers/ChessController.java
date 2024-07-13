@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.game.chess.models.dtos.GameDTO;
 import com.game.chess.models.dtos.InitGameDTO;
 import com.game.chess.models.dtos.MovimentOptionsAvailableDTO;
 import com.game.chess.models.dtos.MovimentRequestDTO;
@@ -40,7 +41,7 @@ public class ChessController {
 	
 	@CrossOrigin
 	@PostMapping("/moviment/new")
-	public Game doANewMoviment(@RequestBody NewMovimentDTO mov)  {
+	public GameDTO doANewMoviment(@RequestBody NewMovimentDTO mov)  {
 		return newMovimentService.addNewMoviment(mov);
 	}
 	
