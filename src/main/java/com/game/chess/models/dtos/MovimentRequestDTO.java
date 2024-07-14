@@ -3,9 +3,6 @@ package com.game.chess.models.dtos;
 import org.springframework.lang.NonNull;
 
 public class MovimentRequestDTO {
-
-	@NonNull
-	private Long idBoard;
 	
 	@NonNull
 	private String pieceToMove;
@@ -26,15 +23,6 @@ public class MovimentRequestDTO {
 	public Long getIdGame() {
 		return idGame;
 	}
-
-	public Long getIdBoard() {
-		return idBoard;
-	}
-
-	public void setIdBoard(Long idBoard) {
-		this.idBoard = idBoard;
-	}
-
 	public String getPieceToMove() {
 		return pieceToMove;
 	}
