@@ -44,5 +44,12 @@ public enum EnumTeam {
     public static EnumTeam get(String name) {
         return ENUM_MAP.get(name);
     }
+    
+	public static EnumTeam getAdversaryTeam(EnumTeam teamthatPlayed) {
+		EnumTeam adversaryteam = EnumTeam.BLACK;
+		if(teamthatPlayed.isBlack())
+			adversaryteam = EnumTeam.WHITE;
+		return adversaryteam;
+	}
 	
 }
