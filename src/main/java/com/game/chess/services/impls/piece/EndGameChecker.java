@@ -1,20 +1,123 @@
 package com.game.chess.services.impls.piece;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.game.chess.models.dtos.GameDTO;
-import com.game.chess.models.dtos.NewMovimentDTO;
+import com.game.chess.models.dtos.MovimentOptionsAvailableDTO;
+import com.game.chess.models.dtos.MovimentRequestDTO;
+import com.game.chess.models.entities.Game;
+import com.game.chess.models.enums.EnumResultGame;
 import com.game.chess.models.enums.EnumTeam;
+import com.game.chess.models.enums.EnumTypePiece;
+import com.game.chess.services.IMovimentService;
+import com.game.chess.services.components.piece.Piece;
 import com.game.chess.services.components.squareboard.SquareBoard;
 import com.game.chess.services.pieces.pawn.ITeamManager;
+import com.game.chess.services.pieces.pawn.ITeamManagerFactory;
 
 public class EndGameChecker {
-
 	
-	private GameDTO checker(NewMovimentDTO mov, SquareBoard[][] squareBoard, EnumTeam pieceTeam) {
-		// check if this current play creates a check wih isAvailableForTeamToCheck
+	private CheckMateChecker checkMateChecker;
+	private ITeamManagerFactory iTeamManagerFactory;
+	private IMovimentService movimentService;
+	
+	private SquareBoard[][] squareBoard;
+	private EnumTeam adversaryteam;
+	private EnumTeam teamPlayer;
+	
+	
+	public GameDTO getResults(Game game, EnumTeam  teamthatPlayed) {
+		setUpGameVariables(game, teamthatPlayed);
 		
-		// check if the other player has options to move
+		boolean isAdversaryInCheck = checkIfAdversaryIsInCheck();
 		
-		// if the other plater has no options to move and he is in check: so he loose
-		// if the other player has no options to move but he is not in check, so it's a tie.
+		Map<String, List<SquareBoard>> adversaryPiecesWithMovimentsAvailable = extractAvailableAdversaryMoviments(game);
+		
+		boolean isCheckMate = adversaryPiecesWithMovimentsAvailable.isEmpty();
+		EnumResultGame result = getResultGame(isAdversaryInCheck, isCheckMate);
+		
+		GameDTO gameDTO = new GameDTO();
+		gameDTO.setAdversaryPiecesWithMovimentsAvailable(adversaryPiecesWithMovimentsAvailable);
+		gameDTO.setEnumResultGame(result);
+		gameDTO.setIdGame(game.getIdGame());
+		gameDTO.setTeamPlayer(teamthatPlayed.name());
+		
+		return gameDTO;
 	}
+
+	private Map<String, List<SquareBoard>> extractAvailableAdversaryMoviments(Game game) {
+		Map<String, List<SquareBoard>> adversaryPiecesWithMovimentsAvailable = new HashMap<>();
+		
+		for(int line=0; line <= 7; line++) {
+			for(int column=0; column<=7; column++) {
+				SquareBoard currentSquare = squareBoard[line][column];
+				if(currentSquare.isEmpty() || currentSquare.getPiece().getTeam().equals(adversaryteam))	
+					continue;
+				
+				Piece piece = currentSquare.getPiece();
+				EnumTypePiece typePiece = piece.getType();
+				
+				MovimentRequestDTO movRequestDTO = new MovimentRequestDTO();
+				movRequestDTO.setCurrentPosition(currentSquare.getNameNotationSquare().name());
+				movRequestDTO.setIdGame(game.getIdGame());
+				movRequestDTO.setPieceToMove(typePiece.getName());
+				movRequestDTO.setTeam(adversaryteam.getName());
+				
+				MovimentOptionsAvailableDTO movsAvailable = movimentService.getMovimentOptions(movRequestDTO);
+				
+				if(!movsAvailable.getChessSquaresAvailable().isEmpty()) 
+					adversaryPiecesWithMovimentsAvailable.put(typePiece.getName(), movsAvailable.getChessSquaresAvailable());
+				
+			}
+		}
+		return adversaryPiecesWithMovimentsAvailable;
+	}
+
+	private EnumResultGame getResultGame(boolean isAdversaryInCheck, boolean isCheckMate) {
+		EnumResultGame result = EnumResultGame.NOTHING;
+		if(isAdversaryInCheck && isCheckMate)
+			result = teamPlayer.isBlack() ? EnumResultGame.BLACK_WON : EnumResultGame.WHITE_WON;
+		if(!isAdversaryInCheck && isCheckMate)
+			result = EnumResultGame.TIE;
+		return result;
+	}
+
+	private void setUpGameVariables(Game game, EnumTeam teamthatPlayed) {
+		squareBoard = game.getSquareBoard();
+		adversaryteam = EnumTeam.getAdversaryTeam(teamthatPlayed);
+		teamPlayer = teamthatPlayed;
+	}
+
+	private boolean checkIfAdversaryIsInCheck() {
+		ITeamManager teamManagerAdversary = iTeamManagerFactory.getTeamManager(adversaryteam);
+		
+		checkMateChecker.setTeamManager(teamManagerAdversary);
+		boolean isAvailableMoviment = checkMateChecker.isAvailableForTeamToCheck(squareBoard);
+		
+		boolean isAdversaryInCheck = false;
+		if(!isAvailableMoviment)
+			isAdversaryInCheck = true;
+		
+		return isAdversaryInCheck;
+	}
+	
+	@Autowired
+	public void setCheckMateChecker(CheckMateChecker checkMateChecker) {
+		this.checkMateChecker = checkMateChecker;
+	}
+	
+	@Autowired
+	public void setiTeamManagerFactory(ITeamManagerFactory iTeamManagerFactory) {
+		this.iTeamManagerFactory = iTeamManagerFactory;
+	}
+	
+	@Autowired
+	public void setMovimentService(IMovimentService movimentService) {
+		this.movimentService = movimentService;
+	}
+	
 }

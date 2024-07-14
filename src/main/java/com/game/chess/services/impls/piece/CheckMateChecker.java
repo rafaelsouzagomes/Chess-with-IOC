@@ -26,13 +26,13 @@ public class CheckMateChecker implements ICheckMateChecker {
 	private IMovimentOptions movimentOptions;
 	private ITeamManagerFactory teamManagerFactory;
 	private Piece pieceToMove;
-	private IBoard IBoard;
+//	private IBoard IBoard;
 	private ITeamManager teamToCheck;
 	
 	@Override
 	public boolean isAvailableForTeamToCheck(SquareBoard[][] squareBoard) {
-		IBoard.setChessBoard(squareBoard);
-		IBoard.showBoard();
+//		IBoard.setChessBoard(squareBoard);
+//		IBoard.showBoard();
 		
 		for(int line=0; line <= 7; line++) {
 			for(int column=0; column<=7; column++) {
@@ -97,9 +97,9 @@ public class CheckMateChecker implements ICheckMateChecker {
 	public void setTeamManagerFactory(ITeamManagerFactory teamManagerFactory) {
 		this.teamManagerFactory = teamManagerFactory;
 	}
-	@Autowired
-	@Lazy
-	public void setIBoard(IBoard iBoard) {
-		IBoard = iBoard;
-	}
+//	@Autowired
+//	@Lazy
+//	public void setIBoard(IBoard iBoard) {
+//		IBoard = iBoard;
+//	}
 }
