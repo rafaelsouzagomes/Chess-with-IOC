@@ -1,9 +1,10 @@
 package com.game.chess.models.dtos;
 
 import java.util.List;
+import java.util.Map;
 
-import com.game.chess.models.enums.EnumNameNotaionSquare;
 import com.game.chess.models.enums.EnumResultGame;
+import com.game.chess.services.components.squareboard.SquareBoard;
 
 public class GameDTO {
 
@@ -11,9 +12,11 @@ public class GameDTO {
 	
 	private EnumResultGame EnumResultGame;
 	
-	private List<EnumNameNotaionSquare> adversaryPiecesAvailableToMove; 
+	private Map<String, List<SquareBoard>> adversaryPiecesWithMovimentsAvailable;
 	
 	private Long idPlayer;
+	
+	private String teamPlayer;
 
 	public Long getIdGame() {
 		return idGame;
@@ -38,6 +41,21 @@ public class GameDTO {
 	public EnumResultGame getEnumResultGame() {
 		return EnumResultGame;
 	}
-	
-	
+
+	public Map<String, List<SquareBoard>> getAdversaryPiecesWithMovimentsAvailable() {
+		return adversaryPiecesWithMovimentsAvailable;
+	}
+
+	public void setAdversaryPiecesWithMovimentsAvailable(
+			Map<String, List<SquareBoard>> adversaryPiecesWithMovimentsAvailable) {
+		this.adversaryPiecesWithMovimentsAvailable = adversaryPiecesWithMovimentsAvailable;
+	}
+
+	public String getTeamPlayer() {
+		return teamPlayer;
+	}
+
+	public void setTeamPlayer(String teamPlayer) {
+		this.teamPlayer = teamPlayer;
+	}
 }
