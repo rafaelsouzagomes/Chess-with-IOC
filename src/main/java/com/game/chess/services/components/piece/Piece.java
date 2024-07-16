@@ -18,6 +18,11 @@ public class Piece {
 	
 	protected Piece() {}
 	
+	public Piece(EnumTypePiece type, EnumTeam team) {
+		this.type = type;
+		this.team = team;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		Piece pieceToCompare = (Piece) obj;
@@ -50,6 +55,11 @@ public class Piece {
 	@JsonIgnore
 	public boolean isKing() {
 		return type == EnumTypePiece.KING;
+	}
+	
+	@JsonIgnore
+	public boolean isPawn() {
+		return type == EnumTypePiece.PAWN;
 	}
 	
 }

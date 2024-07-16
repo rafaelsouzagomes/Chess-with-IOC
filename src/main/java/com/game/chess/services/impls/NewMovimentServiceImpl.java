@@ -9,13 +9,13 @@ import com.game.chess.models.entities.Game;
 import com.game.chess.models.entities.Player;
 import com.game.chess.models.enums.EnumNameNotaionSquare;
 import com.game.chess.models.enums.EnumTeam;
+import com.game.chess.models.enums.EnumTypePiece;
 import com.game.chess.models.repositories.GameRepository;
 import com.game.chess.models.repositories.PlayerRepository;
 import com.game.chess.services.INewMovimentService;
 import com.game.chess.services.components.piece.Piece;
 import com.game.chess.services.components.squareboard.SquareBoard;
-import com.game.chess.services.impls.piece.EndGameChecker;
-import com.game.chess.services.pieces.IMovimentOptions;
+import com.game.chess.services.impls.piece.EndPlayChecker;
 import com.game.chess.validations.ValidationException;
 
 @Service
@@ -23,7 +23,7 @@ public class NewMovimentServiceImpl implements INewMovimentService{
 	
 	private GameRepository gameRepository;
 	private PlayerRepository playerRepo;
-	private EndGameChecker endGameChecker;
+	private EndPlayChecker endPlayChecker;
 	
 	private Game game;
 	private Player player;
@@ -36,7 +36,7 @@ public class NewMovimentServiceImpl implements INewMovimentService{
 		Piece pieceChanged = changePiecePosition(mov);
 		Game gameManaged = updateGameEntityWithCurrentBoard();
 		
-		GameDTO resultsGame = endGameChecker.getResults(gameManaged, pieceChanged.getTeam());
+		GameDTO resultsGame = endPlayChecker.getResults(gameManaged, pieceChanged.getTeam());
 		return resultsGame;
 	}
 
@@ -65,7 +65,17 @@ public class NewMovimentServiceImpl implements INewMovimentService{
 		squareWithPieceToMove.removePiece();
 		
 		SquareBoard squareToPutPiece = squareBoard[destination.getIndex_x()][destination.getIndex_y()];
+		
+		piece = changePawnByAQueenIfItIsOnTopOrBottom(piece, pieceTeam, squareToPutPiece); 
+		
 		squareToPutPiece.setPiece(piece);
+		return piece;
+	}
+
+	private Piece changePawnByAQueenIfItIsOnTopOrBottom(Piece piece, EnumTeam pieceTeam, SquareBoard squareToPutPiece) {
+		EnumNameNotaionSquare squareToPutNotation = squareToPutPiece.getNameNotationSquare();
+		if(piece.isPawn() && squareToPutNotation.isBottomOrTop()) 
+			piece = new Piece(EnumTypePiece.QUEEN, pieceTeam);
 		return piece;
 	}
 
@@ -84,7 +94,8 @@ public class NewMovimentServiceImpl implements INewMovimentService{
 		this.playerRepo = playerRepo;
 	}
 	@Autowired
-	public void setMovimentOptions(IMovimentOptions movimentOptions) {
+	public void setEndPlayChecker(EndPlayChecker endGameChecker) {
+		this.endPlayChecker = endGameChecker;
 	}
 
 }

@@ -23,6 +23,10 @@ public enum EnumNameNotaionSquare {
 		return index_x == 0 || index_x==0 || index_y ==0 || index_y ==7;
 	}
 	
+	public boolean isBottomOrTop() {
+		return index_x==7 || index_x==0;
+	}
+	
 	public boolean isCorner() {
 		return (index_x == 7 && index_y==7) || (index_x==0  && index_y==7)
 				|| (index_x==0  && index_y==0)  || (index_x==7 && index_y==0);

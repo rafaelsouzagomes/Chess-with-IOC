@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.game.chess.models.dtos.GameDTO;
 import com.game.chess.models.dtos.MovimentOptionsAvailableDTO;
@@ -16,14 +17,18 @@ import com.game.chess.models.enums.EnumTypePiece;
 import com.game.chess.services.IMovimentService;
 import com.game.chess.services.components.piece.Piece;
 import com.game.chess.services.components.squareboard.SquareBoard;
+import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.pawn.ITeamManager;
 import com.game.chess.services.pieces.pawn.ITeamManagerFactory;
 
-public class EndGameChecker {
+
+@Service
+public class EndPlayChecker {
 	
 	private CheckMateChecker checkMateChecker;
 	private ITeamManagerFactory iTeamManagerFactory;
 	private IMovimentService movimentService;
+	private IMovimentOptions movimentOptions;
 	
 	private SquareBoard[][] squareBoard;
 	private EnumTeam adversaryteam;
@@ -55,14 +60,15 @@ public class EndGameChecker {
 		for(int line=0; line <= 7; line++) {
 			for(int column=0; column<=7; column++) {
 				SquareBoard currentSquare = squareBoard[line][column];
-				if(currentSquare.isEmpty() || currentSquare.getPiece().getTeam().equals(adversaryteam))	
+				if(currentSquare.isEmpty() || currentSquare.getPiece().getTeam().equals(teamPlayer))	
 					continue;
 				
 				Piece piece = currentSquare.getPiece();
 				EnumTypePiece typePiece = piece.getType();
+				String squareName = currentSquare.getNameNotationSquare().name();
 				
 				MovimentRequestDTO movRequestDTO = new MovimentRequestDTO();
-				movRequestDTO.setCurrentPosition(currentSquare.getNameNotationSquare().name());
+				movRequestDTO.setCurrentPosition(squareName);
 				movRequestDTO.setIdGame(game.getIdGame());
 				movRequestDTO.setPieceToMove(typePiece.getName());
 				movRequestDTO.setTeam(adversaryteam.getName());
@@ -70,7 +76,7 @@ public class EndGameChecker {
 				MovimentOptionsAvailableDTO movsAvailable = movimentService.getMovimentOptions(movRequestDTO);
 				
 				if(!movsAvailable.getChessSquaresAvailable().isEmpty()) 
-					adversaryPiecesWithMovimentsAvailable.put(typePiece.getName(), movsAvailable.getChessSquaresAvailable());
+					adversaryPiecesWithMovimentsAvailable.put(squareName+":"+typePiece.getName(), movsAvailable.getChessSquaresAvailable());
 				
 			}
 		}
@@ -96,6 +102,7 @@ public class EndGameChecker {
 		ITeamManager teamManagerAdversary = iTeamManagerFactory.getTeamManager(adversaryteam);
 		
 		checkMateChecker.setTeamManager(teamManagerAdversary);
+		movimentOptions.setSquareBoard(squareBoard);
 		boolean isAvailableMoviment = checkMateChecker.isAvailableForTeamToCheck(squareBoard);
 		
 		boolean isAdversaryInCheck = false;
@@ -118,6 +125,10 @@ public class EndGameChecker {
 	@Autowired
 	public void setMovimentService(IMovimentService movimentService) {
 		this.movimentService = movimentService;
+	}
+	@Autowired
+	public void setMovimentOptions(IMovimentOptions movimentOptions) {
+		this.movimentOptions = movimentOptions;
 	}
 	
 }

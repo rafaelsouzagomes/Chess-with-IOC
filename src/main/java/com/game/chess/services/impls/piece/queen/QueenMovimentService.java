@@ -24,7 +24,7 @@ import com.game.chess.services.pieces.pawn.ITeamManager;
 @Service
 @Qualifier(NamePieces.QUEEN)
 public class QueenMovimentService implements IMovimentPiece{
-
+	//fix
 	private LongerMoviment longerMoviment;
 	
 	private Bottom bottom;

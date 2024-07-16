@@ -49,7 +49,10 @@ public class MovimentServiceImpl implements IMovimentService {
 		
 		piece.addMovimentsOptionsAvailable(team, currentPosition);
 		 
-		return iMovimentOptions.getMovimentsOptions();
+		MovimentOptionsAvailableDTO movimentsOptions = iMovimentOptions.getMovimentsOptions();
+		iMovimentOptions.clear();
+		 
+		return movimentsOptions;
 	}
 
 	private void validadeIfThePieceisOnTheInformedSquared(MovimentRequestDTO movDTO) {

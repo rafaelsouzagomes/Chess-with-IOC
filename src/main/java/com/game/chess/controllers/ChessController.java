@@ -2,6 +2,8 @@ package com.game.chess.controllers;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,7 @@ import com.game.chess.services.player.PlayerService;
 @RestController()
 @RequestMapping("/chess")
 @CrossOrigin
+@Transactional
 public class ChessController {
 	
 	IMovimentService movimentService;
