@@ -43,6 +43,8 @@ class QueenMovimentServiceTest {
 			System.out.println(enumNotation.name() + " " + results[i] + ", "+ results[i+1]);
 		}
 		assertEquals(results.length, 16);
+		
+		
 		assertEquals(EnumNameNotaionSquare.A7,EnumNameNotaionSquare.get(results[0], results[1]));
 		assertEquals(EnumNameNotaionSquare.E7,EnumNameNotaionSquare.get(results[2], results[3]));
 		assertEquals(EnumNameNotaionSquare.A3,EnumNameNotaionSquare.get(results[4], results[5]));
