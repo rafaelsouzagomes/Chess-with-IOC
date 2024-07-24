@@ -43,7 +43,7 @@ public class LongerMoviment implements ILongerMoviment {
 			return addMoviments(sentido, sentido.getX(x), sentido.getY(y));
 		} 
 		if(Objects.nonNull(sentido)) {
-			iMovimentOptions.addAnyMoveType(x, y);				
+			iMovimentOptions.addAnyMoveType(x, y);	
 			return new int[] {x,y}; 
 		} 
 		

@@ -24,7 +24,6 @@ import com.game.chess.services.pieces.pawn.ITeamManager;
 @Service
 @Qualifier(NamePieces.QUEEN)
 public class QueenMovimentService implements IMovimentPiece{
-	//fix
 	private LongerMoviment longerMoviment;
 	
 	private Bottom bottom;
@@ -48,16 +47,16 @@ public class QueenMovimentService implements IMovimentPiece{
 		longerMoviment.setThirdDirection(bottomLeft);
 		longerMoviment.setFourthDirection(bottomRight);
 		
-		int[] rookMovs = addMoviment(currentPosition);
+		int[] bishopMovs = addMoviment(currentPosition);
 		
 		longerMoviment.setFirstDirection(top);
 		longerMoviment.setSecondDirection(bottom);
 		longerMoviment.setThirdDirection(right);
 		longerMoviment.setFourthDirection(left);
 		
-		int[] bishopMovs= addMoviment(currentPosition);
+		int[] rookMovs= addMoviment(currentPosition);
 		
-		return IntStream.concat(Arrays.stream(rookMovs), Arrays.stream(bishopMovs)).toArray();
+		return IntStream.concat(Arrays.stream(bishopMovs), Arrays.stream(rookMovs)).toArray();
 	}
 	
 	private int[] addMoviment(EnumNameNotaionSquare currentPosition) {

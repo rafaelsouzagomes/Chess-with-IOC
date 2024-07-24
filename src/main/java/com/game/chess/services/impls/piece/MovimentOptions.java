@@ -73,7 +73,7 @@ public class MovimentOptions implements IMovimentOptions {
 	}
 	
 	@Override
-	public void addAnyMoveType( int index_x_to_move, int index_y_to_Move) {
+	public void addAnyMoveType(int index_x_to_move, int index_y_to_Move) {
 		this.index_x = index_x_to_move;
 		this.index_y = index_y_to_Move;
 		if(!isNotCheckMateResult()) {
