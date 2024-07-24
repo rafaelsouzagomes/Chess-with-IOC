@@ -54,6 +54,31 @@ class QueenMovimentServiceTest {
 		assertEquals(EnumNameNotaionSquare.H5,EnumNameNotaionSquare.get(results[12], results[13]));
 		assertEquals(EnumNameNotaionSquare.A5,EnumNameNotaionSquare.get(results[14], results[15]));
 	}
+	
+	@Test
+	void test_1() {
+		chess.showBoard();
+		boardFactory.addAllSquare_empty();
+		
+		EnumNameNotaionSquare square = EnumNameNotaionSquare.A1;
+		int[] results = movimentService.addMoviments(square);
+		
+		for(int i=0; i < results.length; i+=2) {
+			EnumNameNotaionSquare enumNotation = EnumNameNotaionSquare.get(results[i], results[i+1]);
+			System.out.println(enumNotation.name() + " " + results[i] + ", "+ results[i+1]);
+		}
+		assertEquals(results.length, 16);
+		
+		
+		assertEquals(EnumNameNotaionSquare.A1,EnumNameNotaionSquare.get(results[0], results[1]));
+		assertEquals(EnumNameNotaionSquare.H8,EnumNameNotaionSquare.get(results[2], results[3]));
+		assertEquals(EnumNameNotaionSquare.A1,EnumNameNotaionSquare.get(results[4], results[5]));
+		assertEquals(EnumNameNotaionSquare.A1,EnumNameNotaionSquare.get(results[6], results[7]));
+		assertEquals(EnumNameNotaionSquare.A8,EnumNameNotaionSquare.get(results[8], results[9]));
+		assertEquals(EnumNameNotaionSquare.A1,EnumNameNotaionSquare.get(results[10], results[11]));
+		assertEquals(EnumNameNotaionSquare.H1,EnumNameNotaionSquare.get(results[12], results[13]));
+		assertEquals(EnumNameNotaionSquare.A1,EnumNameNotaionSquare.get(results[14], results[15]));
+	}
 
 	@Autowired
 	public void setMovimentService(QueenMovimentService movimentService) {
