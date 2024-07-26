@@ -1,8 +1,10 @@
 package com.game.chess.services.impls.piece;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
@@ -52,7 +54,18 @@ public class MovimentOptions implements IMovimentOptions {
 	@Override
 	public MovimentOptionsAvailableDTO getMovimentsOptions() {
 		MovimentOptionsAvailableDTO dto = new MovimentOptionsAvailableDTO();
-		dto.setChessSquaresAvailable(movesAvailable);
+		Set<SquareBoard> diferents = new HashSet<>();
+		
+		for(SquareBoard mov : movesAvailable) {
+			EnumNameNotaionSquare nameNotationSquare = mov.getNameNotationSquare();
+			if(nameNotationSquare.equals(currentPosition))
+				continue;
+		
+			diferents.add(mov);
+		}
+		
+		dto.setChessSquaresAvailable(new ArrayList<>(diferents));
+//		dto.setChessSquaresAvailable(movesAvailable);
 		return dto;
 	}
 
@@ -76,9 +89,9 @@ public class MovimentOptions implements IMovimentOptions {
 	public void addAnyMoveType(int index_x_to_move, int index_y_to_Move) {
 		this.index_x = index_x_to_move;
 		this.index_y = index_y_to_Move;
-		if(!isNotCheckMateResult()) {
-			return;
-		}
+//		if(!isNotCheckMateResult()) {
+//			return;
+//		}
 		addMove(index_x_to_move, index_y_to_Move);
 		addCaptureMove(index_x_to_move, index_y_to_Move);
 		
