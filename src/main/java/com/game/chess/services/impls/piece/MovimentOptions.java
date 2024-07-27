@@ -1,6 +1,7 @@
 package com.game.chess.services.impls.piece;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -24,6 +25,7 @@ import com.game.chess.services.components.squareboard.SquareBoardFactory;
 import com.game.chess.services.pieces.ICheckMateChecker;
 import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.pawn.ITeamManager;
+import com.game.chess.services.pieces.pawn.ITeamManagerFactory;
 
 @Service
 @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
@@ -31,6 +33,7 @@ public class MovimentOptions implements IMovimentOptions {
 	
 	private IBoard chessBoard;
 	private ITeamManager teamManager;
+	private ITeamManagerFactory teamFactory;
 	private SquareBoardFactory factory;
 	private ICheckMateChecker checkMateChecker;
 	
@@ -56,16 +59,40 @@ public class MovimentOptions implements IMovimentOptions {
 		MovimentOptionsAvailableDTO dto = new MovimentOptionsAvailableDTO();
 		Set<SquareBoard> diferents = new HashSet<>();
 		
+//		ITeamManager adversaryTeamManager = teamFactory.getAdversaryTeamManager(teamManager);
+		checkMateChecker.setTeamManager(teamManager);
 		for(SquareBoard mov : movesAvailable) {
 			EnumNameNotaionSquare nameNotationSquare = mov.getNameNotationSquare();
 			if(nameNotationSquare.equals(currentPosition))
 				continue;
 		
+			if(isAvailableMoviment())
+				diferents.add(mov);
+		}
+		
+		ArrayList<SquareBoard> chessSquaresAvailable = new ArrayList<>(diferents);
+		chessSquaresAvailable.sort(Comparator.comparing(sb -> sb.getNameNotationSquare().name()));
+		
+		dto.setChessSquaresAvailable(chessSquaresAvailable);
+//		dto.setChessSquaresAvailable(movesAvailable);
+		return dto;
+	}
+	
+	@Override
+	public MovimentOptionsAvailableDTO getMovimentsOptionsNoCheck() {
+		MovimentOptionsAvailableDTO dto = new MovimentOptionsAvailableDTO();
+		Set<SquareBoard> diferents = new HashSet<>();
+		
+		
+		for(SquareBoard mov : movesAvailable) {
+			EnumNameNotaionSquare nameNotationSquare = mov.getNameNotationSquare();
+			if(nameNotationSquare.equals(currentPosition))
+				continue;
 			diferents.add(mov);
 		}
 		
-		dto.setChessSquaresAvailable(new ArrayList<>(diferents));
-//		dto.setChessSquaresAvailable(movesAvailable);
+		ArrayList<SquareBoard> chessSquaresAvailable = new ArrayList<>(diferents);
+		dto.setChessSquaresAvailable(chessSquaresAvailable);
 		return dto;
 	}
 
@@ -89,10 +116,7 @@ public class MovimentOptions implements IMovimentOptions {
 	public void addAnyMoveType(int index_x_to_move, int index_y_to_Move) {
 		this.index_x = index_x_to_move;
 		this.index_y = index_y_to_Move;
-		// to fix
-//		if(!isNotCheckMateResult()) {
-//			return;
-//		}
+
 		addMove(index_x_to_move, index_y_to_Move);
 		addCaptureMove(index_x_to_move, index_y_to_Move);
 		
@@ -104,7 +128,7 @@ public class MovimentOptions implements IMovimentOptions {
 	}
 	
 	@Override
-	public boolean isNotCheckMateResult() {
+	public boolean isAvailableMoviment() {
 		if(!checkCheckMate) {
 			return true;
 		}
@@ -126,12 +150,12 @@ public class MovimentOptions implements IMovimentOptions {
 		newSquare.setPiece(removedPiece);
 		
 		
-		checkMateChecker.setTeamManager(teamManager);
+//		
 		boolean isAvailable = checkMateChecker.isAvailableForTeamToCheck(squareBoard);
 		
 		index_x =  index_x_copy;
 		index_y = index_y_copy;
-		checkCheckMate = false;
+		checkCheckMate = true;
 		currentPosition = currentPosition_copy;
 		movesAvailable = new ArrayList<>(movesPrevious);
 		squareBoard = squareCopy.clone();
@@ -189,7 +213,13 @@ public class MovimentOptions implements IMovimentOptions {
 	public void setCheckMateChecker(ICheckMateChecker checkMateChecker) {
 		this.checkMateChecker = checkMateChecker;
 	}
+	
+	@Autowired
+	public void setTeamFactory(ITeamManagerFactory teamFactory) {
+		this.teamFactory = teamFactory;
+	}
 
+	
 	@Override
 	public void dontCheckCheckMate() {
 		checkCheckMate = false;
@@ -199,5 +229,6 @@ public class MovimentOptions implements IMovimentOptions {
 	public void setSquareBoard(SquareBoard[][] squareBoard) {
 		this.squareBoard = squareBoard;
 	}
+
 	
 }

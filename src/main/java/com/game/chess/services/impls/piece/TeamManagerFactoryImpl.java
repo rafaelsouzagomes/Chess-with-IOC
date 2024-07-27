@@ -64,6 +64,13 @@ public class TeamManagerFactoryImpl implements ITeamManagerFactory {
 		    throw new IllegalArgumentException("Unknown team type: " + team);
 		}
 	}
+	
+	@Override
+	public ITeamManager getAdversaryTeamManager(ITeamManager teamManager) {
+		if(teamManager.equals(blackTeamManager))
+			return whiteTeamManager;
+		return blackTeamManager;
+	}
     
     @Autowired
     public void setBlackTeamManager(ITeamManager blackTeamManager) {
@@ -84,4 +91,6 @@ public class TeamManagerFactoryImpl implements ITeamManagerFactory {
     public void setBlackPawnTeamManager(IPawnTeamManager blackPawnTeamManager) {
 		this.blackPawnTeamManager = blackPawnTeamManager;
 	}
+
+
 }

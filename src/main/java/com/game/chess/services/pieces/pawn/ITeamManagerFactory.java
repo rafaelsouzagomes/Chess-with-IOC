@@ -9,4 +9,6 @@ public interface ITeamManagerFactory {
 
 	ITeamManager getTeamManager(EnumTeam team);
 
+	ITeamManager getAdversaryTeamManager(ITeamManager teamManager);
+
 }

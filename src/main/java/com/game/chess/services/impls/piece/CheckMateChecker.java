@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.game.chess.models.dtos.MovimentOptionsAvailableDTO;
 import com.game.chess.models.enums.EnumNameNotaionSquare;
+import com.game.chess.models.enums.EnumTeam;
 import com.game.chess.services.components.IBoard;
 import com.game.chess.services.components.piece.Piece;
 import com.game.chess.services.components.squareboard.SquareBoard;
@@ -26,13 +27,13 @@ public class CheckMateChecker implements ICheckMateChecker {
 	private IMovimentOptions movimentOptions;
 	private ITeamManagerFactory teamManagerFactory;
 	private Piece pieceToMove;
-//	private IBoard IBoard;
+	private IBoard IBoard;
 	private ITeamManager teamToCheck;
 	
 	@Override
 	public boolean isAvailableForTeamToCheck(SquareBoard[][] squareBoard) {
-//		IBoard.setChessBoard(squareBoard);
-//		IBoard.showBoard();
+		IBoard.setChessBoard(squareBoard);
+		IBoard.showBoard();
 		
 		for(int line=0; line <= 7; line++) {
 			for(int column=0; column<=7; column++) {
@@ -51,6 +52,9 @@ public class CheckMateChecker implements ICheckMateChecker {
 	}
 	
 	public boolean isImpossivelMoviment(SquareBoard movOptions) {
+		if(movOptions.getNameNotationSquare().equals(EnumNameNotaionSquare.E1)) {
+			System.out.println();
+		}
 		return Objects.nonNull(movOptions.getPiece()) 
 					&& movOptions.getPiece().isKing() 
 					&& movOptions.getPiece().getTeam()==teamToCheck.getTeam()
@@ -72,11 +76,21 @@ public class CheckMateChecker implements ICheckMateChecker {
 		movimentOptions.dontCheckCheckMate();
 		movimentOptions.setCurrentPosition(nameNotationSquare);
 		
+		EnumTeam enumTeamToCheck = teamToCheck.getTeam();
 		
 		ITeamManager team =  teamManagerFactory.getTeamManager(pieceToMove.getType(), pieceToMove.getTeam());
 		movimentOptions.setTeamManager(team);
+		
+		if(pieceToMove.getType().isQueen()) {
+			System.out.println();
+		}
+		
 		movimentPiece.addMovimentsOptionsAvailable(team, nameNotationSquare);
-		MovimentOptionsAvailableDTO movimentsOptions = movimentOptions.getMovimentsOptions();
+		MovimentOptionsAvailableDTO movimentsOptions = movimentOptions.getMovimentsOptionsNoCheck();
+		
+		ITeamManager myTeamMan =teamManagerFactory.getTeamManager(enumTeamToCheck);
+		setTeamManager(myTeamMan);
+		
 		return movimentsOptions;
 	}
 	
@@ -97,9 +111,9 @@ public class CheckMateChecker implements ICheckMateChecker {
 	public void setTeamManagerFactory(ITeamManagerFactory teamManagerFactory) {
 		this.teamManagerFactory = teamManagerFactory;
 	}
-//	@Autowired
-//	@Lazy
-//	public void setIBoard(IBoard iBoard) {
-//		IBoard = iBoard;
-//	}
+	@Autowired
+	@Lazy
+	public void setIBoard(IBoard iBoard) {
+		IBoard = iBoard;
+	}
 }
