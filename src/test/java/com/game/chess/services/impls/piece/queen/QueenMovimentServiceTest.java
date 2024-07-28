@@ -16,7 +16,6 @@ import com.game.chess.models.enums.EnumTeam;
 import com.game.chess.models.enums.EnumTypePiece;
 import com.game.chess.services.components.Board8x8Factory;
 import com.game.chess.services.components.ChessBoard;
-import com.game.chess.services.impls.piece.MovimentOptions;
 import com.game.chess.services.pieces.IMovimentOptions;
 
 @ExtendWith(SpringExtension.class)

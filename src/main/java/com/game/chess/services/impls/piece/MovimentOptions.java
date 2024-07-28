@@ -21,20 +21,15 @@ import com.game.chess.models.enums.EnumNameNotaionSquare;
 import com.game.chess.services.components.IBoard;
 import com.game.chess.services.components.piece.Piece;
 import com.game.chess.services.components.squareboard.SquareBoard;
-import com.game.chess.services.components.squareboard.SquareBoardFactory;
 import com.game.chess.services.pieces.ICheckMateChecker;
 import com.game.chess.services.pieces.IMovimentOptions;
 import com.game.chess.services.pieces.pawn.ITeamManager;
-import com.game.chess.services.pieces.pawn.ITeamManagerFactory;
 
 @Service
 @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class MovimentOptions implements IMovimentOptions {
 	
-	private IBoard chessBoard;
 	private ITeamManager teamManager;
-	private ITeamManagerFactory teamFactory;
-	private SquareBoardFactory factory;
 	private ICheckMateChecker checkMateChecker;
 	
 	private List<SquareBoard> movesAvailable;
@@ -49,7 +44,6 @@ public class MovimentOptions implements IMovimentOptions {
 		MovimentOptionsAvailableDTO dto = new MovimentOptionsAvailableDTO();
 		Set<SquareBoard> diferents = new HashSet<>();
 		
-//		ITeamManager adversaryTeamManager = teamFactory.getAdversaryeTeamManager(teamManager);
 		checkMateChecker.setTeamManager(teamManager);
 		
 		for(SquareBoard mov : movesAvailable) {
@@ -60,14 +54,9 @@ public class MovimentOptions implements IMovimentOptions {
 			if(isAvailableMoviment())
 				diferents.add(mov);
 		}
-		
-		
 		ArrayList<SquareBoard> chessSquaresAvailable = new ArrayList<>(diferents);
 		chessSquaresAvailable.sort(Comparator.comparing(sb -> sb.getNameNotationSquare().name()));
-
-		
 		dto.setChessSquaresAvailable(chessSquaresAvailable);
-//		dto.setChessSquaresAvailable(movesAvailable);
 		return dto;
 	}
 	
@@ -75,7 +64,6 @@ public class MovimentOptions implements IMovimentOptions {
 	public MovimentOptionsAvailableDTO getMovimentsOptionsNoCheck() {
 		MovimentOptionsAvailableDTO dto = new MovimentOptionsAvailableDTO();
 		Set<SquareBoard> diferents = new HashSet<>();
-		
 		
 		for(SquareBoard mov : movesAvailable) {
 			EnumNameNotaionSquare nameNotationSquare = mov.getNameNotationSquare();
@@ -88,12 +76,17 @@ public class MovimentOptions implements IMovimentOptions {
 		dto.setChessSquaresAvailable(chessSquaresAvailable);
 		return dto;
 	}
+	
+	@Override
+	public void addAnyMoveType(int index_x_to_move, int index_y_to_Move) {
+		addMove(index_x_to_move, index_y_to_Move);
+		addCaptureMove(index_x_to_move, index_y_to_Move);
+	}
 
 	@Override
 	public void addMove( int index_x_to_move, int index_y_to_Move) {
 		this.index_x = index_x_to_move;
 		this.index_y = index_y_to_Move;
-		
 		addMove();
 	}
 	
@@ -101,67 +94,13 @@ public class MovimentOptions implements IMovimentOptions {
 	public void addCaptureMove( int index_x_to_move, int index_y_to_Move) {
 		this.index_x = index_x_to_move;
 		this.index_y = index_y_to_Move;
-
 		addCaptureMove();
 	}
 	
-	@Override
-	public void addAnyMoveType(int index_x_to_move, int index_y_to_Move) {
-		this.index_x = index_x_to_move;
-		this.index_y = index_y_to_Move;
-
-		addMove(index_x_to_move, index_y_to_Move);
-		addCaptureMove(index_x_to_move, index_y_to_Move);
-		
-	}
-
 	private void addMove() {
 		if (isExists() && isEmpty() ) 
 			movesAvailable.add(squareBoard[index_x][index_y]);
 	}
-	
-	@Override
-	public boolean isAvailableMoviment() {
-		if(!checkCheckMate) {
-			return true;
-		}
-		if(!isExists()) {
-			return false;
-		}
-		
-		List<SquareBoard> movesPrevious = new ArrayList<>(movesAvailable);
-		
-		
-		
-		SquareBoard[][] copySquareList = SquareBoard.copySquareList(squareBoard);
-		
-		
-		
-		int index_x_copy = Integer.valueOf(index_x);
-		int index_y_copy = Integer.valueOf(index_y);
-		EnumNameNotaionSquare currentPosition_copy =  EnumNameNotaionSquare.get(currentPosition.getIndex_x(), currentPosition.getIndex_y());
-		
-		SquareBoard square = copySquareList[currentPosition.getIndex_x()][currentPosition.getIndex_y()];
-		Piece removedPiece = square.removePiece();
-				
-		SquareBoard newSquare = copySquareList[index_x][index_y];
-		newSquare.setPiece(removedPiece);
-		
-		
-//		
-		boolean isAvailable = checkMateChecker.isAvailableForTeamToCheck(copySquareList);
-		
-		index_x =  index_x_copy;
-		index_y = index_y_copy;
-		checkCheckMate = true;
-		currentPosition = currentPosition_copy;
-		movesAvailable = new ArrayList<>(movesPrevious);
-//		squareBoard = squareCopy.clone();
-		
-		return isAvailable;
-	}
-
-
 	
 	private void addCaptureMove() {
 		if (isExists() && !isEmpty()) {
@@ -173,25 +112,34 @@ public class MovimentOptions implements IMovimentOptions {
 	}
 	
 	@Override
-	public void setCurrentPosition(EnumNameNotaionSquare currentPosition) {
-		this.currentPosition = currentPosition;
+	public boolean isAvailableMoviment() {
+		if(!checkCheckMate) 
+			return true;
+		if(!isExists()) 
+			return false;
+		
+		List<SquareBoard> movesPrevious = new ArrayList<>(movesAvailable);
+		SquareBoard[][] copySquareList = SquareBoard.copySquareList(squareBoard);
+		int index_x_copy = Integer.valueOf(index_x);
+		int index_y_copy = Integer.valueOf(index_y);
+		EnumNameNotaionSquare currentPosition_copy =  EnumNameNotaionSquare.get(currentPosition.getIndex_x(), currentPosition.getIndex_y());
+		
+		SquareBoard square = copySquareList[currentPosition.getIndex_x()][currentPosition.getIndex_y()];
+		Piece removedPiece = square.removePiece();
+				
+		SquareBoard newSquare = copySquareList[index_x][index_y];
+		newSquare.setPiece(removedPiece);
+		
+		boolean isAvailable = checkMateChecker.isAvailableForTeamToCheck(copySquareList);
+		
+		index_x =  index_x_copy;
+		index_y = index_y_copy;
+		checkCheckMate = true;
+		currentPosition = currentPosition_copy;
+		movesAvailable = new ArrayList<>(movesPrevious);
+		return isAvailable;
 	}
 	
-	@PostConstruct
-	public void iniMoviments() {
-		movesAvailable = new ArrayList<>();
-	}
-	
-	private boolean isEmpty() {
-		return isEmpty(index_x, index_y );
-	}
-	
-	@Override
-	public void clear() {
-		movesAvailable = new ArrayList<>();
-		checkCheckMate= true;
-	}
-
 	@Override
 	public boolean isEmpty(int x, int y) {
 		SquareBoard squareToMove = squareBoard[x][y];
@@ -201,17 +149,31 @@ public class MovimentOptions implements IMovimentOptions {
 	private boolean isExists() {
 		return isExists(index_x,index_y );
 	}
-
+	
+	private boolean isEmpty() {
+		return isEmpty(index_x, index_y );
+	}
+	@Override
+	public void clear() {
+		movesAvailable = new ArrayList<>();
+		checkCheckMate= true;
+	}
+	@PostConstruct
+	public void iniMoviments() {
+		movesAvailable = new ArrayList<>();
+	}
+	@Override
+	public void setCurrentPosition(EnumNameNotaionSquare currentPosition) {
+		this.currentPosition = currentPosition;
+	}
 	@Override
 	public boolean isExists(int x, int y) {
 		EnumNameNotaionSquare notationSquareToMove = EnumNameNotaionSquare.get(x,y);
 		return Objects.nonNull(notationSquareToMove);
 	}
-	
 	@Override
 	@Autowired
 	public void setChessBoard(IBoard chessBoard) {
-		this.chessBoard = chessBoard;
 		squareBoard = chessBoard.getBoard();
 	}
 	@Override	
@@ -219,27 +181,16 @@ public class MovimentOptions implements IMovimentOptions {
 	public void setTeamManager(@Lazy  ITeamManager teamManager) {
 		this.teamManager = teamManager;
 	}
-
 	@Autowired
 	public void setCheckMateChecker(ICheckMateChecker checkMateChecker) {
 		this.checkMateChecker = checkMateChecker;
 	}
-	
-	@Autowired
-	public void setTeamFactory(ITeamManagerFactory teamFactory) {
-		this.teamFactory = teamFactory;
-	}
-
-	
 	@Override
 	public void dontCheckCheckMate() {
 		checkCheckMate = false;
 	}
-	
 	@Override
 	public void setSquareBoard(SquareBoard[][] squareBoard) {
 		this.squareBoard = squareBoard;
 	}
-
-	
 }

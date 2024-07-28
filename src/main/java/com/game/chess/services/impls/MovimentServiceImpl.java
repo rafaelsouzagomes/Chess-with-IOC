@@ -73,8 +73,6 @@ public class MovimentServiceImpl implements IMovimentService {
 		Game game = gameRepository.findById(movDTO.getIdGame()).get();
 		SquareBoard[][] squareBoard = game.getSquareBoard();
 		chess.setChessBoard(squareBoard);
-		chess.showBoard();
-		System.out.println();
 	}
 	
 	private void setUpCurrentPosition(MovimentRequestDTO mov) {

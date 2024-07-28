@@ -50,9 +50,6 @@ public class EndPlayChecker {
 		gameDTO.setEnumResultGame(result);
 		gameDTO.setIdGame(game.getIdGame());
 		gameDTO.setTeamPlayer(teamthatPlayed.name());
-		
-		
-		
 		return gameDTO;
 	}
 

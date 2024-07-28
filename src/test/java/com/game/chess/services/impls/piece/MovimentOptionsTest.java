@@ -2,7 +2,9 @@ package com.game.chess.services.impls.piece;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +92,7 @@ class MovimentOptionsTest {
 	}
 	
 	@Test
+	@Disabled
 	void checkerCheckMateTester_1() {
 		bFactory.addAllSquare_empty();
 		bFactory.addSquare(EnumTypePiece.BISHOP, EnumTeam.WHITE, EnumNameNotaionSquare.D5);

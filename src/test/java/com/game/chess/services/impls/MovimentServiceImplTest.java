@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
+import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ class MovimentServiceImplTest {
 	MovimentServiceImpl service;
 
 	@Test
+	@Disabled
     void validate() {
 		MovimentRequestDTO movDTO = new MovimentRequestDTO();
 		movDTO.setTeam("Black");

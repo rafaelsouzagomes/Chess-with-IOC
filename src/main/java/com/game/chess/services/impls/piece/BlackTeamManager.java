@@ -17,7 +17,4 @@ public class BlackTeamManager implements ITeamManager {
 	public EnumTeam getTeam() {
 		return EnumTeam.BLACK;
 	}
-
-
-
 }

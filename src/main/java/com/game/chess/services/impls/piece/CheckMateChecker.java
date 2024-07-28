@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.game.chess.models.dtos.MovimentOptionsAvailableDTO;
 import com.game.chess.models.enums.EnumNameNotaionSquare;
 import com.game.chess.models.enums.EnumTeam;
-import com.game.chess.services.components.IBoard;
 import com.game.chess.services.components.piece.Piece;
 import com.game.chess.services.components.squareboard.SquareBoard;
 import com.game.chess.services.pieces.ICheckMateChecker;
@@ -27,15 +26,10 @@ public class CheckMateChecker implements ICheckMateChecker {
 	private IMovimentOptions movimentOptions;
 	private ITeamManagerFactory teamManagerFactory;
 	private Piece pieceToMove;
-	private IBoard IBoard;
 	private ITeamManager teamToCheck;
 	
 	@Override
 	public boolean isAvailableForTeamToCheck(SquareBoard[][] squareBoard) {
-//		IBoard.setChessBoard(squareBoard);
-//		IBoard.showBoard();
-		
-		
 		for(int line=0; line <= 7; line++) {
 			for(int column=0; column<=7; column++) {
 				SquareBoard currentSquare = squareBoard[line][column];
@@ -48,7 +42,6 @@ public class CheckMateChecker implements ICheckMateChecker {
 						return false;
 			}
 		}
-		
 		return true;
 	}
 	
@@ -111,10 +104,5 @@ public class CheckMateChecker implements ICheckMateChecker {
 	@Autowired
 	public void setTeamManagerFactory(ITeamManagerFactory teamManagerFactory) {
 		this.teamManagerFactory = teamManagerFactory;
-	}
-	@Autowired
-	@Lazy
-	public void setIBoard(IBoard iBoard) {
-		IBoard = iBoard;
 	}
 }
