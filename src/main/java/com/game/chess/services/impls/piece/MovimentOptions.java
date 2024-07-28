@@ -51,6 +51,7 @@ public class MovimentOptions implements IMovimentOptions {
 		
 //		ITeamManager adversaryTeamManager = teamFactory.getAdversaryeTeamManager(teamManager);
 		checkMateChecker.setTeamManager(teamManager);
+		
 		for(SquareBoard mov : movesAvailable) {
 			EnumNameNotaionSquare nameNotationSquare = mov.getNameNotationSquare();
 			if(nameNotationSquare.equals(currentPosition))
@@ -63,6 +64,7 @@ public class MovimentOptions implements IMovimentOptions {
 		
 		ArrayList<SquareBoard> chessSquaresAvailable = new ArrayList<>(diferents);
 		chessSquaresAvailable.sort(Comparator.comparing(sb -> sb.getNameNotationSquare().name()));
+
 		
 		dto.setChessSquaresAvailable(chessSquaresAvailable);
 //		dto.setChessSquaresAvailable(movesAvailable);
@@ -129,30 +131,37 @@ public class MovimentOptions implements IMovimentOptions {
 		
 		List<SquareBoard> movesPrevious = new ArrayList<>(movesAvailable);
 		
-		SquareBoard[][] squareCopy = squareBoard.clone();
+		
+		
+		SquareBoard[][] copySquareList = SquareBoard.copySquareList(squareBoard);
+		
+		
+		
 		int index_x_copy = Integer.valueOf(index_x);
 		int index_y_copy = Integer.valueOf(index_y);
 		EnumNameNotaionSquare currentPosition_copy =  EnumNameNotaionSquare.get(currentPosition.getIndex_x(), currentPosition.getIndex_y());
 		
-		SquareBoard square = squareBoard[currentPosition.getIndex_x()][currentPosition.getIndex_y()];
+		SquareBoard square = copySquareList[currentPosition.getIndex_x()][currentPosition.getIndex_y()];
 		Piece removedPiece = square.removePiece();
 				
-		SquareBoard newSquare = squareBoard[index_x][index_y];
+		SquareBoard newSquare = copySquareList[index_x][index_y];
 		newSquare.setPiece(removedPiece);
 		
 		
 //		
-		boolean isAvailable = checkMateChecker.isAvailableForTeamToCheck(squareBoard);
+		boolean isAvailable = checkMateChecker.isAvailableForTeamToCheck(copySquareList);
 		
 		index_x =  index_x_copy;
 		index_y = index_y_copy;
 		checkCheckMate = true;
 		currentPosition = currentPosition_copy;
 		movesAvailable = new ArrayList<>(movesPrevious);
-		squareBoard = squareCopy.clone();
+//		squareBoard = squareCopy.clone();
 		
 		return isAvailable;
 	}
+
+
 	
 	private void addCaptureMove() {
 		if (isExists() && !isEmpty()) {
@@ -180,6 +189,7 @@ public class MovimentOptions implements IMovimentOptions {
 	@Override
 	public void clear() {
 		movesAvailable = new ArrayList<>();
+		checkCheckMate= true;
 	}
 
 	@Override

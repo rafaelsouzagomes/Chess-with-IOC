@@ -55,6 +55,10 @@ public enum EnumTypePiece {
 	public boolean isQueen() {
 		return getName()==EnumTypePiece.QUEEN.getName();
 	}
+
+	public boolean isBishop() {
+		return getName()==EnumTypePiece.BISHOP.getName();
+	}
 	
 	
 }

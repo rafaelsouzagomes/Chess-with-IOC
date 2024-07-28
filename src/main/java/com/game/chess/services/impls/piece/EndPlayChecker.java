@@ -75,6 +75,7 @@ public class EndPlayChecker {
 				movRequestDTO.setPieceToMove(typePiece.getName());
 				movRequestDTO.setTeam(adversaryteam.getName());
 				
+				movimentOptions.clear();
 				MovimentOptionsAvailableDTO movsAvailable = movimentService.getMovimentOptions(movRequestDTO);
 				
 				if(!movsAvailable.getChessSquaresAvailable().isEmpty()) 

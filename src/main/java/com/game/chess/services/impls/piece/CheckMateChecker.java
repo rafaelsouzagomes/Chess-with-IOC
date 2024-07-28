@@ -32,8 +32,9 @@ public class CheckMateChecker implements ICheckMateChecker {
 	
 	@Override
 	public boolean isAvailableForTeamToCheck(SquareBoard[][] squareBoard) {
-		IBoard.setChessBoard(squareBoard);
-		IBoard.showBoard();
+//		IBoard.setChessBoard(squareBoard);
+//		IBoard.showBoard();
+		
 		
 		for(int line=0; line <= 7; line++) {
 			for(int column=0; column<=7; column++) {

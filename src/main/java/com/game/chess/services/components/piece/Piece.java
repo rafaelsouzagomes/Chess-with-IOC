@@ -16,6 +16,11 @@ public class Piece {
 	@NonNull
 	private EnumTypePiece type;
 	
+	public Piece copy() {
+		Piece copy = new Piece(type, team);
+		return copy;
+	}
+	
 	protected Piece() {}
 	
 	public Piece(EnumTypePiece type, EnumTeam team) {

@@ -48,6 +48,10 @@ public class MovimentServiceImpl implements IMovimentService {
 		validadeIfThePieceisOnTheInformedSquared(movDTO);
 		
 		piece.addMovimentsOptionsAvailable(team, currentPosition);
+		
+		if(getEnumTypePiece(movDTO).isBishop()) {
+			System.out.println();
+		}
 		 
 		MovimentOptionsAvailableDTO movimentsOptions = iMovimentOptions.getMovimentsOptions();
 		iMovimentOptions.clear();
@@ -69,6 +73,8 @@ public class MovimentServiceImpl implements IMovimentService {
 		Game game = gameRepository.findById(movDTO.getIdGame()).get();
 		SquareBoard[][] squareBoard = game.getSquareBoard();
 		chess.setChessBoard(squareBoard);
+		chess.showBoard();
+		System.out.println();
 	}
 	
 	private void setUpCurrentPosition(MovimentRequestDTO mov) {

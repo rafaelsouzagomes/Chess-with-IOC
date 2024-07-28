@@ -20,6 +20,24 @@ public class SquareBoard {
 				this.piece.equals(squareToCompare.getPiece());
 	}
 	
+	public static SquareBoard[][] copySquareList(SquareBoard[][] squareBoard) {
+		SquareBoard[][] squareCopy = new SquareBoard[8][8] ;
+		for(int line=0; line <= 7; line++) {
+			for(int column=0; column<=7; column++) {
+				SquareBoard copy = squareBoard[line][column].copy();
+				squareCopy[line][column] = copy;
+			}
+		}
+		return squareCopy;
+	}
+	
+	public SquareBoard copy() {
+		 SquareBoard newSquare  = new SquareBoard();
+		 newSquare.setNameNotationSquare(nameNotationSquare);
+		 newSquare.setPiece(this.piece != null ? this.piece.copy() : null);
+	     return newSquare;
+	 }
+	
 	public void setPiece(Piece piece) {
 		this.piece = piece;
 	}
