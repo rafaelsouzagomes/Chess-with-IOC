@@ -43,23 +43,13 @@ public class MovimentOptions implements IMovimentOptions {
 	private EnumNameNotaionSquare currentPosition;
 	private int index_x = -1;
 	private int index_y = -1;
-	
-	@Override
-	public void setCurrentPosition(EnumNameNotaionSquare currentPosition) {
-		this.currentPosition = currentPosition;
-	}
-	
-	@PostConstruct
-	public void iniMoviments() {
-		movesAvailable = new ArrayList<>();
-	}
-	
+		
 	@Override
 	public MovimentOptionsAvailableDTO getMovimentsOptions() {
 		MovimentOptionsAvailableDTO dto = new MovimentOptionsAvailableDTO();
 		Set<SquareBoard> diferents = new HashSet<>();
 		
-//		ITeamManager adversaryTeamManager = teamFactory.getAdversaryTeamManager(teamManager);
+//		ITeamManager adversaryTeamManager = teamFactory.getAdversaryeTeamManager(teamManager);
 		checkMateChecker.setTeamManager(teamManager);
 		for(SquareBoard mov : movesAvailable) {
 			EnumNameNotaionSquare nameNotationSquare = mov.getNameNotationSquare();
@@ -69,6 +59,7 @@ public class MovimentOptions implements IMovimentOptions {
 			if(isAvailableMoviment())
 				diferents.add(mov);
 		}
+		
 		
 		ArrayList<SquareBoard> chessSquaresAvailable = new ArrayList<>(diferents);
 		chessSquaresAvailable.sort(Comparator.comparing(sb -> sb.getNameNotationSquare().name()));
@@ -170,6 +161,16 @@ public class MovimentOptions implements IMovimentOptions {
 			if ( piece!=null && piece.getTeam() != teamManager.getTeam())
 				movesAvailable.add(squareToMove);
 		}
+	}
+	
+	@Override
+	public void setCurrentPosition(EnumNameNotaionSquare currentPosition) {
+		this.currentPosition = currentPosition;
+	}
+	
+	@PostConstruct
+	public void iniMoviments() {
+		movesAvailable = new ArrayList<>();
 	}
 	
 	private boolean isEmpty() {
